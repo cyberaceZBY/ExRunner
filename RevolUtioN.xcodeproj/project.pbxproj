@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		302FD0051727D870004DA005 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0041727D870004DA005 /* UIKit.framework */; };
+		302FD0071727D870004DA005 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0061727D870004DA005 /* Foundation.framework */; };
+		302FD0091727D870004DA005 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0081727D870004DA005 /* CoreGraphics.framework */; };
+		302FD00F1727D870004DA005 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 302FD00D1727D870004DA005 /* InfoPlist.strings */; };
+		302FD0111727D870004DA005 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 302FD0101727D870004DA005 /* main.m */; };
+		302FD0151727D870004DA005 /* RORAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 302FD0141727D870004DA005 /* RORAppDelegate.m */; };
+		302FD0171727D870004DA005 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD0161727D870004DA005 /* Default.png */; };
+		302FD0191727D870004DA005 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD0181727D870004DA005 /* Default@2x.png */; };
+		302FD01B1727D870004DA005 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD01A1727D870004DA005 /* Default-568h@2x.png */; };
+		302FD01E1727D870004DA005 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302FD01C1727D870004DA005 /* MainStoryboard_iPhone.storyboard */; };
+		302FD0211727D870004DA005 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302FD01F1727D870004DA005 /* MainStoryboard_iPad.storyboard */; };
+		302FD0241727D870004DA005 /* RORFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302FD0231727D870004DA005 /* RORFirstViewController.m */; };
+		302FD0261727D870004DA005 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD0251727D870004DA005 /* first.png */; };
+		302FD0281727D870004DA005 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD0271727D870004DA005 /* first@2x.png */; };
+		302FD02B1727D870004DA005 /* RORSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302FD02A1727D870004DA005 /* RORSecondViewController.m */; };
+		302FD02D1727D870004DA005 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD02C1727D870004DA005 /* second.png */; };
+		302FD02F1727D870004DA005 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 302FD02E1727D870004DA005 /* second@2x.png */; };
+		302FD0371727D870004DA005 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0361727D870004DA005 /* SenTestingKit.framework */; };
+		302FD0381727D870004DA005 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0041727D870004DA005 /* UIKit.framework */; };
+		302FD0391727D870004DA005 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0061727D870004DA005 /* Foundation.framework */; };
+		302FD0411727D870004DA005 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 302FD03F1727D870004DA005 /* InfoPlist.strings */; };
+		302FD0441727D870004DA005 /* RevolUtioNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 302FD0431727D870004DA005 /* RevolUtioNTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		302FD03A1727D870004DA005 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 302FCFF91727D870004DA005 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 302FD0001727D870004DA005;
+			remoteInfo = RevolUtioN;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		302FD0011727D870004DA005 /* RevolUtioN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevolUtioN.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		302FD0041727D870004DA005 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		302FD0061727D870004DA005 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		302FD0081727D870004DA005 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		302FD00C1727D870004DA005 /* RevolUtioN-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RevolUtioN-Info.plist"; sourceTree = "<group>"; };
+		302FD00E1727D870004DA005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		302FD0101727D870004DA005 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		302FD0121727D870004DA005 /* RevolUtioN-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RevolUtioN-Prefix.pch"; sourceTree = "<group>"; };
+		302FD0131727D870004DA005 /* RORAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RORAppDelegate.h; sourceTree = "<group>"; };
+		302FD0141727D870004DA005 /* RORAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RORAppDelegate.m; sourceTree = "<group>"; };
+		302FD0161727D870004DA005 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		302FD0181727D870004DA005 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		302FD01A1727D870004DA005 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		302FD01D1727D870004DA005 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		302FD0201727D870004DA005 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		302FD0221727D870004DA005 /* RORFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RORFirstViewController.h; sourceTree = "<group>"; };
+		302FD0231727D870004DA005 /* RORFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RORFirstViewController.m; sourceTree = "<group>"; };
+		302FD0251727D870004DA005 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		302FD0271727D870004DA005 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		302FD0291727D870004DA005 /* RORSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RORSecondViewController.h; sourceTree = "<group>"; };
+		302FD02A1727D870004DA005 /* RORSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RORSecondViewController.m; sourceTree = "<group>"; };
+		302FD02C1727D870004DA005 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		302FD02E1727D870004DA005 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		302FD0351727D870004DA005 /* RevolUtioNTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RevolUtioNTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		302FD0361727D870004DA005 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		302FD03E1727D870004DA005 /* RevolUtioNTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RevolUtioNTests-Info.plist"; sourceTree = "<group>"; };
+		302FD0401727D870004DA005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		302FD0421727D870004DA005 /* RevolUtioNTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RevolUtioNTests.h; sourceTree = "<group>"; };
+		302FD0431727D870004DA005 /* RevolUtioNTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RevolUtioNTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		302FCFFE1727D870004DA005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD0051727D870004DA005 /* UIKit.framework in Frameworks */,
+				302FD0071727D870004DA005 /* Foundation.framework in Frameworks */,
+				302FD0091727D870004DA005 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		302FD0311727D870004DA005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD0371727D870004DA005 /* SenTestingKit.framework in Frameworks */,
+				302FD0381727D870004DA005 /* UIKit.framework in Frameworks */,
+				302FD0391727D870004DA005 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		302FCFF81727D870004DA005 = {
+			isa = PBXGroup;
+			children = (
+				302FD00A1727D870004DA005 /* RevolUtioN */,
+				302FD03C1727D870004DA005 /* RevolUtioNTests */,
+				302FD0031727D870004DA005 /* Frameworks */,
+				302FD0021727D870004DA005 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		302FD0021727D870004DA005 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				302FD0011727D870004DA005 /* RevolUtioN.app */,
+				302FD0351727D870004DA005 /* RevolUtioNTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		302FD0031727D870004DA005 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				302FD0041727D870004DA005 /* UIKit.framework */,
+				302FD0061727D870004DA005 /* Foundation.framework */,
+				302FD0081727D870004DA005 /* CoreGraphics.framework */,
+				302FD0361727D870004DA005 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		302FD00A1727D870004DA005 /* RevolUtioN */ = {
+			isa = PBXGroup;
+			children = (
+				302FD0131727D870004DA005 /* RORAppDelegate.h */,
+				302FD0141727D870004DA005 /* RORAppDelegate.m */,
+				302FD01C1727D870004DA005 /* MainStoryboard_iPhone.storyboard */,
+				302FD01F1727D870004DA005 /* MainStoryboard_iPad.storyboard */,
+				302FD0221727D870004DA005 /* RORFirstViewController.h */,
+				302FD0231727D870004DA005 /* RORFirstViewController.m */,
+				302FD0251727D870004DA005 /* first.png */,
+				302FD0271727D870004DA005 /* first@2x.png */,
+				302FD0291727D870004DA005 /* RORSecondViewController.h */,
+				302FD02A1727D870004DA005 /* RORSecondViewController.m */,
+				302FD02C1727D870004DA005 /* second.png */,
+				302FD02E1727D870004DA005 /* second@2x.png */,
+				302FD00B1727D870004DA005 /* Supporting Files */,
+			);
+			path = RevolUtioN;
+			sourceTree = "<group>";
+		};
+		302FD00B1727D870004DA005 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				302FD00C1727D870004DA005 /* RevolUtioN-Info.plist */,
+				302FD00D1727D870004DA005 /* InfoPlist.strings */,
+				302FD0101727D870004DA005 /* main.m */,
+				302FD0121727D870004DA005 /* RevolUtioN-Prefix.pch */,
+				302FD0161727D870004DA005 /* Default.png */,
+				302FD0181727D870004DA005 /* Default@2x.png */,
+				302FD01A1727D870004DA005 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		302FD03C1727D870004DA005 /* RevolUtioNTests */ = {
+			isa = PBXGroup;
+			children = (
+				302FD0421727D870004DA005 /* RevolUtioNTests.h */,
+				302FD0431727D870004DA005 /* RevolUtioNTests.m */,
+				302FD03D1727D870004DA005 /* Supporting Files */,
+			);
+			path = RevolUtioNTests;
+			sourceTree = "<group>";
+		};
+		302FD03D1727D870004DA005 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				302FD03E1727D870004DA005 /* RevolUtioNTests-Info.plist */,
+				302FD03F1727D870004DA005 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		302FD0001727D870004DA005 /* RevolUtioN */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 302FD0471727D870004DA005 /* Build configuration list for PBXNativeTarget "RevolUtioN" */;
+			buildPhases = (
+				302FCFFD1727D870004DA005 /* Sources */,
+				302FCFFE1727D870004DA005 /* Frameworks */,
+				302FCFFF1727D870004DA005 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RevolUtioN;
+			productName = RevolUtioN;
+			productReference = 302FD0011727D870004DA005 /* RevolUtioN.app */;
+			productType = "com.apple.product-type.application";
+		};
+		302FD0341727D870004DA005 /* RevolUtioNTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 302FD04A1727D870004DA005 /* Build configuration list for PBXNativeTarget "RevolUtioNTests" */;
+			buildPhases = (
+				302FD0301727D870004DA005 /* Sources */,
+				302FD0311727D870004DA005 /* Frameworks */,
+				302FD0321727D870004DA005 /* Resources */,
+				302FD0331727D870004DA005 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				302FD03B1727D870004DA005 /* PBXTargetDependency */,
+			);
+			name = RevolUtioNTests;
+			productName = RevolUtioNTests;
+			productReference = 302FD0351727D870004DA005 /* RevolUtioNTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		302FCFF91727D870004DA005 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ROR;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Beyond;
+			};
+			buildConfigurationList = 302FCFFC1727D870004DA005 /* Build configuration list for PBXProject "RevolUtioN" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 302FCFF81727D870004DA005;
+			productRefGroup = 302FD0021727D870004DA005 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				302FD0001727D870004DA005 /* RevolUtioN */,
+				302FD0341727D870004DA005 /* RevolUtioNTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		302FCFFF1727D870004DA005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD00F1727D870004DA005 /* InfoPlist.strings in Resources */,
+				302FD0171727D870004DA005 /* Default.png in Resources */,
+				302FD0191727D870004DA005 /* Default@2x.png in Resources */,
+				302FD01B1727D870004DA005 /* Default-568h@2x.png in Resources */,
+				302FD01E1727D870004DA005 /* MainStoryboard_iPhone.storyboard in Resources */,
+				302FD0211727D870004DA005 /* MainStoryboard_iPad.storyboard in Resources */,
+				302FD0261727D870004DA005 /* first.png in Resources */,
+				302FD0281727D870004DA005 /* first@2x.png in Resources */,
+				302FD02D1727D870004DA005 /* second.png in Resources */,
+				302FD02F1727D870004DA005 /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		302FD0321727D870004DA005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD0411727D870004DA005 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		302FD0331727D870004DA005 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		302FCFFD1727D870004DA005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD0111727D870004DA005 /* main.m in Sources */,
+				302FD0151727D870004DA005 /* RORAppDelegate.m in Sources */,
+				302FD0241727D870004DA005 /* RORFirstViewController.m in Sources */,
+				302FD02B1727D870004DA005 /* RORSecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		302FD0301727D870004DA005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				302FD0441727D870004DA005 /* RevolUtioNTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		302FD03B1727D870004DA005 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 302FD0001727D870004DA005 /* RevolUtioN */;
+			targetProxy = 302FD03A1727D870004DA005 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		302FD00D1727D870004DA005 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				302FD00E1727D870004DA005 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		302FD01C1727D870004DA005 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				302FD01D1727D870004DA005 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		302FD01F1727D870004DA005 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				302FD0201727D870004DA005 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		302FD03F1727D870004DA005 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				302FD0401727D870004DA005 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		302FD0451727D870004DA005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		302FD0461727D870004DA005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		302FD0481727D870004DA005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RevolUtioN/RevolUtioN-Prefix.pch";
+				INFOPLIST_FILE = "RevolUtioN/RevolUtioN-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		302FD0491727D870004DA005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RevolUtioN/RevolUtioN-Prefix.pch";
+				INFOPLIST_FILE = "RevolUtioN/RevolUtioN-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		302FD04B1727D870004DA005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RevolUtioN.app/RevolUtioN";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RevolUtioN/RevolUtioN-Prefix.pch";
+				INFOPLIST_FILE = "RevolUtioNTests/RevolUtioNTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		302FD04C1727D870004DA005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RevolUtioN.app/RevolUtioN";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RevolUtioN/RevolUtioN-Prefix.pch";
+				INFOPLIST_FILE = "RevolUtioNTests/RevolUtioNTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		302FCFFC1727D870004DA005 /* Build configuration list for PBXProject "RevolUtioN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				302FD0451727D870004DA005 /* Debug */,
+				302FD0461727D870004DA005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		302FD0471727D870004DA005 /* Build configuration list for PBXNativeTarget "RevolUtioN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				302FD0481727D870004DA005 /* Debug */,
+				302FD0491727D870004DA005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		302FD04A1727D870004DA005 /* Build configuration list for PBXNativeTarget "RevolUtioNTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				302FD04B1727D870004DA005 /* Debug */,
+				302FD04C1727D870004DA005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 302FCFF91727D870004DA005 /* Project object */;
+}
