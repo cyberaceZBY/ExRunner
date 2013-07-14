@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef SERVICE_URL
+#ifndef URLS
 #define SERVICE_URL @"http://121.199.56.231:8080/usavich/service/api"
+#define LOGIN_URL @"http://121.199.56.231:8080/usavich/service/api/account/%@/%@"
+#define REGISTER_URL @"http://121.199.56.231:8080/usavich/service/api/account"
+#define RUNNING_HISTORY_URL @"http://121.199.56.231:8080/usavich/service/api/running/%d"
 #endif
 
 @interface RORConstant : NSObject

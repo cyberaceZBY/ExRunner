@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F857708178959DC00173A92 /* RORUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857707178959DC00173A92 /* RORUtils.m */; };
+		0F857712178C4EF100173A92 /* RORHttpClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857711178C4EF100173A92 /* RORHttpClientHandler.m */; };
+		0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9A9D3817894A1B0025E49B /* libsbjson-ios.a */; };
+		0F972BD2179255F300A27EF2 /* RORHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F972BD1179255F300A27EF2 /* RORHttpResponse.m */; };
 		3000E52417408E4F007D5910 /* cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E52317408E4E007D5910 /* cell_bg.png */; };
 		3000E5281740BF07007D5910 /* main_plan_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E5271740BF07007D5910 /* main_plan_bg.png */; };
 		3000E55C1740D739007D5910 /* checkbox_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E55A1740D738007D5910 /* checkbox_off.png */; };
@@ -144,8 +148,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		302FD03A1727D870004DA005 /* PBXContainerItemProxy */ = {
+		0F9A9D3317894A1B0025E49B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
+<<<<<<< HEAD
 			containerPortal = 302FCFF91727D870004DA005 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 302FD0001727D870004DA005;
@@ -154,55 +159,109 @@
 		303F9C6D1789461A000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C6617894619000826AC /* SBJson.xcodeproj */;
+=======
+			containerPortal = 0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = BC12323D1391D5CC00131607;
 			remoteInfo = SBJson;
 		};
+<<<<<<< HEAD
 		303F9C6F1789461A000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C6617894619000826AC /* SBJson.xcodeproj */;
+=======
+		0F9A9D3517894A1B0025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = BC1232521391D5CC00131607;
 			remoteInfo = SBJsonTests;
 		};
+<<<<<<< HEAD
 		303F9C711789461A000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C6617894619000826AC /* SBJson.xcodeproj */;
+=======
+		0F9A9D3717894A1B0025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = BCC2626913920FC7003D9994;
 			remoteInfo = "sbjson-ios";
 		};
+<<<<<<< HEAD
 		303F9C731789461A000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C6617894619000826AC /* SBJson.xcodeproj */;
+=======
+		0F9A9D3917894A1B0025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = BCC2627313920FC7003D9994;
 			remoteInfo = "sbjson-iosTests";
 		};
+<<<<<<< HEAD
 		303F9C7B17894628000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C7517894628000826AC /* iPhone.xcodeproj */;
+=======
+		0F9A9D4117894A330025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
 			remoteInfo = iPhone;
 		};
+<<<<<<< HEAD
 		303F9C7D17894628000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C7517894628000826AC /* iPhone.xcodeproj */;
+=======
+		0F9A9D4317894A330025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = B55B60C70F765BB00064029C;
 			remoteInfo = Tests;
 		};
+<<<<<<< HEAD
 		303F9C7F17894628000826AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 303F9C7517894628000826AC /* iPhone.xcodeproj */;
+=======
+		0F9A9D4517894A330025E49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			proxyType = 2;
 			remoteGlobalIDString = B576D72311C7F34D0059B815;
 			remoteInfo = iPad;
 		};
+		302FD03A1727D870004DA005 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 302FCFF91727D870004DA005 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 302FD0001727D870004DA005;
+			remoteInfo = RevolUtioN;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F857706178959DC00173A92 /* RORUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUtils.h; sourceTree = "<group>"; };
+		0F857707178959DC00173A92 /* RORUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUtils.m; sourceTree = "<group>"; };
+		0F857710178C4EF100173A92 /* RORHttpClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpClientHandler.h; sourceTree = "<group>"; };
+		0F857711178C4EF100173A92 /* RORHttpClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHttpClientHandler.m; sourceTree = "<group>"; };
+		0F972BD0179255F300A27EF2 /* RORHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpResponse.h; sourceTree = "<group>"; };
+		0F972BD1179255F300A27EF2 /* RORHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHttpResponse.m; sourceTree = "<group>"; };
+		0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = "json-framework-master/SBJson.xcodeproj"; sourceTree = "<group>"; };
+		0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iPhone.xcodeproj; path = "pokeb-asi-http-request-3ed0b3c/iPhone.xcodeproj"; sourceTree = "<group>"; };
 		3000E52317408E4E007D5910 /* cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg.png; sourceTree = "<group>"; };
 		3000E5271740BF07007D5910 /* main_plan_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_plan_bg.png; sourceTree = "<group>"; };
 		3000E55A1740D738007D5910 /* checkbox_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_off.png; sourceTree = "<group>"; };
@@ -402,7 +461,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				303F9C9017894E03000826AC /* libsbjson-ios.a in Frameworks */,
+=======
+				0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */,
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 				30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */,
 				30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */,
 				30BB0BA8176A03AC0009A847 /* QuartzCore.framework in Frameworks */,
@@ -430,6 +493,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F972BC81792557A00A27EF2 /* HttpClient */ = {
+			isa = PBXGroup;
+			children = (
+				0F857710178C4EF100173A92 /* RORHttpClientHandler.h */,
+				0F857711178C4EF100173A92 /* RORHttpClientHandler.m */,
+				0F972BD0179255F300A27EF2 /* RORHttpResponse.h */,
+				0F972BD1179255F300A27EF2 /* RORHttpResponse.m */,
+			);
+			name = HttpClient;
+			sourceTree = "<group>";
+		};
+		0F9A9D2D17894A1B0025E49B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F9A9D3417894A1B0025E49B /* SBJson.framework */,
+				0F9A9D3617894A1B0025E49B /* SBJsonTests.octest */,
+				0F9A9D3817894A1B0025E49B /* libsbjson-ios.a */,
+				0F9A9D3A17894A1B0025E49B /* sbjson-iosTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0F9A9D3C17894A320025E49B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F9A9D4217894A330025E49B /* ASIHTTPRequest iPhone.app */,
+				0F9A9D4417894A330025E49B /* Tests.app */,
+				0F9A9D4617894A330025E49B /* ASIHTTPRequest iPad.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3001498D1750F428005DAF1D /* RORMorePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,8 +639,21 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				303F9C7517894628000826AC /* iPhone.xcodeproj */,
 				303F9C6617894619000826AC /* SBJson.xcodeproj */,
+=======
+				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
+				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
+				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
+				30BB0BA9176A04910009A847 /* libicucore.dylib */,
+				30BB0BA7176A03AC0009A847 /* QuartzCore.framework */,
+				30BB0B071769A2E70009A847 /* SystemConfiguration.framework */,
+				30BB0B051769A2DB0009A847 /* MobileCoreServices.framework */,
+				30BB0B031769A2300009A847 /* CFNetwork.framework */,
+				30FC2902175EC34200DEC042 /* MapKit.framework */,
+				3061F3B5174CDB96006093FC /* CoreData.framework */,
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 				301C1F6817378AF30068B43B /* Resources */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
 				302FD03C1727D870004DA005 /* RevolUtioNTests */,
@@ -608,6 +716,7 @@
 		302FD00B1727D870004DA005 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F972BC81792557A00A27EF2 /* HttpClient */,
 				3061F3C7174DC6CC006093FC /* CoreData */,
 				3008CC53175756F60032F5C7 /* DefaultSettings.plist */,
 				3008CC551758997E0032F5C7 /* RORSettings.h */,
@@ -630,6 +739,8 @@
 				30BB0BBC176F004D0009A847 /* RORMapPoint.m */,
 				301250F8177B25C10082A09A /* RORPages.h */,
 				301250F9177B25C10082A09A /* RORPages.m */,
+				0F857706178959DC00173A92 /* RORUtils.h */,
+				0F857707178959DC00173A92 /* RORUtils.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -890,12 +1001,21 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+<<<<<<< HEAD
 					ProductGroup = 303F9C7617894628000826AC /* Products */;
 					ProjectRef = 303F9C7517894628000826AC /* iPhone.xcodeproj */;
 				},
 				{
 					ProductGroup = 303F9C6717894619000826AC /* Products */;
 					ProjectRef = 303F9C6617894619000826AC /* SBJson.xcodeproj */;
+=======
+					ProductGroup = 0F9A9D3C17894A320025E49B /* Products */;
+					ProjectRef = 0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */;
+				},
+				{
+					ProductGroup = 0F9A9D2D17894A1B0025E49B /* Products */;
+					ProjectRef = 0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 				},
 			);
 			projectRoot = "";
@@ -907,6 +1027,7 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+<<<<<<< HEAD
 		303F9C6E1789461A000826AC /* SBJson.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -954,6 +1075,55 @@
 			fileType = wrapper.application;
 			path = "ASIHTTPRequest iPad.app";
 			remoteRef = 303F9C7F17894628000826AC /* PBXContainerItemProxy */;
+=======
+		0F9A9D3417894A1B0025E49B /* SBJson.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SBJson.framework;
+			remoteRef = 0F9A9D3317894A1B0025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D3617894A1B0025E49B /* SBJsonTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SBJsonTests.octest;
+			remoteRef = 0F9A9D3517894A1B0025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D3817894A1B0025E49B /* libsbjson-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libsbjson-ios.a";
+			remoteRef = 0F9A9D3717894A1B0025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D3A17894A1B0025E49B /* sbjson-iosTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "sbjson-iosTests.octest";
+			remoteRef = 0F9A9D3917894A1B0025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D4217894A330025E49B /* ASIHTTPRequest iPhone.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "ASIHTTPRequest iPhone.app";
+			remoteRef = 0F9A9D4117894A330025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D4417894A330025E49B /* Tests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Tests.app;
+			remoteRef = 0F9A9D4317894A330025E49B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0F9A9D4617894A330025E49B /* ASIHTTPRequest iPad.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "ASIHTTPRequest iPad.app";
+			remoteRef = 0F9A9D4517894A330025E49B /* PBXContainerItemProxy */;
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1114,6 +1284,9 @@
 				30F44B501778267200876915 /* RORDBCommon.m in Sources */,
 				301250F0177B21A60082A09A /* RORAccountViewController.m in Sources */,
 				301250FA177B25C10082A09A /* RORPages.m in Sources */,
+				0F857708178959DC00173A92 /* RORUtils.m in Sources */,
+				0F857712178C4EF100173A92 /* RORHttpClientHandler.m in Sources */,
+				0F972BD2179255F300A27EF2 /* RORHttpResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

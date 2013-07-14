@@ -24,6 +24,9 @@
 #import "Place_Package.h"
 #import <SBJson/SBJson.h>
 #import "RORDBCommon.h"
+#import "RORHttpClientHandler.h"
+#import "RORHttpResponse.h"
+#import "RORUtils.h"
 
 
 @implementation RORPublicMethods
@@ -266,8 +269,12 @@ static NSInteger userId = -1;
 
 + (void)syncRunningHistoryToServer{
     NSError *error = nil;
+<<<<<<< HEAD
 //    NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
 
+=======
+    NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     NSMutableArray *dataList = [[NSMutableArray alloc]init];
@@ -279,18 +286,8 @@ static NSInteger userId = -1;
         if ([info valueForKey:@"userId"] == nil)
             [dataList addObject:info];
     }
-//    if (lastUpdateTime == nil || [lastUpdateTime isEqualToString:@""]) {
-//        for (User_Running_History *info in fetchObject) {
-//            [dataList addObject:[info transToDictionary]];
-//        }
-//    } else {
-//        for (User_Running_History *info in fetchObject) {
-//            if (info.missionId == nil) {
-//                [dataList addObject:[info transToDictionary]];
-//            }
-//        }
-//    }
     
+<<<<<<< HEAD
     SBJsonWriter *writer = [[SBJsonWriter alloc] init];
     NSLog(@"Start Create JSON!");
     NSString *dataStr = [writer stringWithObject:dataList];
@@ -308,8 +305,12 @@ static NSInteger userId = -1;
     NSHTTPURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
     NSInteger statCode = [urlResponse statusCode];
+=======
+    NSString *requestUrl = [NSString stringWithFormat:RUNNING_HISTORY_URL, [RORPublicMethods getUserId]];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:requestUrl withRequstBody:[RORUtils toJsonFormObject:dataList]];
+>>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
     
-    if (statCode == 200){
+    if ([httpResponse responseStatus] == 200){
         for (User_Running_History *info in fetchObject) {
             NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
             info.userId = [userDict valueForKey:@"userId"];
@@ -317,7 +318,7 @@ static NSInteger userId = -1;
         [self saveLastUpdateTime:@"User_Running_History"];
 
     } else {
-        NSLog(@"error: statCode = %d", statCode);
+        NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
     }
     
     if (![context save:&error]) {
