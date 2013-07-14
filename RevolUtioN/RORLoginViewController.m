@@ -51,32 +51,6 @@ NSInteger tag = 0;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)hasLoggedIn {
-    //操作数据库，User表
-//    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    context = delegate.managedObjectContext;
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
-//    [fetchRequest setEntity:entity];
-//    NSError *error = nil;
-//    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-//    NSString *name;
-//    for (NSManagedObject *info in fetchObject) {
-//        name = [info valueForKey:@"nickName"];
-//    }
-    if ([RORPublicMethods hasLoggedIn]!=nil){
-        //[alert show];
-
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-        // 通过storyboard id拿到目标控制器的对象
-        UIViewController *viewController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-
-        [self.navigationController pushViewController:viewController animated:NO];
-    }
-}
-
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     UIViewController *destination = segue.destinationViewController;
     if ([destination respondsToSelector:@selector(setDelegate:)]){
@@ -107,6 +81,9 @@ NSInteger tag = 0;
             [RORPublicMethods loginSync];
             //登录后刷新数据页面
 //            [RORPages refreshPages];
+
+            [self.navigationController popViewControllerAnimated:YES];
+
         } else if (statCode == 204) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
@@ -143,15 +120,15 @@ NSInteger tag = 0;
 
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"恭喜你，注册成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
+
+            [self.navigationController popViewControllerAnimated:YES];
+
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:@"注册失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: nil];
             [alert show];
             return;
         }
     }
-    passwordTextField.text = @"";
-    nicknameTextField.text = @"";    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) saveUserInfoFromDict:(NSDictionary *) userInfoDic{

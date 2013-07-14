@@ -97,7 +97,7 @@ static NSInteger userId = -1;
 + (void)loginSync{
     [self syncFriends];
     [self syncRunningHistoryFromServer];
-    [self syncRunningHistoryToServer];
+//    [self syncRunningHistoryToServer];
 }
 
 + (void)synchronizeMissions {
@@ -266,7 +266,7 @@ static NSInteger userId = -1;
 
 + (void)syncRunningHistoryToServer{
     NSError *error = nil;
-    NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
+//    NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
 
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
@@ -275,9 +275,9 @@ static NSInteger userId = -1;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Running_History" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-    for (User_Running_History *info in fetchObject) {
-        if (info.userId == nil)
-            [dataList addObject:[info transToDictionary]];
+    for (NSManagedObject *info in fetchObject) {
+        if ([info valueForKey:@"userId"] == nil)
+            [dataList addObject:info];
     }
 //    if (lastUpdateTime == nil || [lastUpdateTime isEqualToString:@""]) {
 //        for (User_Running_History *info in fetchObject) {
@@ -301,8 +301,10 @@ static NSInteger userId = -1;
     //    将请求的url数据放到NSData对象中
     NSString *contentType = [NSString stringWithFormat:@"application/json"];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+//    [request addValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: dataData];
+    NSLog(@"==========request desp.==========\n%@",[request description]);
     NSHTTPURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
     NSInteger statCode = [urlResponse statusCode];

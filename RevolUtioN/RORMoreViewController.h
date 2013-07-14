@@ -12,6 +12,7 @@
 - (IBAction)logoutAction:(id)sender;
 - (void)saveAll;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString *cityName;
 @property (strong, nonatomic) NSString *cityCode;
 @property (strong, nonatomic) NSNumber *provRow;
