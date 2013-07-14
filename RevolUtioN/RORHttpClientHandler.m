@@ -19,7 +19,6 @@
     //set http headers
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"gzip" forHTTPHeaderField:@"Content-Encoding" ];
-    
     //todo: add key NSString *key=@"key";
     //[request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"]
     
