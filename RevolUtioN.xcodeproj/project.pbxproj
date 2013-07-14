@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F857708178959DC00173A92 /* RORUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857707178959DC00173A92 /* RORUtils.m */; };
+		0F857712178C4EF100173A92 /* RORHttpClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857711178C4EF100173A92 /* RORHttpClientHandler.m */; };
+		0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9A9D3817894A1B0025E49B /* libsbjson-ios.a */; };
+		0F972BD2179255F300A27EF2 /* RORHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F972BD1179255F300A27EF2 /* RORHttpResponse.m */; };
 		3000E52417408E4F007D5910 /* cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E52317408E4E007D5910 /* cell_bg.png */; };
 		3000E5281740BF07007D5910 /* main_plan_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E5271740BF07007D5910 /* main_plan_bg.png */; };
 		3000E55C1740D739007D5910 /* checkbox_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E55A1740D738007D5910 /* checkbox_off.png */; };
@@ -202,6 +206,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F857706178959DC00173A92 /* RORUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUtils.h; sourceTree = "<group>"; };
+		0F857707178959DC00173A92 /* RORUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUtils.m; sourceTree = "<group>"; };
+		0F857710178C4EF100173A92 /* RORHttpClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpClientHandler.h; sourceTree = "<group>"; };
+		0F857711178C4EF100173A92 /* RORHttpClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHttpClientHandler.m; sourceTree = "<group>"; };
+		0F972BD0179255F300A27EF2 /* RORHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpResponse.h; sourceTree = "<group>"; };
+		0F972BD1179255F300A27EF2 /* RORHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHttpResponse.m; sourceTree = "<group>"; };
 		0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = "json-framework-master/SBJson.xcodeproj"; sourceTree = "<group>"; };
 		0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iPhone.xcodeproj; path = "pokeb-asi-http-request-3ed0b3c/iPhone.xcodeproj"; sourceTree = "<group>"; };
 		3000E52317408E4E007D5910 /* cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg.png; sourceTree = "<group>"; };
@@ -401,6 +411,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */,
 				30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */,
 				30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */,
 				30BB0BA8176A03AC0009A847 /* QuartzCore.framework in Frameworks */,
@@ -428,6 +439,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F972BC81792557A00A27EF2 /* HttpClient */ = {
+			isa = PBXGroup;
+			children = (
+				0F857710178C4EF100173A92 /* RORHttpClientHandler.h */,
+				0F857711178C4EF100173A92 /* RORHttpClientHandler.m */,
+				0F972BD0179255F300A27EF2 /* RORHttpResponse.h */,
+				0F972BD1179255F300A27EF2 /* RORHttpResponse.m */,
+			);
+			name = HttpClient;
+			sourceTree = "<group>";
+		};
 		0F9A9D2D17894A1B0025E49B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,6 +649,7 @@
 		302FD00B1727D870004DA005 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F972BC81792557A00A27EF2 /* HttpClient */,
 				3061F3C7174DC6CC006093FC /* CoreData */,
 				3008CC53175756F60032F5C7 /* DefaultSettings.plist */,
 				3008CC551758997E0032F5C7 /* RORSettings.h */,
@@ -649,6 +672,8 @@
 				30BB0BBC176F004D0009A847 /* RORMapPoint.m */,
 				301250F8177B25C10082A09A /* RORPages.h */,
 				301250F9177B25C10082A09A /* RORPages.m */,
+				0F857706178959DC00173A92 /* RORUtils.h */,
+				0F857707178959DC00173A92 /* RORUtils.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1112,6 +1137,9 @@
 				30F44B501778267200876915 /* RORDBCommon.m in Sources */,
 				301250F0177B21A60082A09A /* RORAccountViewController.m in Sources */,
 				301250FA177B25C10082A09A /* RORPages.m in Sources */,
+				0F857708178959DC00173A92 /* RORUtils.m in Sources */,
+				0F857712178C4EF100173A92 /* RORHttpClientHandler.m in Sources */,
+				0F972BD2179255F300A27EF2 /* RORHttpResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

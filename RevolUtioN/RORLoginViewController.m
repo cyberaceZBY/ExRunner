@@ -13,7 +13,9 @@
 #import "RORPublicMethods.h"
 #import "RORPages.h"
 #import "RORConstant.h"
-#import <SBJson/SBJson.h>
+#import "RORUtils.h"
+#import "RORHttpClientHandler.h"
+#import "RORHttpResponse.h"
 
 @interface RORLoginViewController ()
 
@@ -24,8 +26,6 @@
 @synthesize passwordTextField, nicknameTextField;
 @synthesize switchButton, sexButton;
 @synthesize context, delegate;
-
-NSInteger tag = 0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,9 +39,8 @@ NSInteger tag = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
 	// Do any additional setup after loading the view.
-//    [self hasLoggedIn];
     
 }
 
@@ -52,30 +51,15 @@ NSInteger tag = 0;
 }
 
 - (void)hasLoggedIn {
-    //操作数据库，User表
-//    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    context = delegate.managedObjectContext;
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
-//    [fetchRequest setEntity:entity];
-//    NSError *error = nil;
-//    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-//    NSString *name;
-//    for (NSManagedObject *info in fetchObject) {
-//        name = [info valueForKey:@"nickName"];
-//    }
     if ([RORPublicMethods hasLoggedIn]!=nil){
         //[alert show];
-
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         // 通过storyboard id拿到目标控制器的对象
         UIViewController *viewController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-
+        
         [self.navigationController pushViewController:viewController animated:NO];
     }
 }
-
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     UIViewController *destination = segue.destinationViewController;
@@ -90,57 +74,30 @@ NSInteger tag = 0;
     if (![self isLegalInput]) return;
     if (switchButton.selectedSegmentIndex == 0){ //登录
         NSString *userName = usernameTextField.text;
-        NSString *password = passwordTextField.text;
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/account/%@/%@",SERVICE_URL ,userName, password]]];
-        //    将请求的url数据放到NSData对象中
-        NSHTTPURLResponse *urlResponse = nil;
-        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
-        //    iOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-        NSInteger statCode = [urlResponse statusCode];
-        NSLog(@"%d", statCode);
-        if (statCode == 200){
-            NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-            //    weatherDic字典中存放的数据也是字典型，从它里面通过键值取值
-            //            NSDictionary *userInfo = [userInfoDic objectForKey:@"weatherinfo"];
+        NSString *password = [RORUtils md5:passwordTextField.text];
+        NSString *loginUrl = [NSString stringWithFormat:LOGIN_URL ,userName, password];
+        RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:loginUrl];
+        
+        if ([httpResponse responseStatus] == 200){
+            NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
             NSLog(@"%@", [userInfoDic description]);
             [self saveUserInfoFromDict:userInfoDic];
             [RORPublicMethods loginSync];
-            //登录后刷新数据页面
-//            [RORPages refreshPages];
-        } else if (statCode == 204) {
+        } else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
         }
     } else { //注册
-        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail", passwordTextField.text, @"password", nicknameTextField.text, @"nickName", [sexButton selectedSegmentIndex]==0?@"男":@"女", @"sex", nil];
-        SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-        NSLog(@"Start Create JSON!");
-        NSString *regStr = [writer stringWithObject:regDict];
-        NSLog(@"%@",regStr);
+        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [sexButton selectedSegmentIndex]==0?@"男":@"女", @"sex", nil];
         
-//        //=================================
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/account/",SERVICE_URL]]];
-        //    将请求的url数据放到NSData对象中
-        NSString *contentType = [NSString stringWithFormat:@"application/json"];
-        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        [request setHTTPMethod:@"POST"];
-
-        NSData *regData = [regStr dataUsingEncoding: NSUTF8StringEncoding];
-        [request setHTTPBody:regData];
-        NSHTTPURLResponse *urlResponse = nil;
-        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
-        NSInteger statCode = [urlResponse statusCode];
-
-        if (statCode == 200){
-            NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-            //    weatherDic字典中存放的数据也是字典型，从它里面通过键值取值
-            //            NSDictionary *userInfo = [userInfoDic objectForKey:@"weatherinfo"];
-            NSLog(@"%@", [userInfoDic description]);
+        RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:REGISTER_URL withRequstBody:[RORUtils toJsonFormObject:regDict]];
+        
+        if ([httpResponse responseStatus] == 200){
+            NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
             [self saveUserInfoFromDict:userInfoDic];
             [RORPublicMethods loginSync];
-//            [RORPages refreshPages];
-
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"恭喜你，注册成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
         } else {
@@ -150,7 +107,7 @@ NSInteger tag = 0;
         }
     }
     passwordTextField.text = @"";
-    nicknameTextField.text = @"";    
+    nicknameTextField.text = @"";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -202,7 +159,7 @@ NSInteger tag = 0;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.2];
-
+    
     nicknameTextField.alpha = [sender selectedSegmentIndex];
     sexButton.alpha = [sender selectedSegmentIndex];
     
