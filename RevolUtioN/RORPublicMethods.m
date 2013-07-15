@@ -100,7 +100,7 @@ static NSInteger userId = -1;
 + (void)loginSync{
     [self syncFriends];
     [self syncRunningHistoryFromServer];
-//    [self syncRunningHistoryToServer];
+    [self syncRunningHistoryToServer];
 }
 
 + (void)synchronizeMissions {
@@ -269,12 +269,7 @@ static NSInteger userId = -1;
 
 + (void)syncRunningHistoryToServer{
     NSError *error = nil;
-<<<<<<< HEAD
-//    NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
-
-=======
     NSString *lastUpdateTime = [self getLastUpdateTime:@"User_Running_History"];
->>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     NSMutableArray *dataList = [[NSMutableArray alloc]init];
@@ -282,33 +277,13 @@ static NSInteger userId = -1;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Running_History" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-    for (NSManagedObject *info in fetchObject) {
-        if ([info valueForKey:@"userId"] == nil)
-            [dataList addObject:info];
+    for (User_Running_History *info in fetchObject) {
+        if (info.userId == nil)
+            [dataList addObject:[info transToDictionary]];
     }
     
-<<<<<<< HEAD
-    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    NSLog(@"Start Create JSON!");
-    NSString *dataStr = [writer stringWithObject:dataList];
-    NSLog(@"%@",dataStr);
-    NSData *dataData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
-    //        //=================================
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/running/history/%d",SERVICE_URL, [RORPublicMethods getUserId]]]];
-    //    将请求的url数据放到NSData对象中
-    NSString *contentType = [NSString stringWithFormat:@"application/json"];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-//    [request addValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: dataData];
-    NSLog(@"==========request desp.==========\n%@",[request description]);
-    NSHTTPURLResponse *urlResponse = nil;
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
-    NSInteger statCode = [urlResponse statusCode];
-=======
     NSString *requestUrl = [NSString stringWithFormat:RUNNING_HISTORY_URL, [RORPublicMethods getUserId]];
     RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:requestUrl withRequstBody:[RORUtils toJsonFormObject:dataList]];
->>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
     
     if ([httpResponse responseStatus] == 200){
         for (User_Running_History *info in fetchObject) {

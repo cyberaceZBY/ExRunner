@@ -50,8 +50,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-<<<<<<< HEAD
-=======
 - (void)hasLoggedIn {
     if ([RORPublicMethods hasLoggedIn]!=nil){
         //[alert show];
@@ -63,7 +61,6 @@
     }
 }
 
->>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     UIViewController *destination = segue.destinationViewController;
     if ([destination respondsToSelector:@selector(setDelegate:)]){
@@ -86,16 +83,7 @@
             NSLog(@"%@", [userInfoDic description]);
             [self saveUserInfoFromDict:userInfoDic];
             [RORPublicMethods loginSync];
-<<<<<<< HEAD
-            //登录后刷新数据页面
-//            [RORPages refreshPages];
-
-            [self.navigationController popViewControllerAnimated:YES];
-
-        } else if (statCode == 204) {
-=======
         } else{
->>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
@@ -112,21 +100,15 @@
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"恭喜你，注册成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
-
-            [self.navigationController popViewControllerAnimated:YES];
-
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:@"注册失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: nil];
             [alert show];
             return;
         }
     }
-<<<<<<< HEAD
-=======
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
     [self.navigationController popViewControllerAnimated:YES];
->>>>>>> 780d4fcd0eb0533322bf3e93679b6567627e13ca
 }
 
 - (void) saveUserInfoFromDict:(NSDictionary *) userInfoDic{

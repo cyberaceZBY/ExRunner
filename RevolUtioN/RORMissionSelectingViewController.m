@@ -76,6 +76,7 @@
 //    };
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     UILabel* label = (UILabel*)[cell viewWithTag:1];
+
     label.text = [contentList objectAtIndex:indexPath.row];
 //    label.text = [NSString stringWithFormat:@"%@%d",@"任务",indexPath.row];
     // Configure the cell...

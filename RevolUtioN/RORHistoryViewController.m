@@ -67,10 +67,8 @@
     NSError *error = nil;
     NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *info in fetchObject) {
-        if (info == nil)
-            continue;
-//        User_Running_History *historyObj = (User_Running_History *) info;
-        NSDate *date = [info valueForKey:@"missionDate"];
+        User_Running_History *historyObj = (User_Running_History *) info;
+        NSDate *date = [historyObj valueForKey:@"missionDate"];
         
         NSDateFormatter *formate = [[NSDateFormatter alloc] init];
         //    formate.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
@@ -82,7 +80,7 @@
         NSMutableArray *record4Date = [runHistoryList objectForKey:formatDateString];
         if (record4Date == nil)
             record4Date = [[NSMutableArray alloc] init];
-        [record4Date addObject:info];
+        [record4Date addObject:historyObj];
         [runHistoryList setObject:record4Date forKey:formatDateString];
     }
     
@@ -128,24 +126,6 @@
     return sortedDateList.count;
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(scrollView.contentOffset.y < 0){
-        NSLog(@"top*****");
-    }else if(scrollView.contentOffset.y > 10){
-        UITableView *tableview = (UITableView *)scrollView;
-        NSArray *views = [tableview visibleCells];
-        NSLog(@"%d", views.count);
-        for (int i=0; i<views.count; i++){
-            UITableViewCell *cellView = (UITableViewCell *)[views objectAtIndex:i];
-            if (i<views.count/2)
-                cellView.alpha = 0.5;
-            else
-                cellView.alpha = 1;
-        }
-        
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
@@ -164,20 +144,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSString *date_str = [sortedDateList objectAtIndex:indexPath.section];
     NSArray *records4DateList = [runHistoryList objectForKey:date_str];
-    NSManagedObject *record4Date = [records4DateList objectAtIndex:indexPath.row];
+    User_Running_History *record4Date = [records4DateList objectAtIndex:indexPath.row];
     UILabel *distanceLabel = (UILabel *)[tableView viewWithTag:1];
-    distanceLabel.text = [NSString stringWithFormat:@"%@",[record4Date valueForKey:@"distance"]];
+    distanceLabel.text = [NSString stringWithFormat:@"%@",record4Date.distance];
     UILabel *durationLabel = (UILabel *)[tableView viewWithTag:2];
-    durationLabel.text = [RORPublicMethods transSecondToStandardFormat:[[record4Date valueForKey:@"duration"] integerValue]];
+    durationLabel.text = [RORPublicMethods transSecondToStandardFormat:[record4Date.duration integerValue]];
     // Configure the cell...
-    
-    UILabel *syncLabel = (UILabel *)[tableView viewWithTag:5];
-    syncLabel.alpha = [record4Date valueForKey:@"userId"] == nil?1:0;
-    
-    //test code
-    if (indexPath.section == 0 && indexPath.row<3)
-        cell.alpha = 0.5;
-    //end of test code
     
     return cell;
 }

@@ -41,10 +41,6 @@
 //    cityName = cityName;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -63,7 +59,6 @@
 - (void)viewDidUnload {
     [self saveAll];
     [self setMoreTableView:nil];
-    [self setTableView:nil];
     [super viewDidUnload];
 }
 
@@ -71,6 +66,7 @@
     NSMutableDictionary *data = [RORSettings getInstance];
     NSMutableDictionary *location = [data valueForKey:@"location"];
     cityName = [location valueForKey:@"name"];
+    
 }
 
 - (void)saveAll {

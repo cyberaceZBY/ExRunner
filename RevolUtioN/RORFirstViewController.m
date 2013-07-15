@@ -377,6 +377,7 @@ UITableViewCell *routeCheckedCell = nil;
     UILabel *pointsLabel = (UILabel *)[cell viewWithTag:tRouteMissionPointsTag];
     UILabel *expLabel = (UILabel *)[cell viewWithTag:tRouteMissionExpTag];
     UIButton *checkbox = (UIButton *)[cell viewWithTag:tRouteMissionCheckboxTag];
+    
     Mission *mission = [missionList objectAtIndex:indexPath.row];
     nameLabel.text = mission.missionName;
     startLabel.text = mission.missionFrom;
