@@ -7,7 +7,7 @@
 //
 
 #import "RORMissionDetailViewController.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 
 @interface RORMissionDetailViewController ()
 
@@ -42,9 +42,9 @@
 }
 
 - (IBAction)discardAction:(id)sender {
-    NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
+    NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     [userDict setValue:nil forKey:@"periodic"];
-    [RORPublicMethods writeToUserInfoPList:userDict];
+    [RORUtils writeToUserInfoPList:userDict];
     [delegate viewDidLoad];
 
     [self.navigationController popViewControllerAnimated:YES];

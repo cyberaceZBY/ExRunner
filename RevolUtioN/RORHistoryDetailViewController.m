@@ -7,9 +7,9 @@
 //
 
 #import "RORHistoryDetailViewController.h"
-#import "RORPublicMethods.h"
 #import "RORRunningViewController.h"
 #import "RORDBCommon.h"
+#import "RORUtils.h"
 
 @interface RORHistoryDetailViewController ()
 
@@ -36,7 +36,7 @@
     
     distanceLabel.text = [NSString stringWithFormat:@"%.2f", [record.distance floatValue]];
     speedLabel.text = [NSString stringWithFormat:@"%.1f", [record.avgSpeed floatValue]];
-    durationLabel.text = [RORPublicMethods transSecondToStandardFormat:[record.duration integerValue]];
+    durationLabel.text = [RORUtils transSecondToStandardFormat:[record.duration integerValue]];
     energyLabel.text = [NSString stringWithFormat:@"%d", [record.spendCarlorie integerValue]];
     scoreLabel.text = [NSString stringWithFormat:@"%d", [record.scores integerValue]];
     experienceLabel.text = [NSString stringWithFormat:@"%d" ,[record.experience integerValue]];

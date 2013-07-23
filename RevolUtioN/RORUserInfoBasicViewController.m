@@ -9,7 +9,7 @@
 #import "RORUserInfoBasicViewController.h"
 #import "User_Attributes.h"
 #import "RORAppDelegate.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 #import "RORConstant.h"
 
 #define LEVELTAG 1
@@ -89,7 +89,7 @@
 //    }
 //    //========================
     
-//    NSString *path= [RORPublicMethods getUserInfoPList];
+//    NSString *path= [RORUtils getUserInfoPList];
     
 //    self.contentList = [NSDictionary dictionaryWithContentsOfFile:path];
 //    UILabel* label = (UILabel*)[self.view viewWithTag:LEVELTAG];
@@ -155,7 +155,7 @@
         NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
         //    weatherDic字典中存放的数据也是字典型，从它里面通过键值取值
         //            NSDictionary *userInfo = [userInfoDic objectForKey:@"weatherinfo"];
-        [RORPublicMethods loadUserInfoFromDict:userInfoDic];
+        //[RORUtils loadUserInfoFromDict:userInfoDic];
         NSLog(@"%@", [userInfoDic description]);
     } else {
         ErrorTip = @"(非实时数据)";

@@ -16,12 +16,14 @@
 @synthesize userEmail;
 @synthesize userId;
 @synthesize sex;
+@synthesize uuid;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     userId = [dict valueForKey:@"userId"];
     nickName = [dict valueForKey:@"nickName"];
     userEmail = [dict valueForKey:@"userEmail"];
     sex = [dict valueForKey:@"sex"];
+    uuid =[dict valueForKey:@"uuid"];
 }
 
 -(void)setNickName:(id)obj{
@@ -42,6 +44,10 @@
 
 -(void)setSex:(id)obj{
     sex = [RORDBCommon getStringFromId:obj];
+}
+
+-(void)setUuid:(id)obj{
+    uuid = [RORDBCommon getStringFromId:obj];
 }
 
 @end

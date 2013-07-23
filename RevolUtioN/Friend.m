@@ -15,6 +15,15 @@
 @synthesize friendId;
 @synthesize friendStatus;
 @synthesize addTime;
+@synthesize updateTime;
+
+-(void)initWithDictionary:(NSDictionary *)dict{
+    userId = [dict valueForKey:@"userId"];
+    friendId = [dict valueForKey:@"friendId"];
+    friendStatus = [dict valueForKey:@"friendStatus"];
+    addTime = [dict valueForKey:@"addTime"];
+    updateTime = [dict valueForKey:@"updateTime"];
+}
 
 -(void)setUserId:(id)obj{
     userId = [RORDBCommon getNumberFromId:obj];
@@ -32,5 +41,8 @@
     addTime = [RORDBCommon getDateFromId:obj];
 }
 
+-(void)setUpdateTime:(id)obj{
+    updateTime = [RORDBCommon getDateFromId:obj];
+}
 
 @end

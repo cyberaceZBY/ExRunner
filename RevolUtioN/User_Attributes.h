@@ -10,7 +10,8 @@
 #import <CoreData/CoreData.h>
 
 
-@interface User_Attributes : NSManagedObject
+@interface
+User_Attributes : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * baseAcc;
 @property (nonatomic, retain) NSNumber * crit;
@@ -20,6 +21,12 @@
 @property (nonatomic, retain) NSNumber * luck;
 @property (nonatomic, retain) NSNumber * scores;
 @property (nonatomic, retain) NSNumber * userId;
-@property (nonatomic, retain) NSNumber * latestRunId;
+@property (nonatomic, retain) NSNumber * maxPower;
+@property (nonatomic, retain) NSNumber * remainingPower;
+@property (nonatomic, retain) NSNumber * endurance;
+@property (nonatomic, retain) NSNumber * spirit;
+@property (nonatomic, retain) NSNumber * rapidly;
+@property (nonatomic, retain) NSNumber * recoverSpeed;
 
+-(void)initWithDictionary:(NSDictionary *)dict;
 @end

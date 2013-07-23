@@ -11,6 +11,10 @@
 
 @implementation RORUtils
 
+static NSNumber *userId = nil;
+
+static NSDate *systemTime = nil;
+
 + (NSString *)md5:(NSString *)str {
     const char *cStr = [str UTF8String];
     unsigned char result[16];
@@ -23,13 +27,140 @@
             result[12],result[13],result[14],result[15]];
 }
 
++ (NSString *)transSecondToStandardFormat:(NSInteger) seconds {
+    NSInteger min=0, hour=0;
+    min = seconds / 60;
+    seconds = seconds % 60;
+    hour = min / 60;
+    min = min % 60;
+    return [NSString stringWithFormat:@"%.2d:%.2d:%.2d",hour, min, seconds];
+}
+
 + (NSString *)toJsonFormObject:(NSObject *)object{
     SBJsonWriter *writer = [[SBJsonWriter alloc] init];
     NSString *regStr = [writer stringWithObject:object];
     return regStr;
 }
 
-+(NSData*) gzipCompressData: (NSData*)uncompressedData  {
++ (NSNumber *)getUserId{
+    if (userId == nil || userId < 0){
+        NSMutableDictionary *userDict = [self getUserInfoPList];
+        userId = [userDict valueForKey:@"userId"];    }
+    return userId;
+}
+
++(NSDate *)getSystemTime{
+    if (systemTime == nil){
+        NSMutableDictionary *userDict = [self getUserInfoPList];
+        systemTime = [userDict valueForKey:@"systemTime"];    }
+    return systemTime;
+}
+
++ (void)resetUserId{
+    userId = [[NSNumber alloc] initWithInt:-1];
+}
+
++ (NSString*)getCityCodeJSon{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"CityCode" ofType:@"geojson"];
+    return path;
+}
+
++ (NSString*)getUserSettingsPList{
+    NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [ doc objectAtIndex:0 ];
+    return [docPath stringByAppendingPathComponent:@"userSettings.plist"];
+}
+
++ (NSString *)hasLoggedIn{
+    NSMutableDictionary *userDict = [self getUserInfoPList];
+    NSString *name = [userDict valueForKey:@"nickName"];
+    
+    if (!([name isEqual:@""] || name == nil))
+        return name;
+    else
+        return nil;
+}
+
++(NSString *)getCurrentTime{
+    NSDateFormatter *formate = [[NSDateFormatter alloc] init];
+    [formate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *formatDateString = [formate stringFromDate:[NSDate date]];
+    return formatDateString;
+}
+
++ (NSMutableDictionary *)getUserInfoPList{
+    NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [ doc objectAtIndex:0 ];
+    NSString *path = [docPath stringByAppendingPathComponent:@"userInfo.plist"];
+    NSMutableDictionary *userDict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    if (userDict == nil)
+        userDict = [[NSMutableDictionary alloc] init];
+    
+    return userDict;
+}
+
++ (void)writeToUserInfoPList:(NSDictionary *) userDict{
+    NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [ doc objectAtIndex:0 ];
+    NSString *path = [docPath stringByAppendingPathComponent:@"userInfo.plist"];
+    [userDict writeToFile:path atomically:YES];
+}
+
++ (void)saveLastUpdateTime: (NSString *) key{
+    NSMutableDictionary *userDict = [self getUserInfoPList];
+    NSString *systemTime = (NSString *)[userDict objectForKey:@"systemTime"];
+    [userDict setValue:systemTime forKey:key];
+    [self writeToUserInfoPList:userDict];
+}
+
++ (NSString *)getLastUpdateTime: (NSString *) key{
+    NSMutableDictionary *userDict = [self getUserInfoPList];
+    NSString *lastUpdateTime = (NSString *)[userDict objectForKey:key];
+    if(lastUpdateTime == nil || [lastUpdateTime isEqualToString:@""]){
+        lastUpdateTime = @"2000-01-01 00:00:00";
+    }
+    return lastUpdateTime;
+}
+
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query{
+    NSError *error;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:query argumentArray:params];
+    [fetchRequest setPredicate:predicate];
+    [fetchRequest setFetchLimit:1];
+    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    return fetchObject;
+}
+
++ (void)clearTableData:(NSArray *) tableArray{
+    NSError *error;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    
+    for(NSString *table in tableArray){
+        NSEntityDescription *entity = [NSEntityDescription entityForName:table inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        NSError *error = nil;
+        NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
+        for (NSManagedObject *info in fetchObject) {
+            [context deleteObject:info];
+        }
+    }
+    //保存修改
+    [context save:&error];
+}
+
++ (NSData*) gzipCompressData: (NSData*)uncompressedData  {
     
     if (!uncompressedData || [uncompressedData length] == 0)
 	{

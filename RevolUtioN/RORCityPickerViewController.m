@@ -7,8 +7,8 @@
 //
 
 #import "RORCityPickerViewController.h"
-#import "RORPublicMethods.h"
 #import "RORMoreViewController.h"
+#import "RORUtils.h"
 
 #define PROVINCECOMPONENT 0
 #define CITYCOMPONENT 1
@@ -36,7 +36,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSError *error;
-    NSData *CityCodeJson = [NSData dataWithContentsOfFile:[RORPublicMethods getCityCodeJSon]];
+    NSData *CityCodeJson = [NSData dataWithContentsOfFile:[RORUtils getCityCodeJSon]];
 //    NSString *path = [RORPlistPaths getCityCodeJSon];
 //    NSInputStream *jsoninput = [NSInputStream inputStreamWithFileAtPath:path];
 //    NSDictionary *citycodeDic = [NSJSONSerialization JSONObjectWithStream:jsoninput options:NSJSONReadingMutableLeaves error:&error];

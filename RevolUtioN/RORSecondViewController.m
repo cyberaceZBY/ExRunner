@@ -8,7 +8,7 @@
 
 #import "RORSecondViewController.h"
 #import "RORAppDelegate.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 #import "RORPages.h"
 
 @interface RORSecondViewController ()
@@ -23,17 +23,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([RORPublicMethods hasLoggedIn]){
+    //if ([RORUtils hasLoggedIn]){
         coverView.alpha = 0;
         self.people = [[NSMutableArray alloc] init];
         [self loadFriendsFromDatabase];
         NSDictionary *row1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"AdoubleZ", @"name", @"9月1号 20:00", @"date", nil];
         self.invitation = [[NSMutableArray alloc] initWithObjects:row1, nil];
         addFriendButton.enabled = YES;
-    } else {
-        addFriendButton.enabled = NO;
-        coverView.alpha = 1;
-    }
+//    } else {
+//        addFriendButton.enabled = NO;
+//        coverView.alpha = 1;
+//    }
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -45,7 +45,7 @@
 
 - (void)loadFriendsFromDatabase{
     NSError *error = nil;
-    NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
+    NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     self.userName = [userDict valueForKey:@"nickName"];
     self.userId = [userDict valueForKey:@"userId"];
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];

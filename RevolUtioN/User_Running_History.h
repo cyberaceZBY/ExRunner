@@ -13,6 +13,7 @@
 @interface User_Running_History : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * userId;
+@property (nonatomic, retain) NSString * runUuid;
 @property (nonatomic, retain) NSNumber * missionId;
 @property (nonatomic, retain) NSNumber * missionTypeId;
 @property (nonatomic, retain) NSString * missionRoute;
@@ -28,9 +29,11 @@
 @property (nonatomic, retain) NSNumber * scores;
 @property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) NSString * comment;
-@property (nonatomic, retain) NSDate * synchronizeDate;
+@property (nonatomic, retain) NSDate * commitTime;
+@property (nonatomic, retain) NSString * uuid;
 
 -(NSMutableDictionary *)transToDictionary;
--(void)initByDictionary:(NSDictionary *)dict;
+
+-(void)initWithDictionary:(NSDictionary *)dict;
 
 @end

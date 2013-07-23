@@ -29,5 +29,8 @@
 @property (nonatomic, retain) NSNumber * inertiaAcc;
 @property (nonatomic, retain) NSNumber * crit;
 @property (nonatomic, retain) NSNumber * luck;
+@property (nonatomic, retain) NSNumber * endurance;
+@property (nonatomic, retain) NSNumber * spirit;
+@property (nonatomic, retain) NSNumber * rapidly;
 
 @end

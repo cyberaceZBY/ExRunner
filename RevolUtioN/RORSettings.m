@@ -23,14 +23,14 @@ static NSMutableDictionary *configList = nil;
 
 +(NSMutableDictionary*)getInstance{
     if (configList == nil) {
-        NSString *path = [RORPublicMethods getUserSettingsPList];
+        NSString *path = [RORUtils getUserSettingsPList];
         configList = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     }
     return configList;
 }
 
 + (void)setValue:(id)value forKey:(NSString *)key{
-    NSString *path = [RORPublicMethods getUserSettingsPList];
+    NSString *path = [RORUtils getUserSettingsPList];
     [configList setValue:value forKey:key];
     [configList writeToFile:path atomically:YES];
 }

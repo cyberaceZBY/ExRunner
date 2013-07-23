@@ -10,12 +10,13 @@
 #import "User.h"
 #import "User_Attributes.h"
 #import "RORAppDelegate.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 #import "RORPages.h"
 #import "RORConstant.h"
 #import "RORUtils.h"
-#import "RORHttpClientHandler.h"
+#import "RORUserClientHandler.h"
 #import "RORHttpResponse.h"
+#import "RORUserServices.h"
 
 @interface RORLoginViewController ()
 
@@ -51,14 +52,14 @@
 }
 
 - (void)hasLoggedIn {
-    if ([RORPublicMethods hasLoggedIn]!=nil){
-        //[alert show];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-        // 通过storyboard id拿到目标控制器的对象
-        UIViewController *viewController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-        
-        [self.navigationController pushViewController:viewController animated:NO];
-    }
+//    if ([RORUtils hasLoggedIn]!=nil){
+//        //[alert show];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+//        // 通过storyboard id拿到目标控制器的对象
+//        UIViewController *viewController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
+//        
+//        [self.navigationController pushViewController:viewController animated:NO];
+//    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -75,14 +76,12 @@
     if (switchButton.selectedSegmentIndex == 0){ //登录
         NSString *userName = usernameTextField.text;
         NSString *password = [RORUtils md5:passwordTextField.text];
-        NSString *loginUrl = [NSString stringWithFormat:LOGIN_URL ,userName, password];
-        RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:loginUrl];
+        RORHttpResponse *httpResponse = [RORUserClientHandler getUserInfoByUserNameAndPassword:userName withPassword:password];
         
         if ([httpResponse responseStatus] == 200){
             NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
-            NSLog(@"%@", [userInfoDic description]);
-            [self saveUserInfoFromDict:userInfoDic];
-            [RORPublicMethods loginSync];
+            [self firstLoginSync:userInfoDic];
+            //[RORUtils loginSync];
         } else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
@@ -91,17 +90,17 @@
     } else { //注册
         NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [sexButton selectedSegmentIndex]==0?@"男":@"女", @"sex", nil];
         
-        RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:REGISTER_URL withRequstBody:[RORUtils toJsonFormObject:regDict]];
+        RORHttpResponse *httpResponse = [RORUserClientHandler createUserInfoByUserDic:regDict];
         
         if ([httpResponse responseStatus] == 200){
             NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
-            [self saveUserInfoFromDict:userInfoDic];
-            [RORPublicMethods loginSync];
+            [self firstLoginSync:userInfoDic];
+            //[RORUtils loginSync];
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"恭喜你，注册成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:@"注册失败" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:@"用户名已存在" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: nil];
             [alert show];
             return;
         }
@@ -111,17 +110,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) saveUserInfoFromDict:(NSDictionary *) userInfoDic{
-    
-    [RORPublicMethods loadUserInfoFromDict:userInfoDic];
-    
-    NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
+- (void) firstLoginSync:(NSDictionary *) userInfoDic{
+    //init local DB.
+    NSNumber *userId = [userInfoDic valueForKey:@"userId"];
+    [RORUserServices syncUserInfo:userId withUserDic:userInfoDic];
+    //init plist
+    NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     [userDict setValue:[userInfoDic valueForKey:@"userId"] forKey:@"userId"];
     [userDict setValue:[userInfoDic valueForKey:@"nickName"] forKey:@"nickName"];
     [userDict setValue:[NSDate date] forKey:@"loginDate"];
-    [RORPublicMethods writeToUserInfoPList:userDict];
+    [RORUtils writeToUserInfoPList:userDict];
 }
-
 - (BOOL) isLegalInput {
     if (switchButton.selectedSegmentIndex == 0){
         if ([usernameTextField.text isEqualToString:@""] ||

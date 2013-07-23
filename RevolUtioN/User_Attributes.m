@@ -19,7 +19,29 @@
 @synthesize luck;
 @synthesize scores;
 @synthesize userId;
-@synthesize latestRunId;
+@synthesize maxPower;
+@synthesize remainingPower;
+@synthesize endurance;
+@synthesize spirit;
+@synthesize rapidly;
+@synthesize recoverSpeed;
+
+-(void)initWithDictionary:(NSDictionary *)dict{
+    userId = [dict valueForKey:@"userId"];
+    level = [dict valueForKey:@"level"];
+    crit = [dict valueForKey:@"crit"];
+    baseAcc = [dict valueForKey:@"baseAcc"];
+    experience = [dict valueForKey:@"experience"];
+    inertiaAcc = [dict valueForKey:@"inertiaAcc"];
+    luck = [dict valueForKey:@"luck"];
+    scores = [dict valueForKey:@"scores"];
+    maxPower = [dict valueForKey:@"maxPower"];
+    remainingPower = [dict valueForKey:@"remainingPower"];
+    endurance = [dict valueForKey:@"endurance"];
+    spirit = [dict valueForKey:@"spirit"];
+    rapidly = [dict valueForKey:@"rapidly"];
+    recoverSpeed = [dict valueForKey:@"recoverSpeed"];
+}
 
 -(void)setBaseAcc:(id)obj{
     baseAcc = [RORDBCommon getNumberFromId:obj];
@@ -53,8 +75,28 @@
     userId = [RORDBCommon getNumberFromId:obj];
 }
 
--(void)latestRunId:(id)obj{
-    latestRunId = [RORDBCommon getNumberFromId:obj];
+-(void)setMaxPower:(id)obj{
+    maxPower = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setRemainingPower:(id)obj{
+    remainingPower = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setEndurance:(id)obj{
+    endurance = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setSpirit:(id)obj{
+    spirit = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setRapidly:(id)obj{
+    rapidly = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setRecoverSpeed:(id)obj{
+    recoverSpeed = [RORDBCommon getNumberFromId:obj];
 }
 
 @end

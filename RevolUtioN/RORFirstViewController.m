@@ -7,12 +7,12 @@
 //
 
 #import "RORFirstViewController.h"
-#import "RORPublicMethods.h"
 #import "RORAppDelegate.h"
 #import "RORSettings.h"
 #import "Mission.h"
 #import <UIKit/UIKit.h>
 #import "RORPages.h"
+#import "RORUtils.h"
 
 @interface RORFirstViewController ()
 
@@ -48,10 +48,10 @@ UITableViewCell *routeCheckedCell = nil;
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [weatherSubView addGestureRecognizer:panGes];
     
-    [RORPublicMethods synchronizeMissions];
+    //[RORPublicMethods synchronizeMissions];
     
     //应用初始设置
-    NSString *userSettingDocPath = [RORPublicMethods getUserSettingsPList];
+    NSString *userSettingDocPath = [RORUtils getUserSettingsPList];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:userSettingDocPath];
     if (data == nil) {
         NSString *userSettingPath = [[NSBundle mainBundle] pathForResource:@"DefaultSettings" ofType:@"plist"];
@@ -71,7 +71,7 @@ UITableViewCell *routeCheckedCell = nil;
     //subview's initial location
     
     //初始化用户名
-    NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
+    NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     
     if ([userDict valueForKey:@"userId"] == nil){
         [userButton setTitle:@"请登录" forState:UIControlStateNormal];
@@ -137,7 +137,7 @@ UITableViewCell *routeCheckedCell = nil;
 }
 
 - (void)loadWeatherInfo{
-    NSString *settingPath = [RORPublicMethods getUserSettingsPList];
+    NSString *settingPath = [RORUtils getUserSettingsPList];
     if (settingPath != nil){ 
         NSMutableDictionary *settings = [RORSettings getInstance];
         NSMutableDictionary *location = [settings objectForKey:@"location"];

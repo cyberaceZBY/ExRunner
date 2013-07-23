@@ -16,5 +16,8 @@
 @property (nonatomic, retain) NSNumber * friendId;
 @property (nonatomic, retain) NSNumber * friendStatus;
 @property (nonatomic, retain) NSDate * addTime;
+@property (nonatomic, retain) NSDate * updateTime;
+
+-(void)initWithDictionary:(NSDictionary *)dict;
 
 @end

@@ -19,6 +19,26 @@
 @synthesize sequence;
 @synthesize lastUpdateTime;
 
+-(void)initWithDictionary:(NSDictionary *)dict{
+    missionPackageId = [dict valueForKey:@"missionPackageId"];
+    missionPackageName = [dict valueForKey:@"missionPackageName"];
+    missionPackageDescription = [dict valueForKey:@"missionPackageDescription"];
+    missionId = [dict valueForKey:@"missionId"];
+    missionTypeId = [dict valueForKey:@"missionTypeId"];
+    sequence = [dict valueForKey:@"sequence"];
+    lastUpdateTime = [dict valueForKey:@"lastUpdateTime"];
+}
+
+-(void)initWithDictionary:(NSDictionary *)dict withSubDictionary:(NSDictionary *)subDict{
+    missionPackageId = [dict valueForKey:@"missionPackageId"];
+    missionPackageName = [dict valueForKey:@"missionPackageName"];
+    missionPackageDescription = [dict valueForKey:@"missionPackageDescription"];
+    missionId = [subDict valueForKey:@"missionId"];
+    missionTypeId = [subDict valueForKey:@"missionTypeId"];
+    sequence = [subDict valueForKey:@"sequence"];
+    lastUpdateTime = [dict valueForKey:@"lastUpdateTime"];
+}
+
 -(void)setMissionId:(id)obj{
     missionId = [RORDBCommon getNumberFromId:obj];
 }

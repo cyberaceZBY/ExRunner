@@ -12,6 +12,7 @@
 @implementation User_Running_History
 
 @synthesize userId;
+@synthesize runUuid;
 @synthesize missionId;
 @synthesize missionTypeId;
 @synthesize missionRoute;
@@ -27,7 +28,8 @@
 @synthesize scores;
 @synthesize experience;
 @synthesize comment;
-@synthesize synchronizeDate;
+@synthesize commitTime;
+@synthesize uuid;
 
 -(NSMutableDictionary *)transToDictionary{
     NSMutableDictionary *tempoDict = [[NSMutableDictionary alloc] init];
@@ -35,6 +37,7 @@
     [tempoDict setValue:comment forKey:@"comment"];
     [tempoDict setValue:distance forKey:@"distance"];
     [tempoDict setValue:userId forKey:@"userId"];
+    [tempoDict setValue:runUuid forKey:@"runUuid"];
     [tempoDict setValue:missionTypeId forKey:@"missionTypeId"];
     [tempoDict setValue:missionRoute forKey:@"missionRoute"];
     [tempoDict setValue:[RORDBCommon getStringFromId:missionStartTime] forKey:@"missionStartTime"];
@@ -47,14 +50,17 @@
     [tempoDict setValue:scores forKey:@"scores"];
     [tempoDict setValue:experience forKey:@"experience"];
     [tempoDict setValue:missionId forKey:@"missionId"];
+    [tempoDict setValue:uuid forKey:@"uuid"];
+    [tempoDict setValue:[RORDBCommon getStringFromId:commitTime] forKey:@"commitTime"];
     return tempoDict;
 }
 
--(void)initByDictionary:(NSDictionary *)dict{
+-(void)initWithDictionary:(NSDictionary *)dict{
     self.avgSpeed = [dict valueForKey:@"avgSpeed"];
     self.comment = [dict valueForKey:@"comment"];
     self.distance = [dict valueForKey:@"distance"];
     self.userId = [dict valueForKey:@"userId"];
+    self.runUuid= [dict valueForKey:@"runUuid"];
     self.missionTypeId = [dict valueForKey:@"missionTypeId"];
     self.missionRoute = [dict valueForKey:@"missionRoute"];
     self.missionStartTime = [RORDBCommon getDateFromId:[dict valueForKey:@"missionStartTime"]];
@@ -67,10 +73,16 @@
     self.scores = [dict valueForKey:@"scores"];
     self.experience = [dict valueForKey:@"experience"];
     self.missionId = [dict valueForKey:@"missionId"];
+    self.uuid = [dict valueForKey:@"uuid"];
+    self.commitTime = [RORDBCommon getDateFromId:[dict valueForKey:@"commitTime"]];
 }
 
 -(void)setUserId:(id)obj{
     userId = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setRunUuid:(id)obj{
+    runUuid = [RORDBCommon getStringFromId:obj];
 }
 
 -(void)setMissionId:(id)obj{
@@ -133,8 +145,12 @@
     comment = [RORDBCommon getStringFromId:obj];
 }
 
--(void)setSynchronizeDate:(id)obj{
-    synchronizeDate = [RORDBCommon getDateFromId:obj];
+-(void)setCommitTime:(id)obj{
+    commitTime = [RORDBCommon getDateFromId:obj];
+}
+
+-(void)setUuid:(id)obj{
+    uuid = [RORDBCommon getStringFromId:obj];
 }
 
 @end

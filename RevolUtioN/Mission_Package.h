@@ -20,4 +20,8 @@
 @property (nonatomic, retain) NSNumber * sequence;
 @property (nonatomic, retain) NSDate * lastUpdateTime;
 
+-(void)initWithDictionary:(NSDictionary *)dict;
+
+-(void)initWithDictionary:(NSDictionary *)dict withSubDictionary:(NSDictionary *)subDict;
+
 @end

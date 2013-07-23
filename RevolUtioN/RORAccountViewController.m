@@ -7,8 +7,8 @@
 //
 
 #import "RORAccountViewController.h"
-#import "RORPublicMethods.h"
 #import "RORPages.h"
+#import "RORUtils.h"
 
 @interface RORAccountViewController ()
 
@@ -63,8 +63,8 @@
     if (buttonIndex == 0) {
         return;
     }else if(buttonIndex == 1){
-        [RORPublicMethods clearData];
-        [RORPublicMethods clearUser];
+        //[RORPublicMethods clearData];
+        //[RORPublicMethods clearUser];
         //登录后刷新数据页面
         [RORPages refreshPages];
 

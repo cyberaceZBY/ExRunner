@@ -9,7 +9,7 @@
 #import "RORHistoryViewController.h"
 #import "RORAppDelegate.h"
 #import "User_Running_History.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 
 @interface RORHistoryViewController ()
 
@@ -53,7 +53,7 @@
 {
     [super viewDidLoad];
     
-    syncButtonItem.enabled = ([RORPublicMethods hasLoggedIn]!=nil);
+    //syncButtonItem.enabled = ([RORUtils hasLoggedIn]!=nil);
     
     runHistoryList = [[NSMutableDictionary alloc] init];
     dateList = [[NSMutableArray alloc] init];
@@ -115,7 +115,7 @@
 }
 
 - (IBAction)syncAction:(id)sender {
-    [RORPublicMethods syncRunningHistoryToServer];
+    //[RORPublicMethods syncRunningHistoryToServer];
 }
 
 #pragma mark - Table view data source
@@ -148,7 +148,7 @@
     UILabel *distanceLabel = (UILabel *)[tableView viewWithTag:1];
     distanceLabel.text = [NSString stringWithFormat:@"%@",record4Date.distance];
     UILabel *durationLabel = (UILabel *)[tableView viewWithTag:2];
-    durationLabel.text = [RORPublicMethods transSecondToStandardFormat:[record4Date.duration integerValue]];
+    durationLabel.text = [RORUtils transSecondToStandardFormat:[record4Date.duration integerValue]];
     // Configure the cell...
     
     return cell;

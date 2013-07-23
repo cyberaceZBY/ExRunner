@@ -11,7 +11,7 @@
 #import "User_Running_History.h"
 #import "RORAppDelegate.h"
 #import "RORMapAnnotation.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 #import "RORDBCommon.h"
 
 #define SCALE_SMALL CGRectMake(0,0,320,155)
@@ -282,7 +282,7 @@
 
     timerCount++;
     distanceLabel.text = [NSString stringWithFormat:@"%.2lf", distance];
-    timeLabel.text = [RORPublicMethods transSecondToStandardFormat:timerCount];
+    timeLabel.text = [RORUtils transSecondToStandardFormat:timerCount];
     speedLabel.text = [NSString stringWithFormat:@"%.1f", (float)distance/timerCount*3.6];
 }
 
@@ -314,13 +314,7 @@
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;
-//    if ([RORPublicMethods hasLoggedIn]!=nil){
-//        NSMutableDictionary *userDict = [RORPublicMethods getUserInfoPList];
-//        NSNumber *userId = [userDict valueForKey:@"userId"];
-//        runHistory.userId = userId;
-//    } else {
     runHistory.userId = nil;
-//    }
     record = runHistory;
     if (![context save:&error]) {
         NSLog(@"%@",[error localizedDescription]);

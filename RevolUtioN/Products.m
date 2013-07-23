@@ -28,5 +28,8 @@
 @dynamic inertiaAcc;
 @dynamic crit;
 @dynamic luck;
+@dynamic endurance;
+@dynamic spirit;
+@dynamic rapidly;
 
 @end

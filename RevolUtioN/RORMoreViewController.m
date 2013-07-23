@@ -9,7 +9,7 @@
 #import "RORMoreViewController.h"
 #import "User.h"
 #import "RORAppDelegate.h"
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 #import "RORSettings.h"
 
 @interface RORMoreViewController ()
@@ -99,7 +99,7 @@
             identifier = @"accountCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *label = (UILabel*)[cell viewWithTag:1];
-            label.text = [RORPublicMethods hasLoggedIn];
+            //label.text = [RORUtils hasLoggedIn];
             break;
         }
         case 1:

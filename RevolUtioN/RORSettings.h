@@ -5,7 +5,7 @@
 //  Created by Beyond on 13-5-31.
 //  Copyright (c) 2013年 Beyond. All rights reserved.
 //
-#import "RORPublicMethods.h"
+#import "RORUtils.h"
 
 @interface RORSettings : NSMutableDictionary
 
