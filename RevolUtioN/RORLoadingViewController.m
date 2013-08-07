@@ -20,15 +20,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        //sync user
-        NSNumber *userId = [RORUtils getUserId];
-        if(userId > 0){
-            [RORUserServices syncUserInfo:userId];
-        }
-        //sync missions
-        [RORMissionServices syncMissions];
-        
+        // Custom initialization        
     }
     return self;
 }
@@ -37,6 +29,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //sync user
+    NSNumber *userId = [RORUtils getUserId];
+    if(userId > 0){
+        [RORUserServices syncUserInfo:userId];
+    }
+    //sync missions
+    [RORMissionServices syncMissions];
     [self performSegueWithIdentifier:@"loadingfinished" sender:self];
 }
 

@@ -1715,12 +1715,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="D8a-Uh-dfF"/>
                     <connections>
-                        <segue destination="4" kind="push" identifier="loadingfinished" id="tcD-Gc-xdk"/>
+                        <segue destination="4" kind="push" identifier="loadingfinished" id="TBr-eQ-ANJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRh-LJ-G5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413" y="-8"/>
+            <point key="canvasLocation" x="-379" y="-8"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FmZ-we-Evh">
@@ -1733,7 +1733,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fbj-I0-4lZ" kind="push" id="Mro-aa-YNv"/>
+                        <segue destination="fbj-I0-4lZ" kind="relationship" relationship="rootViewController" id="3Ri-of-ua4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kE-LS-Wji" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2495,7 +2495,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="challengeRunAction:"/>
                 <relationship kind="action" name="normalRunAction:"/>
-                <relationship kind="action" name="userInfoMenu:"/>
                 <relationship kind="action" name="weatherInfoAction:"/>
                 <relationship kind="outlet" name="nonPlanView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="userButton" candidateClass="UIButton"/>

@@ -13,7 +13,7 @@
 
 +(RORHttpResponse *) postRequest:(NSString *)url withRequstBody:(NSString *)reqBody {
     NSLog(@"post request: %@ \r\n %@",url,reqBody);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     //set http Method
     [request setHTTPMethod:@"POST"];
     //set http headers
@@ -33,7 +33,7 @@
 
 +(RORHttpResponse *) putRequest:(NSString *)url withRequstBody:(NSString *)reqBody {
     NSLog(@"put request: %@ \r\n %@",url,reqBody);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     //set http Method
     [request setHTTPMethod:@"PUT"];
     //set http headers
@@ -53,7 +53,8 @@
 
 +(RORHttpResponse *) getRequest: (NSString *)url{
     NSLog(@"get request: %@",url);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    //[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     //set http Method
     [request setHTTPMethod:@"GET"];
     //set http headers
@@ -67,7 +68,7 @@
 
 +(RORHttpResponse *) getRequest: (NSString *)url withHeaders:(NSMutableDictionary *) headers{
     NSLog(@"get request: %@",url);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     //set http Method
     [request setHTTPMethod:@"GET"];
     //set http headers
