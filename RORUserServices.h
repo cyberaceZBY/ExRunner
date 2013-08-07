@@ -16,6 +16,8 @@
 
 @interface RORUserServices : NSObject
 
++(void)syncUserInfo:(NSNumber *)userId;
+
 + (void)syncUserInfo:(NSNumber *)userId withUserDic:(NSDictionary *) userInfoDic;
 
 + (void)syncFriends:(NSNumber *) userId;

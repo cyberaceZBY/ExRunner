@@ -11,14 +11,15 @@
 #import "RORHttpResponse.h"
 #import "RORMissionClientHandler.h"
 #import "Mission.h"
-#import "Mission_Package.h"
 #import "Mission_Type.h"
 #import "Place_Package.h"
 
 @interface RORMissionServices : NSObject
 
-+ (void)syncMissions;
++(Mission *)fetchMission:(NSNumber *) missionId;
 
-+ (void)syncMissionPackages;
++(NSArray *)fetchMissionList:(MissionTypeEnum *) missionType;
+
++ (void)syncMissions;
 
 @end

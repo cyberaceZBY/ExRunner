@@ -31,6 +31,7 @@
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSDate * commitTime;
 @property (nonatomic, retain) NSString * uuid;
+@property (nonatomic, retain) NSString * grade;
 
 -(NSMutableDictionary *)transToDictionary;
 

@@ -9,8 +9,7 @@
 #import "RORPeriodicPickerViewController.h"
 #import "RORAppDelegate.h"
 #import "RORUtils.h"
-#import "Mission.h"
-#import "Mission_Package.h"
+#import "Mission.h"challengeId
 #import "RORConstant.h"
 
 @interface RORPeriodicPickerViewController ()

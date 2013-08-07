@@ -12,16 +12,87 @@
 @implementation RORMissionServices
 
 
-+(Mission_Package *)fetchMissionPackage:(NSNumber *) missionPackageId withMissionId:(NSNumber *) missionId{
++(Mission *)fetchPackageMission:(NSNumber *) packageMissionId{
     
-    NSString *table=@"Mission_Package";
-    NSString *query = @"missionPackageId = %@ and missionId = %@";
-    NSArray *params = [NSArray arrayWithObjects:missionPackageId, missionId, nil];
+    NSString *table=@"Mission";
+    MissionTypeEnum cycle = Cycle;
+    NSString *query = @"missionId = %@ and missionTypeId = %@";
+    NSArray *params = [NSArray arrayWithObjects:packageMissionId, (int)cycle, nil];
+    
     NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    return   (Mission_Package *) [fetchObject objectAtIndex:0];
+    Mission *packageMission = (Mission *) [fetchObject objectAtIndex:0];
+    
+    query = @"missionPackageId = %@ and missionTypeId = %@";
+    MissionTypeEnum subCycle = SubCycle;
+    params = [NSArray arrayWithObjects:packageMissionId, (int)subCycle, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:YES];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    packageMission.subMissionPackageList = [(NSArray*)fetchObject mutableCopy];
+    return packageMission;
+    
+}
+
++(Mission *)fetchRecommandMission:(NSNumber *) recommandMissionId{
+    
+    NSString *table=@"Mission";
+    MissionTypeEnum recommand = Recommand;
+    NSString *query = @"missionId = %@ and missionTypeId = %@";
+    NSArray *params = [NSArray arrayWithObjects:recommandMissionId, (int)recommand, nil];
+    
+    NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    Mission *recommandMission = (Mission *) [fetchObject objectAtIndex:0];
+    
+    if(recommandMission.missionPlacePackageId != nil){
+        table = @"Place_Package";
+        query = @"packageId = %@";
+        params = [NSArray arrayWithObjects:recommandMission.missionPlacePackageId, nil];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:YES];
+        NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+        fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+        recommandMission.missionPlacePackageList = [(NSArray*)fetchObject mutableCopy];
+    }
+    return recommandMission;
+    
+}
+
++(Mission *)fetchMissionDetails:(Mission *) mission{
+    
+    if([mission.missionTypeId intValue] == (int)Cycle){
+        NSString *table=@"Mission";
+        NSString *query = @"missionPackageId = %@ and missionTypeId = %@";
+        NSArray *params = [NSArray arrayWithObjects:mission.missionId, (int)SubCycle, nil];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:NO];
+        NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+        mission.subMissionPackageList = [(NSArray*)fetchObject mutableCopy];
+    }
+    if([mission.missionTypeId intValue] == (int)Recommand && mission.missionPlacePackageId != nil){
+        NSString *table = @"Place_Package";
+        NSString *query = @"packageId = %@";
+        NSArray *params = [NSArray arrayWithObjects:mission.missionPlacePackageId, nil];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:NO];
+        NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+        mission.missionPlacePackageList = [(NSArray*)fetchObject mutableCopy];
+    }
+    if(mission.challengeId != nil){
+        NSString *table = @"Mission_Challenge";
+        NSString *query = @"challengeId = %@";
+        NSArray *params = [NSArray arrayWithObjects:mission.challengeId, nil];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:NO];
+        NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+        mission.challengeList = [(NSArray*)fetchObject mutableCopy];
+    }
+    return mission;
+    
 }
 
 +(Mission *)fetchMission:(NSNumber *) missionId{
@@ -32,63 +103,39 @@
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    return   (Mission *) [fetchObject objectAtIndex:0];
+    Mission *mission = (Mission *) [fetchObject objectAtIndex:0];
+    return [self fetchMissionDetails:mission];
+}
+
++(NSArray *)fetchMissionList:(MissionTypeEnum *) missionType{
+    NSString *table=@"Mission";
+    NSString *query = @"%@ missionTypeId = %@";
+    NSArray *params = [NSArray arrayWithObjects:@"",(int)missionType, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"missionId" ascending:YES];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *missionDetails = [NSMutableArray arrayWithCapacity:10];
+    for (Mission *mission in fetchObject) {
+        [missionDetails addObject: [self fetchMissionDetails:mission]];
+    }
+    return [(NSArray*)missionDetails mutableCopy];;
 }
 
 +(void) deletePlacePackage:(NSNumber *) placePackageId{
-    NSError *error;
-    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Mission" inManagedObjectContext:context];
-    
-    [fetchRequest setEntity:entity];
-    NSArray *arrayFilter = [NSArray arrayWithObjects:placePackageId, nil];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"missionId = %@" argumentArray:arrayFilter];
-    [fetchRequest setPredicate:predicate];
-    [fetchRequest setFetchLimit:1];
-    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-    if (fetchObject == nil || [fetchObject count] == 0) {
-        return;
-    }
-    for (NSManagedObject *objectToDelete in fetchObject) {
-        [context deleteObject:objectToDelete];
-    }
-    
-    if (![context save:&error]) {
-        NSLog(@"%@",[error localizedDescription]);
-    }
+    NSString *table=@"Place_Package";
+    NSString *query = @"packageId = %@";
+    NSArray *params = [NSArray arrayWithObjects:placePackageId, nil];
+    [RORUtils deleteFromDelegate:table withParams:params withPredicate:query];
 }
 
-+ (void)syncMissionPackages{
-    NSError *error = nil;
-    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-    NSString *lastUpdateTime = [RORUtils getLastUpdateTime:@"MissionPackageUpdateTime"];
-    
-    RORHttpResponse *httpResponse =[RORMissionClientHandler getMissionPackage:lastUpdateTime];
-    
-    if ([httpResponse responseStatus] == 200){
-        NSArray *missionPackageList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
-        for (NSDictionary *missionPackageDict in missionPackageList){
-            NSArray *subMissionList = [missionPackageDict valueForKey:@"missionPackageList"];
-            NSNumber *missionPackageId = [missionPackageDict valueForKey:@"missionPackageId"];
-            for (id subMissionDict in subMissionList){
-                NSNumber *missionId = [subMissionDict valueForKey:@"missionId"];
-                Mission_Package *missionPackageEntity = [self fetchMissionPackage:missionPackageId withMissionId:missionId];
-                if(missionPackageEntity == nil)
-                    missionPackageEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Mission_Package" inManagedObjectContext:context];
-                [missionPackageEntity initWithDictionary:missionPackageDict withSubDictionary:subMissionDict];
-            }
-        }
-        if (![context save:&error]) {
-            NSLog(@"error %@",[error localizedDescription]);
-        }
-        [RORUtils saveLastUpdateTime:@"MissionPackageUpdateTime"];
-    } else {
-        NSLog(@"sync with host error: can't get mission package list. Status Code: %d", [httpResponse responseStatus]);
-    }
++(void) deleteChallenges:(NSNumber *) challengeId{
+    NSString *table=@"Mission_Challenge";
+    NSString *query = @"challengeId = %@";
+    NSArray *params = [NSArray arrayWithObjects:challengeId, nil];
+    [RORUtils deleteFromDelegate:table withParams:params withPredicate:query];
 }
 
 + (void)syncMissions{
@@ -96,6 +143,13 @@
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     NSString *lastUpdateTime = [RORUtils getLastUpdateTime:@"MissionUpdateTime"];
+    
+    /* 
+    //only need sync challenge
+    NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithCapacity:3];
+    [headers setObject:MissionTypeEnum_toString[Challenge] forKey:@"X-MISSION-TYPE"];
+    RORHttpResponse *httpResponse =[RORMissionClientHandler getMissions:lastUpdateTime withHeaders:headers];
+    */
     
     RORHttpResponse *httpResponse =[RORMissionClientHandler getMissions:lastUpdateTime];
     
@@ -107,14 +161,22 @@
             if(missionEntity == nil)
                 missionEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Mission" inManagedObjectContext:context];
             [missionEntity initWithDictionary:missionDict];
-            
+            //sync place list
             if (![[missionDict valueForKey:@"missionPlacePackages"] isKindOfClass:[NSNull class]]){
                 NSArray *placeList = [missionDict valueForKey:@"missionPlacePackages"];
+                [self deletePlacePackage:[missionDict valueForKey:@"missionPlacePackageId"]];
                 for (NSDictionary *place in placeList){
-                    NSNumber *placePackageId = [place valueForKey:@"packageId"];
-                    [self deletePlacePackage:placePackageId];
                     Place_Package *placeEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Place_Package" inManagedObjectContext:context];
                     [placeEntity initWithDictionary:place];
+                }
+            }
+            //sync challenge list
+            if (![[missionDict valueForKey:@"missionChallenges"] isKindOfClass:[NSNull class]]){
+                NSArray *challengeList = [missionDict valueForKey:@"missionChallenges"];
+                [self deleteChallenges:[missionDict valueForKey:@"challengeId"]];
+                for (NSDictionary *challenge in challengeList){
+                    Place_Package *challengeEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Mission_Challenge" inManagedObjectContext:context];
+                    [challengeEntity initWithDictionary:challenge];
                 }
             }
         }

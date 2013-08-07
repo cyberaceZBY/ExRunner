@@ -14,8 +14,8 @@
 
 @interface RORMissionClientHandler : NSObject
 
-+(RORHttpResponse *)getMissionPackage:(NSString *) lastUpdateTime;
-
 +(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime;
+
++(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime withHeaders:(NSMutableDictionary *) headers;
 
 @end

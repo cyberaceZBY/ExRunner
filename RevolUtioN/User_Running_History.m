@@ -30,6 +30,7 @@
 @synthesize comment;
 @synthesize commitTime;
 @synthesize uuid;
+@synthesize grade;
 
 -(NSMutableDictionary *)transToDictionary{
     NSMutableDictionary *tempoDict = [[NSMutableDictionary alloc] init];
@@ -52,6 +53,7 @@
     [tempoDict setValue:missionId forKey:@"missionId"];
     [tempoDict setValue:uuid forKey:@"uuid"];
     [tempoDict setValue:[RORDBCommon getStringFromId:commitTime] forKey:@"commitTime"];
+    [tempoDict setValue:grade forKey:@"grade"];
     return tempoDict;
 }
 
@@ -75,6 +77,7 @@
     self.missionId = [dict valueForKey:@"missionId"];
     self.uuid = [dict valueForKey:@"uuid"];
     self.commitTime = [RORDBCommon getDateFromId:[dict valueForKey:@"commitTime"]];
+    self.grade = [dict valueForKey:@"grade"];
 }
 
 -(void)setUserId:(id)obj{
@@ -153,4 +156,7 @@
     uuid = [RORDBCommon getStringFromId:obj];
 }
 
+-(void)setGrade:(id)obj{
+    grade = [RORDBCommon getStringFromId:obj];
+}
 @end

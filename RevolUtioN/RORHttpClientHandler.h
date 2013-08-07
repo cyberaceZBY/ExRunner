@@ -17,4 +17,6 @@
 
 +(RORHttpResponse *) getRequest: (NSString *)url;
 
++(RORHttpResponse *) getRequest: (NSString *)url withHeaders:(NSMutableDictionary *) headers;
+
 @end

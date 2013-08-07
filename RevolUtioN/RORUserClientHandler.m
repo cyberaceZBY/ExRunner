@@ -27,4 +27,10 @@
     return httpResponse;
 }
 
++(RORHttpResponse *)getUserInfoById:(NSNumber *) userId{
+    NSString *url = [NSString stringWithFormat:USER_INFO ,userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
 @end

@@ -10,15 +10,15 @@
 
 @implementation RORMissionClientHandler
 
-+(RORHttpResponse *)getMissionPackage:(NSString *) lastUpdateTime{
-    NSString *url = [NSString stringWithFormat:MISSION_PACKAGE_URL, lastUpdateTime];
++(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime{
+    NSString *url = [NSString stringWithFormat:MISSION_URL, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
     return httpResponse;
 }
 
-+(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime{
++(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime withHeaders:(NSMutableDictionary *) headers{
     NSString *url = [NSString stringWithFormat:MISSION_URL, lastUpdateTime];
-    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url withHeaders:headers];
     return httpResponse;
 }
 

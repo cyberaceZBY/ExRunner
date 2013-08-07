@@ -10,4 +10,11 @@
 
 @implementation RORConstant
 
+NSString * const MissionTypeEnum_toString[] = {
+    @"Challenge",
+    @"Recommand",
+    @"Cycle",
+    @"SubCycle"
+};
+
 @end

@@ -133,12 +133,49 @@ static NSDate *systemTime = nil;
     [fetchRequest setEntity:entity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:query argumentArray:params];
     [fetchRequest setPredicate:predicate];
-    [fetchRequest setFetchLimit:1];
     NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     return fetchObject;
+}
+
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams{
+    NSError *error;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:query argumentArray:params];
+    [fetchRequest setPredicate:predicate];
+    [fetchRequest setSortDescriptors:sortParams];
+    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    return fetchObject;
+}
+
++(void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query{
+    NSError *error;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:query argumentArray:params];
+    [fetchRequest setPredicate:predicate];
+    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchObject) {
+        [context deleteObject:info];
+    }
+    //保存修改
+    [context save:&error];
 }
 
 + (void)clearTableData:(NSArray *) tableArray{

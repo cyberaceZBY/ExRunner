@@ -65,6 +65,24 @@
     return httpResponse;
 }
 
++(RORHttpResponse *) getRequest: (NSString *)url withHeaders:(NSMutableDictionary *) headers{
+    NSLog(@"get request: %@",url);
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    //set http Method
+    [request setHTTPMethod:@"GET"];
+    //set http headers
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    for (NSObject *header in [headers objectEnumerator]) {
+        NSString *headerField = [NSString stringWithFormat:@"%@", header];
+        [request addValue:[headers objectForKey:headerField] forHTTPHeaderField:headerField];
+    }
+    //todo: add key NSString *key=@"key";
+    //[request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"]
+    
+    RORHttpResponse *httpResponse = [self excuteRequest:request];
+    return httpResponse;
+}
+
 + (RORHttpResponse *) excuteRequest: (NSMutableURLRequest *)request{
     NSError *error = nil;
     NSHTTPURLResponse *urlResponse = nil;

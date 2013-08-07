@@ -15,6 +15,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Mission" representedClassName="Mission" syncable="YES">
+        <attribute name="challengeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cycleTime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="lastUpdateTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -25,6 +26,7 @@
         <attribute name="missionFrom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="missionPackageId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="missionPlacePackageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="missionSteps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -32,15 +34,16 @@
         <attribute name="missionTo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="scores" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="subMissionList" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Mission_Package" representedClassName="Mission_Package" syncable="YES">
-        <attribute name="lastUpdateTime" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="missionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="missionPackageDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="missionPackageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="missionPackageName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="missionTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="sequence" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    <entity name="Mission_Challenge" representedClassName="Mission_Challenge" syncable="YES">
+        <attribute name="challengeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="grade" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Mission_Type" representedClassName="Mission_Type" syncable="YES">
         <attribute name="missionName" optional="YES" attributeType="String" syncable="YES"/>
@@ -142,6 +145,7 @@
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="grade" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionEndTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionGrade" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -165,8 +169,7 @@
     <elements>
         <element name="Communication" positionX="-569" positionY="36" width="128" height="118"/>
         <element name="Friend" positionX="-1017" positionY="54" width="128" height="118"/>
-        <element name="Mission" positionX="-569" positionY="234" width="128" height="298"/>
-        <element name="Mission_Package" positionX="-371" positionY="-153" width="173" height="148"/>
+        <element name="Mission" positionX="-569" positionY="234" width="128" height="360"/>
         <element name="Mission_Type" positionX="-371" positionY="189" width="128" height="73"/>
         <element name="Place_Package" positionX="-369" positionY="36" width="128" height="118"/>
         <element name="Products" positionX="-135" positionY="-144" width="128" height="343"/>
@@ -176,7 +179,8 @@
         <element name="User_Last_Location" positionX="-785" positionY="54" width="128" height="103"/>
         <element name="User_Products_History" positionX="-135" positionY="198" width="128" height="118"/>
         <element name="User_Running" positionX="-1017" positionY="234" width="128" height="163"/>
-        <element name="User_Running_History" positionX="-794" positionY="234" width="128" height="343"/>
+        <element name="User_Running_History" positionX="-794" positionY="234" width="128" height="360"/>
         <element name="Version_Control" positionX="-569" positionY="-153" width="128" height="88"/>
+        <element name="Mission_Challenge" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

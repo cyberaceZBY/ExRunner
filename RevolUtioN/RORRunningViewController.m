@@ -13,6 +13,7 @@
 #import "RORMapAnnotation.h"
 #import "RORUtils.h"
 #import "RORDBCommon.h"
+#import "RORMacro.h"
 
 #define SCALE_SMALL CGRectMake(0,0,320,155)
 
@@ -22,7 +23,7 @@
 @end
 
 @implementation RORRunningViewController
-@synthesize mapView, expandButton, collapseButton, formerLocation, count, repeatingTimer, timerCount, isStarted;
+@synthesize mapView, expandButton, collapseButton, formerLocation, count, repeatingTimer, timerCount, isStarted, latestUserLocation, offset;
 @synthesize timeLabel, speedLabel, distanceLabel, startButton, endButton;
 @synthesize distance, routePoints, routeLine, routeLineView;
 @synthesize record;
@@ -41,17 +42,21 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    wasFound = NO;
-    count = 0;
-    timerCount = 0;
-    distance = 0;
-    isStarted = NO;
+}
+
+//initial all when view appears
+- (void)viewDidAppear:(BOOL)animated{
+    [self controllerInit];
+    [self navigationInit];
+}
+
+-(void)controllerInit{
+    self.mapView.delegate = self;
     [startButton setTitle:@"开始" forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"graybutton_bg.png"];
     [startButton setBackgroundImage:image forState:UIControlStateNormal];
     [endButton setEnabled:NO];
     routePoints = [[NSMutableArray alloc]init];
-    [mapView removeOverlays:[mapView overlays]];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"返回首页";
@@ -63,8 +68,21 @@
     timeLabel.text = @"00:00:00";
     speedLabel.text = @"0.0";
     mapView.frame = SCALE_SMALL;
-
+    
     doCollect = NO;
+}
+
+-(void)navigationInit{
+    //    [mapView setUserTrackingMode:MKUserTrackingModeFollow];
+    [mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    [mapView removeOverlays:[mapView overlays]];
+    wasFound = NO;
+    count = 0;
+    timerCount = 0;
+    distance = 0;
+    offset.latitude = 0.0;
+    offset.longitude = 0.0;
+    isStarted = NO;
 }
 
 -(void)backToMain:(id)sender {
@@ -82,7 +100,7 @@
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-//    locationManager.distanceFilter = 2;
+    locationManager.distanceFilter = 3;
     [locationManager startUpdatingLocation];
 }
 
@@ -90,63 +108,85 @@
     [self update];
 }
 
+- (CLLocation *)transToRealLocation:(CLLocation *)orginalLocation{
+    CLLocation *absoluteLocation = [[CLLocation alloc] initWithLatitude:orginalLocation.coordinate.latitude + offset.latitude longitude:orginalLocation.coordinate.longitude + offset.longitude];
+    return absoluteLocation;
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-//    if (wasFound) return;
-//    wasFound = YES;
+    NSLog(@"ToLocation:%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:newLocation]);
+    self.latestUserLocation = [self transToRealLocation:newLocation];
     
-    double dist_cocoa = [newLocation getDistanceFrom:oldLocation];
-    CLLocationCoordinate2D newLoc = [newLocation coordinate];
-    CLLocationCoordinate2D oldLoc = [oldLocation coordinate];
-    double dist = [self LatitudeLongitudeDist:oldLoc.longitude latitude_Y:oldLoc.latitude longtitude_X:newLoc.longitude longtitude_Y:newLoc.latitude];
-    formerLocation = newLocation;
-    if (isStarted && doCollect){
-        [mapView removeOverlays:[mapView overlays]];
-        [routePoints addObject:newLocation];
-        [self drawLineWithLocationArray:routePoints];
-//        preLocation = newLocation;
-//        count ++;
-        distance += dist;
-        
-        doCollect = NO;
-    }
-//    [self center_map];
-    if (dist_cocoa >5){
-    float zoomLevel = 0.005;
-    MKCoordinateRegion region = MKCoordinateRegionMake(newLoc,MKCoordinateSpanMake(zoomLevel, zoomLevel));
-    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
-    }
-//    latitude.text = [NSString stringWithFormat: @"%f", loc.latitude];
-//    longitude.text = [NSString stringWithFormat: @"%f", loc.longitude];
-
+    //    if (wasFound) return;
+    //
+    //    wasFound = YES;
+    //    NSLog(@"didUpdateToLocation:%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    //    double dist_cocoa = [newLocation getDistanceFrom:oldLocation];
+    //    CLLocationCoordinate2D newLoc = [newLocation coordinate];
+    //    CLLocationCoordinate2D oldLoc = [oldLocation coordinate];
+    //    double dist = [self LatitudeLongitudeDist:oldLoc.longitude latitude_Y:oldLoc.latitude longtitude_X:newLoc.longitude longtitude_Y:newLoc.latitude];
+    //    formerLocation = newLocation;
+    //    if (isStarted && doCollect){
+    //        [mapView removeOverlays:[mapView overlays]];
+    //        [routePoints addObject:newLocation];
+    //        [self drawLineWithLocationArray:routePoints];
+    ////        preLocation = newLocation;
+    ////        count ++;
+    //        distance += dist;
+    //
+    //        doCollect = NO;
+    //    }
+    ////    [self center_map];
+    //    if (dist_cocoa >5){
+    //    float zoomLevel = 0.005;
+    //    MKCoordinateRegion region = MKCoordinateRegionMake(newLoc,MKCoordinateSpanMake(zoomLevel, zoomLevel));
+    //    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
+    //    }
+    //    latitude.text = [NSString stringWithFormat: @"%f", loc.latitude];
+    //    longitude.text = [NSString stringWithFormat: @"%f", loc.longitude];
+    
 }
 
-//center the route line
-- (void)center_map{
-    MKCoordinateRegion region;
-    CLLocationDegrees maxLat = -90;
-    CLLocationDegrees maxLon = -180;
-    CLLocationDegrees minLat = 90;
-    CLLocationDegrees minLon = 180;
-    
-    for (int i=0; i<routePoints.count; i++){
-        CLLocation *currentLocation = [routePoints objectAtIndex:i];
-        if (currentLocation.coordinate.latitude > maxLat)
-            maxLat = currentLocation.coordinate.latitude;
-        if (currentLocation.coordinate.longitude > maxLon)
-            maxLon = currentLocation.coordinate.longitude;
-        if (currentLocation.coordinate.latitude < minLat)
-            minLat = currentLocation.coordinate.latitude;
-        if (currentLocation.coordinate.longitude < minLon)
-            minLon = currentLocation.coordinate.longitude;
-    }
-    region.center.latitude = (maxLat + minLat)/2;
-    region.center.longitude = (maxLon + minLon)/2;
-    region.span.latitudeDelta = maxLat - minLat ;
-    region.span.longitudeDelta = maxLon - minLon;
+-(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 
-    [mapView setRegion:region animated:YES];
+{
+    //    if (self.latestUserLocation != nil && offset.latitude == 0.0) {
+    //        offset.latitude = userLocation.coordinate.latitude - self.latestUserLocation.coordinate.latitude;
+    //        offset.longitude = userLocation.coordinate.longitude - self.latestUserLocation.coordinate.longitude;
+    //    }
+    NSLog(@"UserLocation:%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+    //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:[userLocation location]]);
+    //    self.latestUserLocation = [userLocation location];
+    //    // 这里获得的userLocation，已经是偏移后的地位了
 }
+////center the route line
+//- (void)center_map{
+//    MKCoordinateRegion region;
+//    CLLocationDegrees maxLat = -90;
+//    CLLocationDegrees maxLon = -180;
+//    CLLocationDegrees minLat = 90;
+//    CLLocationDegrees minLon = 180;
+//
+//    for (int i=0; i<routePoints.count; i++){
+//        CLLocation *currentLocation = [routePoints objectAtIndex:i];
+//        if (currentLocation.coordinate.latitude > maxLat)
+//            maxLat = currentLocation.coordinate.latitude;
+//        if (currentLocation.coordinate.longitude > maxLon)
+//            maxLon = currentLocation.coordinate.longitude;
+//        if (currentLocation.coordinate.latitude < minLat)
+//            minLat = currentLocation.coordinate.latitude;
+//        if (currentLocation.coordinate.longitude < minLon)
+//            minLon = currentLocation.coordinate.longitude;
+//    }
+//    region.center.latitude = (maxLat + minLat)/2;
+//    region.center.longitude = (maxLon + minLon)/2;
+//    region.span.latitudeDelta = maxLat - minLat ;
+//    region.span.longitudeDelta = maxLon - minLon;
+//
+//    [mapView setRegion:region animated:YES];
+//}
 
 #define PI M_PI
 -(double) LatitudeLongitudeDist:(double) lon1 latitude_Y:(double) lat1 longtitude_X:
@@ -254,14 +294,26 @@
     
 }
 
+- (void)initOffset{
+    MKUserLocation *userLocation = [mapView userLocation];
+    CLLocation *cl = [locationManager location];
+    offset.latitude = userLocation.coordinate.latitude - cl.coordinate.latitude;
+    offset.longitude = userLocation.coordinate.longitude - cl.coordinate.longitude;
+}
+
 - (IBAction)startButtonAction:(id)sender {
     if (!isStarted){
         isStarted = YES;
         if (self.startTime == nil){
             self.startTime = [NSDate date];
-            [routePoints addObject:formerLocation];
+            [self initOffset];
+            self.latestUserLocation = [self transToRealLocation:latestUserLocation];
+            self.formerLocation = self.latestUserLocation;//[locationManager location];
+            [routePoints addObject:self.latestUserLocation];
+            //            [self pushPoint];
         }
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(displayTime) userInfo:nil repeats:YES];
+        
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
         self.repeatingTimer = timer;
         UIImage *image = [UIImage imageNamed:@"redbutton_bg.png"];
         [startButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -274,16 +326,30 @@
         
         [startButton setTitle:@"继续" forState:UIControlStateNormal];
     }
-//    [[NSRunLoop  currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
+    //    [[NSRunLoop  currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
 }
 
-- (void)displayTime{
+- (void)timerDot{
     doCollect = YES;
-
+    
     timerCount++;
-    distanceLabel.text = [NSString stringWithFormat:@"%.2lf", distance];
-    timeLabel.text = [RORUtils transSecondToStandardFormat:timerCount];
-    speedLabel.text = [NSString stringWithFormat:@"%.1f", (float)distance/timerCount*3.6];
+    NSInteger time = timerCount * TIMER_INTERVAL;
+    if (time % 3 == 0){
+        [self pushPoint];
+        distanceLabel.text = [NSString stringWithFormat:@"%.2lf m", distance];
+        speedLabel.text = [NSString stringWithFormat:@"%.1f m/s", (float)distance/time*3.6];
+    }
+    timeLabel.text = [RORUtils transSecondToStandardFormat:time];
+}
+
+- (void)pushPoint{
+    CLLocation *currentLocation = self.latestUserLocation;
+    if (formerLocation != currentLocation){
+        distance += [self.formerLocation getDistanceFrom:currentLocation];
+        self.formerLocation = currentLocation;
+        [routePoints addObject:currentLocation];
+        [self drawLineWithLocationArray:routePoints];
+    }
 }
 
 - (IBAction)endButtonAction:(id)sender {
@@ -301,6 +367,10 @@
     [viewController viewDidLoad];
     
     [self performSegueWithIdentifier:@"ResultSegue" sender:self];
+}
+
+- (IBAction)setUserCentered:(id)sender {
+    [self centerMap];
 }
 
 - (void)saveRunInfo{
@@ -333,13 +403,12 @@
 
 - (void)drawLineWithLocationArray:(NSArray *)locationArray
 {
-//    [self updateLocation];
+    //    [self updateLocation];
     
-//    if (self.routeLine != nil){
-////        [self.mapView removeOverlays:[self.mapView overlays]];
-//        [mapView removeOverlay:self.routeLine];
-//        self.routeLine = nil;
-//    }
+    if (self.routeLine != nil){
+        [mapView removeOverlay:self.routeLine];
+        self.routeLine = nil;
+    }
     int pointCount = [locationArray count];
     CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
     
@@ -347,21 +416,34 @@
         CLLocation *location = [locationArray objectAtIndex:i];
         coordinateArray[i] = [location coordinate];
     }
-
-    routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
-    [mapView setVisibleMapRect:[routeLine boundingMapRect]];
-    [mapView addOverlay:routeLine];
     
+    routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
+    //    [mapView setVisibleMapRect:[routeLine boundingMapRect]];
+    [mapView addOverlay:routeLine];
     free(coordinateArray);
     coordinateArray = NULL;
 }
 
+- (void) centerMap{
+    [mapView setCenterCoordinate:self.latestUserLocation.coordinate animated:YES];
+    CLLocation *cl = [mapView userLocation].location;
+    //    [self drawTestLine];
+}
+
 - (void)drawTestLine
 {
-    CLLocation *location0 = [[CLLocation alloc] initWithLatitude:39.954245 longitude:116.312455];
-    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:30.247871 longitude:120.127683];
-    NSArray *array = [NSArray arrayWithObjects:location0, location1, nil];
-    [self drawLineWithLocationArray:array];
+    //    CLLocation *location0 = [[CLLocation alloc] initWithLatitude:31.014008 longitude:121.427551];
+    ////
+    ////    RORMapAnnotation *mapAnno = [[RORMapAnnotation alloc]initWithCoordinate:location0.coordinate];
+    ////    mapAnno.title = @"cyberace";
+    ////    mapAnno.headImage = nil;
+    ////    mapAnno.subtitle = @"snail";
+    ////    [mapView addAnnotation:mapAnno];
+    //
+    //    //31.014008,121.427551
+    //    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:31.014308 longitude:121.427851];
+    //    NSArray *array = [NSArray arrayWithObjects:location0,location1, nil];
+    //    [self drawLineWithLocationArray:array];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -372,13 +454,13 @@
     if(overlay == self.routeLine)
     {
         //if we have not yet created an overlay view for this overlay, create it now.
-//        if(nil == self.routeLineView)
-//        {
-            self.routeLineView = [[MKPolylineView alloc] initWithPolyline:self.routeLine];
-            self.routeLineView.fillColor = [UIColor redColor];
-            self.routeLineView.strokeColor = [UIColor redColor];
-            self.routeLineView.lineWidth = 2;
-//        }
+        //        if(nil == self.routeLineView)
+        //        {
+        self.routeLineView = [[MKPolylineView alloc] initWithPolyline:self.routeLine];
+        self.routeLineView.fillColor = [UIColor redColor];
+        self.routeLineView.strokeColor = [UIColor redColor];
+        self.routeLineView.lineWidth = 8;
+        //        }
         
         overlayView = self.routeLineView;
         
@@ -390,18 +472,58 @@
 
 //#pragma mark Map View Delegate Methods
 //- (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>) annotation {
-//    
-//    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"PIN_ANNOTATION"];
-//    if(annotationView == nil) {
-//        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-//                                                          reuseIdentifier:@"PIN_ANNOTATION"];
+//
+////    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"PIN_ANNOTATION"];
+////    if(annotationView == nil) {
+////        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+////                                                          reuseIdentifier:@"PIN_ANNOTATION"];
+////    }
+////    annotationView.canShowCallout = YES;
+////    annotationView.pinColor = MKPinAnnotationColorRed;
+////    annotationView.animatesDrop = YES;
+////    annotationView.highlighted = YES;
+////    annotationView.draggable = YES;
+////    return annotationView;
+//    if ([annotation isKindOfClass:[MKUserLocation class]])
+//        return nil;
+//    // 处理我们自定义的Annotation
+//    if ([annotation isKindOfClass:[RORMapAnnotation class]]) {
+//        RORMapAnnotation *travellerAnnotation = (RORMapAnnotation *)annotation;
+////        static NSString* travellerAnnotationIdentifier = @"TravellerAnnotationIdentifier";
+//        static NSString *identifier = @"currentLocation";
+////        SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//
+//        MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
+//        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+//        if (!pulsingView)
+//        {
+//            // if an existing pin view was not available, create one
+//            pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+////            MKAnnotationView* customPinView = [[MKAnnotationView alloc]
+////                                                initWithAnnotation:annotation reuseIdentifier:identifier];
+//            //加展开按钮
+////            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+////            [rightButton addTarget:self
+////                            action:@selector(showDetails:)
+////                  forControlEvents:UIControlEventTouchUpInside];
+////            pulsingView.rightCalloutAccessoryView = rightButton;
+////
+//            UIImage *image = [UIImage imageNamed:@"smail_annotation.png"];
+//            pulsingView.image = image;  //将图钉变成笑脸。
+//            pulsingView.canShowCallout = YES;
+////
+////            UIImageView *headImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:travellerAnnotation.headImage]];
+////            pulsingView.leftCalloutAccessoryView = headImage; //设置最左边的头像
+//            
+//            return pulsingView;
+//        }
+//        else
+//        {
+//            pulsingView.annotation = annotation;
+//        }
+//        return pulsingView;
 //    }
-//    annotationView.canShowCallout = YES;
-//    annotationView.pinColor = MKPinAnnotationColorRed;
-//    annotationView.animatesDrop = YES;
-//    annotationView.highlighted = YES;
-//    annotationView.draggable = YES;
-//    return annotationView;
+//    return nil;
 //}
 
 @end

@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import "RORPages.h"
 #import "RORUtils.h"
+#import "RORMissionServices.h"
 
 @interface RORFirstViewController ()
 
@@ -20,11 +21,11 @@
 
 @implementation RORFirstViewController
 @synthesize userInfoView;
-@synthesize routeTableView, nonPlanView, planView;
 @synthesize weatherSubView;
 @synthesize weatherInfoButtonView;
 @synthesize userButton;
-@synthesize context, missionList;
+@synthesize context;
+@synthesize nonPlanView;
 
 NSInteger expanded = 0;
 BOOL isWeatherButtonClicked = false;
@@ -48,7 +49,7 @@ UITableViewCell *routeCheckedCell = nil;
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [weatherSubView addGestureRecognizer:panGes];
     
-    //[RORPublicMethods synchronizeMissions];
+    
     
     //应用初始设置
     NSString *userSettingDocPath = [RORUtils getUserSettingsPList];
@@ -67,9 +68,6 @@ UITableViewCell *routeCheckedCell = nil;
 
 - (void)initPageData{
         
-	// Do any additional setup after loading the view, typically from a nib.
-    //subview's initial location
-    
     //初始化用户名
     NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     
@@ -84,48 +82,11 @@ UITableViewCell *routeCheckedCell = nil;
         [userButton removeTarget:self action:@selector(segueToLogin) forControlEvents:UIControlEventTouchUpInside];
         [userButton addTarget:self action:@selector(segueToInfo) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    if ([userDict valueForKey:@"periodic"] == nil)
-        nonPlanView.alpha = 1;
-    else {
-        //载入周期任务
-        NSNumber *missionId = [userDict valueForKey:@"periodic"];
-        NSError *error = nil;
-        nonPlanView.alpha = 0;
-        NSEntityDescription *missionEntity = [NSEntityDescription entityForName:@"Mission" inManagedObjectContext:context];
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-        [fetchRequest setEntity:missionEntity];
-        NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-        for (Mission *mission in fetchObject) {
-            if ([mission.missionId isEqualToNumber:missionId]){
-                UILabel *missionNameLabel = (UILabel *)[planView viewWithTag:1];
-                missionNameLabel.text = mission.missionName;
-                break;
-            }
-        }
-    }
-    
-    //载入线路任务
-    NSError *error=nil;
-    NSEntityDescription *missionEntity = [NSEntityDescription entityForName:@"Mission" inManagedObjectContext:context];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-    [fetchRequest setEntity:missionEntity];
-    missionList = [[NSMutableArray alloc]init];
-    NSArray *fetchObject = [context executeFetchRequest:fetchRequest error:&error];
-    for (Mission *info in fetchObject) {
-        NSNumber *num = [info valueForKey:@"missionTypeId"];
-        if ([num integerValue] == 1)
-            [missionList addObject:info];
-    }
-
-    //    CGSize result = [[UIScreen mainScreen] bounds].size;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self initPageData];
-    [routeTableView reloadData];
 }
 
 - (void)segueToLogin{
@@ -194,8 +155,8 @@ UITableViewCell *routeCheckedCell = nil;
     CGPoint translation = [recognizer translationInView:weatherSubView];
     [self weatherDragView:translation.y];
 
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    CGContextRef gccontext = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:gccontext];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.6];
     [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
@@ -218,9 +179,6 @@ UITableViewCell *routeCheckedCell = nil;
 }
 
 -(void) singleTap:(UITapGestureRecognizer*) tap {
-
-    CGPoint p = [tap locationInView:tap.view];
-    CGContextRef context = UIGraphicsGetCurrentContext();
     
     if (expanded) {
         [self weatherPopView];
@@ -246,27 +204,22 @@ UITableViewCell *routeCheckedCell = nil;
 
     [self setUserInfoView:nil];
     [self setUserInfoSubView:nil];
-    [self setRouteTableView:nil];
     [self setWeatherSubView:nil];
     [self setWeatherInfoButtonView:nil];
     [self setUserButton:nil];
     [self setNonPlanView:nil];
-    [self setPlanView:nil];
     [self setContext:nil];
     [self setUserName:nil];
     [self setUserId:nil];
-    [self setRouteMissions:nil];
-    [self setMissionList:nil];
     
     [super viewDidUnload];
 }
 
 - (void)weatherPopView{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    CGContextRef gccontext = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:gccontext];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.3];
-//    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
     weatherSubView.frame = CGRectMake(2, -120, 100, 120);
     weatherInfoButtonView.tintColor = nil;
     expanded = 0;
@@ -290,8 +243,8 @@ UITableViewCell *routeCheckedCell = nil;
 }
 
 - (void)weatherInView{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    CGContextRef gccontext = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:gccontext];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.3];
 
@@ -304,37 +257,6 @@ UITableViewCell *routeCheckedCell = nil;
     [UIView commitAnimations];
 }
 
-//- (IBAction)routeCheckboxClicked:(id)sender {
-//    UIButton *exCheckbox = nil;
-//    UIButton *currCheckbox = (UIButton *)sender;;
-//    
-//    if (routeCheckedCell == nil){
-//        UIImage *image = (UIImage*)[UIImage imageNamed:@"checkbox_on.png"];
-//        [currCheckbox setBackgroundImage:image forState:UIControlStateNormal];
-//        for (UITableViewCell * cell in [routeTableView subviews]){
-//            if (currCheckbox == (UIButton*)[cell viewWithTag:tRouteMissionCheckboxTag]){
-//                routeCheckedCell = cell;
-//                break;
-//            }
-//        }
-//    } else {
-//        exCheckbox = (UIButton *)[routeCheckedCell viewWithTag:tRouteMissionCheckboxTag];
-//        [exCheckbox setBackgroundImage:[UIImage imageNamed:@"checkbox_off.png"] forState:UIControlStateNormal];
-//        if (exCheckbox == currCheckbox){
-//            routeCheckedCell = nil;
-//        } else {
-//            UIImage *image = (UIImage*)[UIImage imageNamed:@"checkbox_on.png"];
-//            [currCheckbox setBackgroundImage:image forState:UIControlStateNormal];
-//            for (UITableViewCell * cell in [routeTableView subviews]){
-//                if (currCheckbox == (UIButton*)[cell viewWithTag:tRouteMissionCheckboxTag]){
-//                    routeCheckedCell = cell;
-//                    break;
-//                }
-//            }
-//        }
-//    }
-//}
-
 - (IBAction)weatherInfoAction:(id)sender {
     if (weatherSubView.frame.origin.y < 0){
         [self weatherInView];
@@ -343,9 +265,15 @@ UITableViewCell *routeCheckedCell = nil;
     }
 }
 
+- (IBAction)normalRunAction:(id)sender {
+}
+
+- (IBAction)challengeRunAction:(id)sender {
+}
+
 - (IBAction)userInfoMenu:(id)sender{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    CGContextRef gccontext = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:gccontext];
     [UIView setAnimationDuration:0.3];
     [UIView setAnimationDelegate:self];
 
@@ -356,36 +284,6 @@ UITableViewCell *routeCheckedCell = nil;
 
     [UIView setAnimationDidStopSelector:@selector(animationFinished)];
     [UIView commitAnimations];
-}
-
-#pragma mark -
-#pragma mark Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return missionList.count;
-//    return [routeMissions count];
-}
-
-- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = @"routePlainCell";
-    
-    NSDictionary *routeMission = [self.routeMissions objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    UILabel *nameLabel = (UILabel*)[cell viewWithTag:tRouteMissionNameTag];
-    UILabel *startLabel = (UILabel *)[cell viewWithTag:tRouteMissionStartNameTag];
-    UILabel *endLabel = (UILabel *)[cell viewWithTag:tRouteMissionEndNameTag];
-    UILabel *pointsLabel = (UILabel *)[cell viewWithTag:tRouteMissionPointsTag];
-    UILabel *expLabel = (UILabel *)[cell viewWithTag:tRouteMissionExpTag];
-    UIButton *checkbox = (UIButton *)[cell viewWithTag:tRouteMissionCheckboxTag];
-    
-    Mission *mission = [missionList objectAtIndex:indexPath.row];
-    nameLabel.text = mission.missionName;
-    startLabel.text = mission.missionFrom;
-    endLabel.text = mission.missionTo;
-    pointsLabel.text = [NSString stringWithFormat:@"%@",mission.scores];
-    expLabel.text = [NSString stringWithFormat:@"%@", mission.experience];
-
-    return cell;
 }
 
 @end

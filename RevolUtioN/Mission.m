@@ -29,6 +29,15 @@
 @synthesize missionTypeId;
 @synthesize scores;
 @synthesize lastUpdateTime;
+@synthesize challengeId;
+@synthesize subMissionList;
+@synthesize missionPackageId;
+@synthesize sequence;
+
+//array list for place package, challenge, submission
+@synthesize missionPlacePackageList;
+@synthesize challengeList;
+@synthesize subMissionPackageList;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.missionId = [dict valueForKey:@"missionId"];
@@ -47,6 +56,10 @@
     self.missionPlacePackageId = [dict valueForKey:@"missionPlacePackageId"];
     self.missionSteps = [dict valueForKey:@"missionSteps"];
     self.missionSpeed = [dict valueForKey:@"missionSpeed"];
+    self.challengeId = [dict valueForKey:@"challengeId"];
+    self.subMissionList = [dict valueForKey:@"subMissionList"];
+    self.missionPackageId = [dict valueForKey:@"missionPackageId"];
+    self.sequence = [dict valueForKey:@"sequence"];
 }
 
 -(void)setMissionId:(id)missId{
@@ -115,6 +128,22 @@
 
 -(void)setLastUpdateTime:(id)obj{
     lastUpdateTime = [RORDBCommon getDateFromId:obj];
+}
+
+-(void)setChallengeId:(id)obj{
+    challengeId =[RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setSubMissionList:(id)obj{
+    subMissionList =[RORDBCommon getStringFromId:obj];
+}
+
+-(void)setMissionPackageId:(id)obj{
+    missionPackageId =[RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setSequence:(id)obj{
+    sequence =[RORDBCommon getNumberFromId:obj];
 }
 
 @end

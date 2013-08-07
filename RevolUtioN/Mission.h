@@ -29,6 +29,15 @@
 @property (nonatomic, retain) NSNumber * missionTypeId;
 @property (nonatomic, retain) NSNumber * scores;
 @property (nonatomic, retain) NSDate * lastUpdateTime;
+@property (nonatomic, retain) NSNumber * challengeId;
+@property (nonatomic, retain) NSString * subMissionList;
+@property (nonatomic, retain) NSNumber * missionPackageId;
+@property (nonatomic, retain) NSNumber * sequence;
+
+//array list for place package, challenge, submission
+@property (nonatomic, retain) NSMutableArray * missionPlacePackageList;
+@property (nonatomic, retain) NSMutableArray * challengeList;
+@property (nonatomic, retain) NSMutableArray * subMissionPackageList;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 @end

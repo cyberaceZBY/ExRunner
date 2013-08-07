@@ -20,4 +20,6 @@
 
 +(RORHttpResponse *)getUserFriends:(NSNumber *) userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
++(RORHttpResponse *)getUserInfoById:(NSNumber *) userId;
+
 @end

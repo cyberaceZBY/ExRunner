@@ -37,6 +37,10 @@
 
 +(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query;
 
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams;
+
++(void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query;
+
 + (void)clearTableData:(NSArray *) tableArray;
 
 + (NSString*)getCityCodeJSon;

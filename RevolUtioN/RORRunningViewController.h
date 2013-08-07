@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+//#import "SVPulsingAnnotationView.h"
 #import "User_Running_History.h"
+
+#define TIMER_INTERVAL 1
 
 @interface RORRunningViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate> {
     BOOL wasFound;
@@ -24,7 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *expandButton;
 @property (weak, nonatomic) IBOutlet UIButton *collapseButton;
-@property (nonatomic) CLLocation *formerLocation;
+@property (strong, nonatomic) CLLocation *initialLocation;
+@property (strong, nonatomic) CLLocation *formerLocation;
+@property (strong, nonatomic) CLLocation *latestUserLocation;
+@property (nonatomic) CLLocationCoordinate2D offset;
 @property (nonatomic) NSInteger count;
 @property (nonatomic) NSInteger timerCount;
 @property (assign) NSTimer *repeatingTimer;
@@ -43,5 +49,6 @@
 - (IBAction)collapseAction:(id)sender;
 - (IBAction)startButtonAction:(id)sender;
 - (IBAction)endButtonAction:(id)sender;
+- (IBAction)setUserCentered:(id)sender;
 -(void)backToMain;
 @end

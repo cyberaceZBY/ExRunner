@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0D588F17AFE6B80046515C /* Mission_Challenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D588E17AFE6B80046515C /* Mission_Challenge.m */; };
+		0F0D589217B0E4680046515C /* RORLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D589117B0E4680046515C /* RORLoadingViewController.m */; };
 		0F7F398E1792DF1000B1C720 /* RORUserServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F398D1792DF1000B1C720 /* RORUserServices.m */; };
 		0F7F39911794360800B1C720 /* RORUserClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F39901794360800B1C720 /* RORUserClientHandler.m */; };
 		0F7F3994179BD08000B1C720 /* RORMissionServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F3993179BD08000B1C720 /* RORMissionServices.m */; };
@@ -98,7 +100,6 @@
 		30BB0BBD176F004D0009A847 /* RORMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BBC176F004D0009A847 /* RORMapPoint.m */; };
 		30BB0BC717732FEF0009A847 /* User_Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BC617732FEF0009A847 /* User_Attributes.m */; };
 		30BB0BCA177484220009A847 /* RORPeriodicPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BC9177484210009A847 /* RORPeriodicPickerViewController.m */; };
-		30BB0BD017757B8A0009A847 /* Mission_Package.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BCF17757B880009A847 /* Mission_Package.m */; };
 		30BB0BD31775A06F0009A847 /* Mission.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BD21775A06E0009A847 /* Mission.m */; };
 		30BB0BD61775A2550009A847 /* Place_Package.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0BD51775A2540009A847 /* Place_Package.m */; };
 		30C658381751EDE60076AFA3 /* blueButton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C658371751EDE60076AFA3 /* blueButton_bg.png */; };
@@ -211,6 +212,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0D588D17AFE6B80046515C /* Mission_Challenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mission_Challenge.h; sourceTree = "<group>"; };
+		0F0D588E17AFE6B80046515C /* Mission_Challenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mission_Challenge.m; sourceTree = "<group>"; };
+		0F0D589017B0E4680046515C /* RORLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORLoadingViewController.h; sourceTree = "<group>"; };
+		0F0D589117B0E4680046515C /* RORLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORLoadingViewController.m; sourceTree = "<group>"; };
 		0F7F398C1792DF1000B1C720 /* RORUserServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserServices.h; sourceTree = "<group>"; };
 		0F7F398D1792DF1000B1C720 /* RORUserServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUserServices.m; sourceTree = "<group>"; };
 		0F7F398F1794360700B1C720 /* RORUserClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserClientHandler.h; sourceTree = "<group>"; };
@@ -359,8 +364,6 @@
 		30BB0BC617732FEF0009A847 /* User_Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User_Attributes.m; sourceTree = "<group>"; };
 		30BB0BC8177484210009A847 /* RORPeriodicPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORPeriodicPickerViewController.h; sourceTree = "<group>"; };
 		30BB0BC9177484210009A847 /* RORPeriodicPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORPeriodicPickerViewController.m; sourceTree = "<group>"; };
-		30BB0BCE17757B870009A847 /* Mission_Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mission_Package.h; sourceTree = "<group>"; };
-		30BB0BCF17757B880009A847 /* Mission_Package.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mission_Package.m; sourceTree = "<group>"; };
 		30BB0BD11775A06C0009A847 /* Mission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mission.h; sourceTree = "<group>"; };
 		30BB0BD21775A06E0009A847 /* Mission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mission.m; sourceTree = "<group>"; };
 		30BB0BD41775A2520009A847 /* Place_Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place_Package.h; sourceTree = "<group>"; };
@@ -766,8 +769,8 @@
 				30BB0BD51775A2540009A847 /* Place_Package.m */,
 				30BB0BD11775A06C0009A847 /* Mission.h */,
 				30BB0BD21775A06E0009A847 /* Mission.m */,
-				30BB0BCE17757B870009A847 /* Mission_Package.h */,
-				30BB0BCF17757B880009A847 /* Mission_Package.m */,
+				0F0D588D17AFE6B80046515C /* Mission_Challenge.h */,
+				0F0D588E17AFE6B80046515C /* Mission_Challenge.m */,
 				30BB0BC517732FEE0009A847 /* User_Attributes.h */,
 				30BB0BC617732FEF0009A847 /* User_Attributes.m */,
 				305A18FB1750A405003A8CD7 /* User_Products_History.h */,
@@ -842,6 +845,8 @@
 				30BB0BC9177484210009A847 /* RORPeriodicPickerViewController.m */,
 				30507C01174A164300EC7F12 /* RORRouteDetailViewController.h */,
 				30507C02174A164300EC7F12 /* RORRouteDetailViewController.m */,
+				0F0D589017B0E4680046515C /* RORLoadingViewController.h */,
+				0F0D589117B0E4680046515C /* RORLoadingViewController.m */,
 			);
 			name = MainPage;
 			sourceTree = "<group>";
@@ -1171,7 +1176,6 @@
 				30BB0BBD176F004D0009A847 /* RORMapPoint.m in Sources */,
 				30BB0BC717732FEF0009A847 /* User_Attributes.m in Sources */,
 				30BB0BCA177484220009A847 /* RORPeriodicPickerViewController.m in Sources */,
-				30BB0BD017757B8A0009A847 /* Mission_Package.m in Sources */,
 				30BB0BD31775A06F0009A847 /* Mission.m in Sources */,
 				30BB0BD61775A2550009A847 /* Place_Package.m in Sources */,
 				30F44B501778267200876915 /* RORDBCommon.m in Sources */,
@@ -1187,6 +1191,8 @@
 				0F87D881179D72C7007E0412 /* RORRunHistoryServices.m in Sources */,
 				0F87D884179D72F8007E0412 /* RORRunHistoryClientHandler.m in Sources */,
 				0F87D888179ED3C7007E0412 /* User.m in Sources */,
+				0F0D588F17AFE6B80046515C /* Mission_Challenge.m in Sources */,
+				0F0D589217B0E4680046515C /* RORLoadingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
