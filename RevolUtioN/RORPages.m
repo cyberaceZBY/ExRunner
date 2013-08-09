@@ -14,7 +14,6 @@
 
 static RORFirstViewController *MainPage;
 static RORSecondViewController *FriendPage;
-static UIViewController *HistoryPage;
 
 
 + (void) setMainPage:(RORFirstViewController *)viewController{

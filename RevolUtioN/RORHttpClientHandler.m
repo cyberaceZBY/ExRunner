@@ -88,6 +88,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *urlResponse = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
+    NSLog(@"Response from request: %@",[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error]);
     NSInteger statCode = [urlResponse statusCode];
     RORHttpResponse *httpResponse = [[RORHttpResponse alloc] init];
     [httpResponse setResponseStatus:statCode];

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0F0D588F17AFE6B80046515C /* Mission_Challenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D588E17AFE6B80046515C /* Mission_Challenge.m */; };
 		0F0D589217B0E4680046515C /* RORLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D589117B0E4680046515C /* RORLoadingViewController.m */; };
+		0F0D589817B23F490046515C /* RORThirdPartyClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D589717B23F490046515C /* RORThirdPartyClientHandler.m */; };
+		0F0D589B17B249230046515C /* RORThirdPartyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D589A17B249230046515C /* RORThirdPartyService.m */; };
 		0F7F398E1792DF1000B1C720 /* RORUserServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F398D1792DF1000B1C720 /* RORUserServices.m */; };
 		0F7F39911794360800B1C720 /* RORUserClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F39901794360800B1C720 /* RORUserClientHandler.m */; };
 		0F7F3994179BD08000B1C720 /* RORMissionServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F3993179BD08000B1C720 /* RORMissionServices.m */; };
@@ -216,6 +218,10 @@
 		0F0D588E17AFE6B80046515C /* Mission_Challenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mission_Challenge.m; sourceTree = "<group>"; };
 		0F0D589017B0E4680046515C /* RORLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORLoadingViewController.h; sourceTree = "<group>"; };
 		0F0D589117B0E4680046515C /* RORLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORLoadingViewController.m; sourceTree = "<group>"; };
+		0F0D589617B23F490046515C /* RORThirdPartyClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORThirdPartyClientHandler.h; sourceTree = "<group>"; };
+		0F0D589717B23F490046515C /* RORThirdPartyClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORThirdPartyClientHandler.m; sourceTree = "<group>"; };
+		0F0D589917B249230046515C /* RORThirdPartyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORThirdPartyService.h; sourceTree = "<group>"; };
+		0F0D589A17B249230046515C /* RORThirdPartyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORThirdPartyService.m; sourceTree = "<group>"; };
 		0F7F398C1792DF1000B1C720 /* RORUserServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserServices.h; sourceTree = "<group>"; };
 		0F7F398D1792DF1000B1C720 /* RORUserServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUserServices.m; sourceTree = "<group>"; };
 		0F7F398F1794360700B1C720 /* RORUserClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserClientHandler.h; sourceTree = "<group>"; };
@@ -466,6 +472,8 @@
 				0F7F3993179BD08000B1C720 /* RORMissionServices.m */,
 				0F87D87F179D72C7007E0412 /* RORRunHistoryServices.h */,
 				0F87D880179D72C7007E0412 /* RORRunHistoryServices.m */,
+				0F0D589917B249230046515C /* RORThirdPartyService.h */,
+				0F0D589A17B249230046515C /* RORThirdPartyService.m */,
 			);
 			name = RORServices;
 			path = ..;
@@ -496,6 +504,8 @@
 				0F87D876179D6429007E0412 /* RORMissionClientHandler.m */,
 				0F87D882179D72F7007E0412 /* RORRunHistoryClientHandler.h */,
 				0F87D883179D72F8007E0412 /* RORRunHistoryClientHandler.m */,
+				0F0D589617B23F490046515C /* RORThirdPartyClientHandler.h */,
+				0F0D589717B23F490046515C /* RORThirdPartyClientHandler.m */,
 			);
 			name = HttpClient;
 			sourceTree = "<group>";
@@ -1193,6 +1203,8 @@
 				0F87D888179ED3C7007E0412 /* User.m in Sources */,
 				0F0D588F17AFE6B80046515C /* Mission_Challenge.m in Sources */,
 				0F0D589217B0E4680046515C /* RORLoadingViewController.m in Sources */,
+				0F0D589817B23F490046515C /* RORThirdPartyClientHandler.m in Sources */,
+				0F0D589B17B249230046515C /* RORThirdPartyService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

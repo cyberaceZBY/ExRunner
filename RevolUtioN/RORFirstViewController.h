@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RORLoginViewController.h"
 #import "RORSettings.h"
+#import "RORThirdPartyService.h"
+#import "RORAppDelegate.h"
+#import "RORPages.h"
+#import "RORUtils.h"
+#import "User.h"
 
 @interface RORFirstViewController : UIViewController
 
@@ -20,7 +25,10 @@
 @property (weak, nonatomic) IBOutlet UIView *weatherSubView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *weatherInfoButtonView;
 @property (weak, nonatomic) IBOutlet UIButton *userButton;
-@property (weak, nonatomic) IBOutlet UIView *nonPlanView;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *lbTemperature;
+@property (weak, nonatomic) IBOutlet UILabel *lbWind;
 
 - (IBAction)weatherInfoAction:(id)sender;
 - (IBAction)normalRunAction:(id)sender;

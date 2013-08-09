@@ -7,13 +7,6 @@
 //
 
 #import "RORFirstViewController.h"
-#import "RORAppDelegate.h"
-#import "RORSettings.h"
-#import "Mission.h"
-#import <UIKit/UIKit.h>
-#import "RORPages.h"
-#import "RORUtils.h"
-#import "RORMissionServices.h"
 
 @interface RORFirstViewController ()
 
@@ -25,12 +18,10 @@
 @synthesize weatherInfoButtonView;
 @synthesize userButton;
 @synthesize context;
-@synthesize nonPlanView;
 
 NSInteger expanded = 0;
 BOOL isWeatherButtonClicked = false;
-NSInteger centerLoc = -10000;
-UITableViewCell *routeCheckedCell = nil;
+NSInteger centerLoc =-10000;
 
 - (void)viewDidLoad
 {
@@ -40,7 +31,6 @@ UITableViewCell *routeCheckedCell = nil;
 
     userInfoView.frame = CGRectMake(0, -200, 320, 200);
     weatherSubView.frame = CGRectMake(2, -120, 100, 120);
-    nonPlanView.frame = CGRectMake(0, 0, 320, 155);
     self.navigationItem.leftBarButtonItem = weatherInfoButtonView;
     //init topbar's gesture listeners
     UITapGestureRecognizer *t = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
@@ -103,30 +93,14 @@ UITableViewCell *routeCheckedCell = nil;
         NSMutableDictionary *settings = [RORSettings getInstance];
         NSMutableDictionary *location = [settings objectForKey:@"location"];
         NSString *citycode = [location valueForKey:@"code"];
-        NSError *error;
-        //    加载一个NSURL对象
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://m.weather.com.cn/data/%@.html",citycode]]];
-        //    将请求的url数据放到NSData对象中
-        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        //    iOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-        if (response != nil){
-            NSDictionary *weatherDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-            //    weatherDic字典中存放的数据也是字典型，从它里面通过键值取值
-            NSDictionary *weatherInfo = [weatherDic objectForKey:@"weatherinfo"];
-            
-            UILabel *label = (UILabel *)[weatherSubView viewWithTag:1];
-            label.text = [weatherInfo objectForKey:@"temp1"];
-            label = (UILabel *)[weatherSubView viewWithTag:2];
-            label.text = [weatherInfo objectForKey:@"wind1"];
+
+        NSDictionary *weatherInfo = [RORThirdPartyService syncWeatherInfo:citycode];
+
+        if (weatherInfo != nil){
+            self.lbTemperature.text = [weatherInfo objectForKey:@"temp1"];
+            self.lbWind.text = [weatherInfo objectForKey:@"wind1"];
         }
         //空气质量API=========================
-//        request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.pm25.in/api/querys/pm2_5.json?city=shanghai&token=5j1znBVAsnSf5xQyNQyq"]]];
-//        //    将请求的url数据放到NSData对象中
-//        response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-//        //    iOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-//        weatherDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-//        NSLog(@"%@", [weatherDic description]);
-        
     }
 }
 
@@ -150,7 +124,6 @@ UITableViewCell *routeCheckedCell = nil;
 -(void) panAction:(UIPanGestureRecognizer*) recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         centerLoc = weatherSubView.center.y;
-//        NSLog(@"began");
     }
     CGPoint translation = [recognizer translationInView:weatherSubView];
     [self weatherDragView:translation.y];
@@ -207,11 +180,12 @@ UITableViewCell *routeCheckedCell = nil;
     [self setWeatherSubView:nil];
     [self setWeatherInfoButtonView:nil];
     [self setUserButton:nil];
-    [self setNonPlanView:nil];
     [self setContext:nil];
     [self setUserName:nil];
     [self setUserId:nil];
     
+    [self setLbTemperature:nil];
+    [self setLbWind:nil];
     [super viewDidUnload];
 }
 

@@ -9,7 +9,7 @@
 #import "RORPeriodicPickerViewController.h"
 #import "RORAppDelegate.h"
 #import "RORUtils.h"
-#import "Mission.h"challengeId
+#import "Mission.h"
 #import "RORConstant.h"
 
 @interface RORPeriodicPickerViewController ()
@@ -80,14 +80,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return periodicList.count;
 }

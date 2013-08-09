@@ -7,16 +7,6 @@
 //
 
 #import "RORLoginViewController.h"
-#import "User.h"
-#import "User_Attributes.h"
-#import "RORAppDelegate.h"
-#import "RORUtils.h"
-#import "RORPages.h"
-#import "RORConstant.h"
-#import "RORUtils.h"
-#import "RORUserClientHandler.h"
-#import "RORHttpResponse.h"
-#import "RORUserServices.h"
 
 @interface RORLoginViewController ()
 
@@ -49,17 +39,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)hasLoggedIn {
-//    if ([RORUtils hasLoggedIn]!=nil){
-//        //[alert show];
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-//        // 通过storyboard id拿到目标控制器的对象
-//        UIViewController *viewController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-//        
-//        [self.navigationController pushViewController:viewController animated:NO];
-//    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

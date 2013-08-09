@@ -161,7 +161,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="4.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2rM-Ct-sMl">
-                                                <rect key="frame" x="58" y="91" width="24" height="21"/>
+                                                <rect key="frame" x="56" y="91" width="24" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -288,6 +288,8 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="lbTemperature" destination="Y6P-Pq-4XQ" id="HLt-tS-QdD"/>
+                        <outlet property="lbWind" destination="FzS-zY-P9K" id="RLU-Cv-C4X"/>
                         <outlet property="userButton" destination="phb-0B-y1e" id="QT6-8a-VaE"/>
                         <outlet property="userInfoSubView" destination="ubI-5H-aV9" id="Gub-Oc-gi2"/>
                         <outlet property="userInfoView" destination="b9W-e7-GvT" id="B9e-Tt-bjc"/>
@@ -2495,8 +2497,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="challengeRunAction:"/>
                 <relationship kind="action" name="normalRunAction:"/>
+                <relationship kind="action" name="userInfoMenu:"/>
                 <relationship kind="action" name="weatherInfoAction:"/>
-                <relationship kind="outlet" name="nonPlanView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="lbTemperature" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbWind" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userInfoSubView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="userInfoView" candidateClass="UIView"/>
