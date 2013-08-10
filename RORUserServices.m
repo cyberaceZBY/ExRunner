@@ -44,40 +44,52 @@
     return   (Friend *) [fetchObject objectAtIndex:0];
 }
 
-+(void)syncUserInfo:(NSNumber *)userId withUserDic:(NSDictionary *) userInfoDic{
-    NSError *error;
-    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-    
++ (User *)fetchUser:(NSNumber *) userId{
     User *user = [self fetchUserById:userId];
-    User_Attributes *userAttr = [self fetchUserAttrsByUserId:userId];
-    
-    if(user == nil)
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-    [user initWithDictionary:userInfoDic];
-    
-    if(userAttr == nil)
-        userAttr = [NSEntityDescription insertNewObjectForEntityForName:@"User_Attributes" inManagedObjectContext:context];
-    [userAttr initWithDictionary:userInfoDic];
-    
-    if (![context save:&error]) {
-        NSLog(@"%@",[error localizedDescription]);
+    if(user != nil){
+        user.attributes = [self fetchUserAttrsByUserId:userId];
     }
+    return user;
+}
+
++(User *)registerUser:(NSDictionary *)registerDic{
+    RORHttpResponse *httpResponse = [RORUserClientHandler createUserInfoByUserDic:registerDic];
+    return [self syncUserFromResponse:httpResponse];
+}
+
++(User *)syncUserInfoById:(NSNumber *)userId{
+    RORHttpResponse *httpResponse =[RORUserClientHandler getUserInfoById:userId];
+    return [self syncUserFromResponse:httpResponse];
+}
+
++(User *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password{
+    RORHttpResponse *httpResponse = [RORUserClientHandler getUserInfoByUserNameAndPassword:userName withPassword:password];
+    return [self syncUserFromResponse:httpResponse];
 }
 
 
-+(void)syncUserInfo:(NSNumber *)userId{
++ (void) saveUserInfoToList:(User *)user{
+    NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
+    [userDict setValue:user.userId forKey:@"userId"];
+    [userDict setValue:user.nickName forKey:@"nickName"];
+    [userDict setValue:user.systemTime forKey:@"systemTime"];
+    [RORUtils writeToUserInfoPList:userDict];
+}
+    
++(User *)syncUserFromResponse:(RORHttpResponse *)httpResponse{
     NSError *error;
+    User *user = nil;
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
-    
-    RORHttpResponse *httpResponse =[RORUserClientHandler getUserInfoById:userId];
     
     if ([httpResponse responseStatus] == 200){
         NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         
-        User *user = [self fetchUserById:userId];
+        NSNumber *userId = [userInfoDic valueForKey:@"userId"];
+        
+        user = [self fetchUserById:userId];
         User_Attributes *userAttr = [self fetchUserAttrsByUserId:userId];
+        
         
         if(user == nil)
             user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
@@ -90,10 +102,12 @@
         if (![context save:&error]) {
             NSLog(@"%@",[error localizedDescription]);
         }
-        [RORUtils saveLastUpdateTime:@"systemTime"];
+        user.attributes = userAttr;
+        [self saveUserInfoToList:user];
     }else {
         NSLog(@"sync with host error: can't get user's info. Status Code: %d", [httpResponse responseStatus]);
     }
+    return user;
 }
 
 + (void)syncFriends:(NSNumber *) userId {

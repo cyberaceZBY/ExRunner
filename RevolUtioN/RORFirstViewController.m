@@ -73,9 +73,8 @@ NSInteger centerLoc =-10000;
         [userButton addTarget:self action:@selector(segueToInfo) forControlEvents:UIControlEventTouchUpInside];
     }
 }
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self initPageData];
 }
 

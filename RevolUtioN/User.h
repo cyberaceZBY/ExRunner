@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "User_Attributes.h"
 
 
 @interface User : NSManagedObject
@@ -18,7 +19,10 @@
 @property (nonatomic, retain) NSString * userEmail;
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSString * uuid;
+@property (nonatomic, retain) NSDate * systemTime;
+@property (nonatomic, retain) User_Attributes * attributes;
 
+-(NSMutableDictionary *)transToDictionary;
 -(void)initWithDictionary:(NSDictionary *)dict;
 
 @end

@@ -9,6 +9,7 @@
 #import "RORLoadingViewController.h"
 #import "RORMissionServices.h"
 #import "RORUserServices.h"
+#import "RORRunHistoryServices.h"
 
 @interface RORLoadingViewController ()
 
@@ -32,7 +33,9 @@
     //sync user
     NSNumber *userId = [RORUtils getUserId];
     if(userId > 0){
-        [RORUserServices syncUserInfo:userId];
+        [RORUserServices syncUserInfoById:userId];
+        //sync runningHistory
+        [RORRunHistoryServices syncRunningHistories];
     }
     //sync missions
     [RORMissionServices syncMissions];

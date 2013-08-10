@@ -16,11 +16,15 @@
 
 @interface RORUserServices : NSObject
 
-+(void)syncUserInfo:(NSNumber *)userId;
++ (User *)fetchUser:(NSNumber *) userId;
 
-+ (void)syncUserInfo:(NSNumber *)userId withUserDic:(NSDictionary *) userInfoDic;
++(User *)registerUser:(NSDictionary *)registerDic;
 
-+ (void)syncFriends:(NSNumber *) userId;
++(User *)syncUserInfoById:(NSNumber *)userId;
+
++(User *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password;
+
++(void)syncFriends:(NSNumber *) userId;
 
 +(void)clearUserData;
 
