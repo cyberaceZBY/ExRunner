@@ -10,6 +10,7 @@
 #import "RORMissionServices.h"
 #import "RORUserServices.h"
 #import "RORRunHistoryServices.h"
+#import "RORSystemService.h"
 
 @interface RORLoadingViewController ()
 
@@ -30,12 +31,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //sync version
+    [RORSystemService syncVersion:@"ios"];
     //sync user
     NSNumber *userId = [RORUtils getUserId];
     if(userId > 0){
         [RORUserServices syncUserInfoById:userId];
         //sync runningHistory
-        [RORRunHistoryServices syncRunningHistories];
+        //[RORRunHistoryServices syncRunningHistories];
     }
     //sync missions
     [RORMissionServices syncMissions];

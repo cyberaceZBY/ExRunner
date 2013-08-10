@@ -12,8 +12,12 @@
 
 @interface Version_Control : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * platform;
+@property (nonatomic, retain) NSString * platform;
 @property (nonatomic, retain) NSNumber * version;
 @property (nonatomic, retain) NSNumber * subVersion;
+@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSDate * systemTime;
+
+-(void)initWithDictionary:(NSDictionary *)dict;
 
 @end

@@ -17,7 +17,6 @@
 @synthesize userId;
 @synthesize sex;
 @synthesize uuid;
-@synthesize systemTime;
 @synthesize attributes;
 
 -(NSMutableDictionary *)transToDictionary{
@@ -28,7 +27,6 @@
     [tempoDict setValue:userEmail forKey:@"userEmail"];
     [tempoDict setValue:sex forKey:@"sex"];
     [tempoDict setValue:uuid forKey:@"uuid"];
-    [tempoDict setValue:[RORDBCommon getStringFromId:systemTime] forKey:@"systemTime"];
     return tempoDict;
 }
 
@@ -38,7 +36,6 @@
     userEmail = [dict valueForKey:@"userEmail"];
     sex = [dict valueForKey:@"sex"];
     uuid =[dict valueForKey:@"uuid"];
-    systemTime = [RORDBCommon getDateFromId:[dict valueForKey:@"systemTime"]];
 }
 
 -(void)setNickName:(id)obj{
@@ -64,9 +61,4 @@
 -(void)setUuid:(id)obj{
     uuid = [RORDBCommon getStringFromId:obj];
 }
-
--(void)setSystemTime:(id)obj{
-    systemTime =[RORDBCommon getDateFromId:obj];
-}
-
 @end

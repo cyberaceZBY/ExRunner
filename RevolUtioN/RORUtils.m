@@ -103,7 +103,9 @@ static NSDate *systemTime = nil;
     NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docPath = [ doc objectAtIndex:0 ];
     NSString *path = [docPath stringByAppendingPathComponent:@"userInfo.plist"];
-    [userDict writeToFile:path atomically:YES];
+    NSMutableDictionary *pInfo = [self getUserInfoPList];
+    [pInfo addEntriesFromDictionary:userDict];
+    [pInfo writeToFile:path atomically:YES];
 }
 
 + (void)saveLastUpdateTime: (NSString *) key{
@@ -116,7 +118,7 @@ static NSDate *systemTime = nil;
 + (NSString *)getLastUpdateTime: (NSString *) key{
     NSMutableDictionary *userDict = [self getUserInfoPList];
     NSString *lastUpdateTime = (NSString *)[userDict objectForKey:key];
-    if(lastUpdateTime == nil || [lastUpdateTime isEqualToString:@""]){
+    if(lastUpdateTime == nil){
         lastUpdateTime = @"2000-01-01 00:00:00";
     }
     return lastUpdateTime;

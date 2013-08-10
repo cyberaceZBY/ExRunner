@@ -7,12 +7,43 @@
 //
 
 #import "Version_Control.h"
-
+#import "RORDBCommon.h"
 
 @implementation Version_Control
 
-@dynamic platform;
-@dynamic version;
-@dynamic subVersion;
+@synthesize platform;
+@synthesize version;
+@synthesize subVersion;
+@synthesize desc;
+@synthesize systemTime;
+
+-(void)initWithDictionary:(NSDictionary *)dict{
+    platform = [dict valueForKey:@"platform"];
+    version = [dict valueForKey:@"version"];
+    subVersion = [dict valueForKey:@"subVersion"];
+    desc = [dict valueForKey:@"description"];
+    systemTime = [dict valueForKey:@"systemTime"];
+}
+
+-(void)setPlatform:(id)obj{
+    platform = [RORDBCommon getStringFromId:obj];
+}
+
+-(void)setVersion:(id)obj{
+    version = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setSubVersion:(id)obj{
+    subVersion = [RORDBCommon getNumberFromId:obj];
+}
+
+-(void)setDesc:(id)obj{
+    desc = [RORDBCommon getStringFromId:obj];
+}
+
+-(void)setSystemTime:(id)obj{
+    systemTime = [RORDBCommon getDateFromId:obj];
+}
+
 
 @end

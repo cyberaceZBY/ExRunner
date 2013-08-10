@@ -41,7 +41,7 @@
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    return   (Friend *) [fetchObject objectAtIndex:0];
+    return (Friend *) [fetchObject objectAtIndex:0];
 }
 
 + (User *)fetchUser:(NSNumber *) userId{
@@ -72,7 +72,6 @@
     NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     [userDict setValue:user.userId forKey:@"userId"];
     [userDict setValue:user.nickName forKey:@"nickName"];
-    [userDict setValue:user.systemTime forKey:@"systemTime"];
     [RORUtils writeToUserInfoPList:userDict];
 }
     

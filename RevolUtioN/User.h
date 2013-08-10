@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSString * userEmail;
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSString * uuid;
-@property (nonatomic, retain) NSDate * systemTime;
 @property (nonatomic, retain) User_Attributes * attributes;
 
 -(NSMutableDictionary *)transToDictionary;
