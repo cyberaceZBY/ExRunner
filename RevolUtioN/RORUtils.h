@@ -15,11 +15,19 @@
 
 + (NSNumber *)getUserId;
 
++ (NSString *)getUserUuid;
+
 + (NSString *)transSecondToStandardFormat:(NSInteger) seconds;
 
 + (NSDate *)getSystemTime;
 
++ (NSDate *)getDateFromString:(NSString *) date;
+
++ (NSString *)getStringFromDate:(NSDate *) date;
+
 + (NSString *)md5:(NSString *)str;
+
++ (NSString *)uuidString;
 
 + (NSData *)gzipCompressData:(NSData *)uncompressedData;
 

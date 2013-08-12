@@ -16,8 +16,14 @@
 
 @interface RORRunHistoryServices : NSObject
 
++ (User_Running_History *)fetchRunHistoryByRunId:(NSString *) runId;
+
++ (User_Running *)fetchUserRunningByRunId:(NSString *) runId;
+
 + (void)uploadRunningHistories;
 
 + (void)syncRunningHistories;
+
++ (void)syncUserRunning;
 
 @end

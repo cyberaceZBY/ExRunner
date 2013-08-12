@@ -22,7 +22,7 @@
     version = [dict valueForKey:@"version"];
     subVersion = [dict valueForKey:@"subVersion"];
     desc = [dict valueForKey:@"description"];
-    systemTime = [dict valueForKey:@"systemTime"];
+    systemTime = [RORDBCommon getDateFormatFromDict:[dict valueForKey:@"systemTime"]];
 }
 
 -(void)setPlatform:(id)obj{

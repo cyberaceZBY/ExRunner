@@ -345,7 +345,7 @@
 - (void)pushPoint{
     CLLocation *currentLocation = self.latestUserLocation;
     if (formerLocation != currentLocation){
-        distance += [self.formerLocation getDistanceFrom:currentLocation];
+        distance += [self.formerLocation distanceFromLocation:currentLocation];
         self.formerLocation = currentLocation;
         [routePoints addObject:currentLocation];
         [self drawLineWithLocationArray:routePoints];
@@ -374,21 +374,16 @@
 }
 
 - (void)saveRunInfo{
-    NSError *error = nil;
-    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-    User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
+    User_Running_History *runHistory = [[User_Running_History alloc] init];
     runHistory.distance = [[NSNumber alloc] initWithInteger:distance];
     runHistory.duration = [[NSNumber alloc] initWithInteger:timerCount];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutePoints:routePoints];
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;
-    runHistory.userId = nil;
+    runHistory.userId = [RORUtils getUserId];
+    runHistory.runUuid = [RORUtils uuidString];
     record = runHistory;
-    if (![context save:&error]) {
-        NSLog(@"%@",[error localizedDescription]);
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -426,7 +421,7 @@
 
 - (void) centerMap{
     [mapView setCenterCoordinate:self.latestUserLocation.coordinate animated:YES];
-    CLLocation *cl = [mapView userLocation].location;
+    //CLLocation *cl = [mapView userLocation].location;
     //    [self drawTestLine];
 }
 

@@ -27,6 +27,16 @@ static NSDate *systemTime = nil;
             result[12],result[13],result[14],result[15]];
 }
 
++ (NSString *)uuidString {
+    // Returns a UUID
+    
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
+    
+    return uuidStr;
+}
+
 + (NSString *)transSecondToStandardFormat:(NSInteger) seconds {
     NSInteger min=0, hour=0;
     min = seconds / 60;
@@ -45,8 +55,18 @@ static NSDate *systemTime = nil;
 + (NSNumber *)getUserId{
     if (userId == nil || userId < 0){
         NSMutableDictionary *userDict = [self getUserInfoPList];
-        userId = [userDict valueForKey:@"userId"];    }
+        userId = [userDict valueForKey:@"userId"];
+    }
+    if(userId == nil){
+        userId = [NSNumber numberWithInteger:-1];
+    }
     return userId;
+}
+
++ (NSString *)getUserUuid{
+    NSMutableDictionary *userDict = [self getUserInfoPList];
+    NSString *uuid = (NSString *)[userDict objectForKey:@"uuid"];
+    return uuid;
 }
 
 +(NSDate *)getSystemTime{
@@ -88,6 +108,20 @@ static NSDate *systemTime = nil;
     return formatDateString;
 }
 
++(NSDate *)getDateFromString:(NSString *) date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateFormat = [dateFormatter dateFromString: date];
+    return dateFormat;
+}
+
++(NSString *)getStringFromDate:(NSDate *) date{
+    NSDateFormatter *formate = [[NSDateFormatter alloc] init];
+    [formate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *formatDateString = [formate stringFromDate:date];
+    return formatDateString;
+}
+
 + (NSMutableDictionary *)getUserInfoPList{
     NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docPath = [ doc objectAtIndex:0 ];
@@ -121,6 +155,7 @@ static NSDate *systemTime = nil;
     if(lastUpdateTime == nil){
         lastUpdateTime = @"2000-01-01 00:00:00";
     }
+    lastUpdateTime = [self getStringFromDate:[self getDateFromString:lastUpdateTime]];
     return lastUpdateTime;
 }
 

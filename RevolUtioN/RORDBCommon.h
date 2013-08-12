@@ -11,6 +11,7 @@
 @interface RORDBCommon : NSObject
 
 + (NSDate *)getDateFromId:(id)obj;
++ (NSDate *)getDateFormatFromDict:(NSString *) stringDate;
 + (NSString *)getStringFromId:(id)obj;
 + (NSNumber *)getNumberFromId:(id)obj;
 + (NSString *)getStringFromRoutePoints:(NSArray *)routePoints;

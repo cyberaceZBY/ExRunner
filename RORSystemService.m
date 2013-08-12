@@ -45,7 +45,7 @@
             NSLog(@"%@",[error localizedDescription]);
         }
         
-        [self saveSystimeTime:(NSString *)versionEntity.systemTime];
+        [self saveSystimeTime:[RORUtils getStringFromDate:versionEntity.systemTime]];
     } else {
         NSLog(@"sync with host error: can't get version info. Status Code: %d", [httpResponse responseStatus]);
     }

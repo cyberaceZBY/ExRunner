@@ -72,6 +72,7 @@
     NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     [userDict setValue:user.userId forKey:@"userId"];
     [userDict setValue:user.nickName forKey:@"nickName"];
+    [userDict setValue:user.uuid forUndefinedKey:@"uuid"];
     [RORUtils writeToUserInfoPList:userDict];
 }
     

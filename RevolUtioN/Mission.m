@@ -60,6 +60,7 @@
     self.subMissionList = [dict valueForKey:@"subMissionList"];
     self.missionPackageId = [dict valueForKey:@"missionPackageId"];
     self.sequence = [dict valueForKey:@"sequence"];
+    self.lastUpdateTime = [RORDBCommon getDateFormatFromDict:[dict valueForKey:@"lastUpdateTime"]];
 }
 
 -(void)setMissionId:(id)missId{

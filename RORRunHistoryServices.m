@@ -169,6 +169,20 @@
     }
 }
 
++ (void) saveRunInfoToDB:(User_Running_History *)runningHistory{
+    //check uuid
+    if(runningHistory.runUuid != nil){
+        NSError *error = nil;
+        RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = delegate.managedObjectContext;
+        User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
+        runHistory = runningHistory;
+        if (![context save:&error]) {
+            NSLog(@"%@",[error localizedDescription]);
+        }
+    }
+}
+
 + (void)uploadUserRunning{
     NSNumber *userId = [RORUtils getUserId];
     NSMutableArray *dataList = [self fetchUnsyncedUserRunning];
