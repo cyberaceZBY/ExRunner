@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXApi.h"
+#import "WBApi.h"
+#import <TencentOpenAPI/QQApi.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <RennSDK/RennSDK.h>
+
+#import <ShareSDK/ShareSDK.h>
 
 @interface RORAppDelegate : UIResponder <UIApplicationDelegate>
 

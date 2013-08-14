@@ -293,12 +293,62 @@
                         <outlet property="weatherInfoButtonView" destination="IVu-FM-rZG" id="rD5-Sk-HMj"/>
                         <outlet property="weatherSubView" destination="Kec-6v-Wue" id="5xs-oo-DBn"/>
                         <segue destination="y9P-Sa-8pW" kind="push" identifier="userInfoSegue" id="a02-dk-zhF"/>
-                        <segue destination="ZbL-oL-5D5" kind="push" identifier="loginSegue" id="0eg-fs-gQ0"/>
+                        <segue destination="9Jk-xy-NJo" kind="push" identifier="loginSegue" id="cCw-0J-VLe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1387" y="-1130"/>
+        </scene>
+        <!--Login Check View Controller-->
+        <scene sceneID="ndV-1f-UVV">
+            <objects>
+                <viewController storyboardIdentifier="RORLoginCheckController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Jk-xy-NJo" customClass="RORLoginCheckViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DWZ-Ht-pbi">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Cp-Xe-NMU">
+                                <rect key="frame" x="54" y="182" width="142" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="新浪微博登陆">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sinaWeiboLogin:" destination="9Jk-xy-NJo" eventType="touchUpInside" id="hiq-f3-Abo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EtI-AY-uYh">
+                                <rect key="frame" x="54" y="111" width="142" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="直接登陆">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ZbL-oL-5D5" kind="push" identifier="selflgoin" id="YwV-1K-gbi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hLa-Zw-mfc"/>
+                    <connections>
+                        <outlet property="btnSinaWeibo" destination="9Cp-Xe-NMU" id="o75-Dv-Me7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ps-t5-eYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="906" y="-2046"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="OCm-Sc-Srz">
@@ -401,7 +451,6 @@
         <!--Route Detail View Controller - 跑在华师大-->
         <scene sceneID="yjO-Sq-e9F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4N5-5Z-Mlw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="aAg-4J-S0z" customClass="RORRouteDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="28h-fB-hN6">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -526,6 +575,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4N5-5Z-Mlw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4852" y="-1799"/>
         </scene>
@@ -962,7 +1012,6 @@
         <!--Second View Controller - Second-->
         <scene sceneID="13">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="RORRelationsViewController" title="Second" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3" customClass="RORSecondViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="17">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1187,13 +1236,13 @@
                         <outlet property="tableView" destination="M2m-4I-lgc" id="ISW-na-cwe"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5097" y="-3500"/>
         </scene>
         <!--Add Friend View Controller - 添加好友-->
         <scene sceneID="dxR-Sv-WcI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wWV-vD-EPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="pN5-Co-sSo" customClass="RORAddFriendViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2B6-GS-iUv">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1279,13 +1328,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="添加好友" id="tOC-H8-LdT"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wWV-vD-EPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5742" y="-3258"/>
         </scene>
         <!--Plan View Controller - 约跑-->
         <scene sceneID="oXO-sE-6CA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="as1-0E-mke" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="icW-zZ-02S" customClass="RORPlanViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EqN-BY-y63">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1305,13 +1354,13 @@
                         <barButtonItem key="rightBarButtonItem" title="开始！" id="29h-S7-wg5"/>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="as1-0E-mke" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5748" y="-2561"/>
         </scene>
         <!--Initation View Controller - 已发出/收到的邀请-->
         <scene sceneID="Vae-Tj-zZl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EUh-bw-g9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="yC9-Wm-LCD" customClass="RORInitationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rNG-F1-eVg">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1320,13 +1369,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="已发出/收到的邀请" id="3fg-gl-xIp"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EUh-bw-g9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5748" y="-1841"/>
         </scene>
         <!--Invite View Controller - 约跑-->
         <scene sceneID="rxW-q5-WKu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TTF-DW-KpG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="VCe-1P-rqi" customClass="RORInviteViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="97l-Rv-fIz">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1484,13 +1533,13 @@
                         <outlet property="tableView" destination="97l-Rv-fIz" id="6tY-aT-56g"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TTF-DW-KpG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6361" y="-2118"/>
         </scene>
         <!--Appearence View Controller - 穿着-->
         <scene sceneID="TS8-MT-V2U">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="apc-fR-LdX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="e5E-5n-iB5" customClass="RORAppearenceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g5y-MM-egw">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1506,13 +1555,13 @@
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="apc-fR-LdX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6820" y="-2590"/>
         </scene>
         <!--Datetime View Controller - 日期&时间-->
         <scene sceneID="YuQ-HL-KcH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-R7-cfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="1xc-yy-cbr" customClass="RORDatetimeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iUB-Bi-87H">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1561,13 +1610,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="picker" destination="Zt5-gT-Lh9" id="BWn-wB-plD"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-R7-cfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6868" y="-1890"/>
         </scene>
         <!--Mission Selecting View Controller - 选择任务-->
         <scene sceneID="NEQ-Uz-kLL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gIL-jE-RgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lzd-42-vmp" customClass="RORMissionSelectingViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r9m-sx-fxB">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1620,13 +1669,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <barButtonItem key="backBarButtonItem" title="后退" id="A4l-yC-Csy"/>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gIL-jE-RgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6820" y="-3276"/>
         </scene>
         <!--Navigation Controller - 约跑-->
         <scene sceneID="iad-sA-U7J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-05-m5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="Zq9-4F-Tty" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="约跑" image="people.png" id="RCW-1v-yqo"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -1638,13 +1687,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="3" kind="relationship" relationship="rootViewController" id="RA4-lF-Kn1"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-05-m5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4659" y="-3508"/>
         </scene>
         <!--Say Hi View Controller - 打招呼-->
         <scene sceneID="Bej-wD-UE5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mtv-me-q7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9Kd-Oc-bvX" customClass="RORSayHiViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ifm-zK-W9X" customClass="UIControl">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1680,6 +1729,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="sayhiTextField" destination="PNb-Bb-07O" id="tF7-XG-Bng"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mtv-me-q7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6313" y="-3131"/>
         </scene>
@@ -2034,7 +2084,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Mall View Controller - 商城-->
         <scene sceneID="d6I-vF-0aO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sYz-8j-XWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="oXT-wh-Ti1" customClass="RORMallViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="100" sectionHeaderHeight="10" sectionFooterHeight="10" id="zXp-t6-vqs">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -2102,6 +2151,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <tabBarItem key="tabBarItem" title="商城" image="gift.png" id="43W-P5-ANZ"/>
                     <navigationItem key="navigationItem" title="商城" id="kn3-yE-rlL"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sYz-8j-XWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4612" y="-2553"/>
         </scene>
@@ -2347,7 +2397,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--View Controller - 商品详情-->
         <scene sceneID="ezF-0i-BkQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JvP-he-27t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="Rsa-QI-IW7" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VeT-q4-PR4">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -2408,13 +2457,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="商品详情" id="WO1-qZ-DhZ"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JvP-he-27t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5097" y="-2553"/>
         </scene>
         <!--Navigation Controller - 商城-->
         <scene sceneID="rnT-c1-xEI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pVc-CC-In0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="dCH-Zm-2rZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="商城" image="gift.png" id="Trh-Zm-0cc"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -2426,6 +2475,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="oXT-wh-Ti1" kind="relationship" relationship="rootViewController" id="kDZ-XC-U3L"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVc-CC-In0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4148" y="-2553"/>
         </scene>
@@ -2453,204 +2503,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="userInfoDetailButton_bg.png" width="158" height="102"/>
         <image name="weather_flat_bg.png" width="100" height="120"/>
     </resources>
-    <classes>
-        <class className="RORAccountViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORAccountViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backAction:"/>
-                <relationship kind="action" name="logoutAction:"/>
-            </relationships>
-        </class>
-        <class className="RORAddFriendViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORAddFriendViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundTap:"/>
-                <relationship kind="action" name="textFieldDoneEditing:"/>
-                <relationship kind="outlet" name="searchTextField" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="RORAppearenceViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORAppearenceViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="selectPictureAction:"/>
-            </relationships>
-        </class>
-        <class className="RORCityPickerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORCityPickerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelAction:"/>
-                <relationship kind="action" name="okAction:"/>
-                <relationship kind="outlet" name="cityPickerView" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="RORDatetimeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORDatetimeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="submitAction:"/>
-                <relationship kind="outlet" name="picker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="RORFirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORFirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="challengeRunAction:"/>
-                <relationship kind="action" name="normalRunAction:"/>
-                <relationship kind="action" name="userInfoMenu:"/>
-                <relationship kind="action" name="weatherInfoAction:"/>
-                <relationship kind="outlet" name="lbTemperature" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbWind" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userInfoSubView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="userInfoView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="weatherInfoButtonView" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="weatherSubView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="RORHistoryDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORHistoryDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backAction:"/>
-                <relationship kind="outlet" name="backButtonItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="bonusLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="durationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="energyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="experienceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="weatherLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RORHistoryViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORHistoryViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="syncAction:"/>
-                <relationship kind="outlet" name="syncButtonItem" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="RORInitationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORInitationViewController.h"/>
-        </class>
-        <class className="RORInviteViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORInviteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="editEndAction:"/>
-                <relationship kind="action" name="tapOthersAction:"/>
-                <relationship kind="outlet" name="datetimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="locationTextFieldView" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="missionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="psTextFieldView" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RORLoadingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORLoadingViewController.h"/>
-        </class>
-        <class className="RORLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundTap:"/>
-                <relationship kind="action" name="cancelAction:"/>
-                <relationship kind="action" name="loginAction:"/>
-                <relationship kind="action" name="passwordDone:"/>
-                <relationship kind="action" name="switchAction:"/>
-                <relationship kind="action" name="usernameDone:"/>
-                <relationship kind="action" name="visibilityOfPW:"/>
-                <relationship kind="outlet" name="nicknameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="sexButton" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="switchButton" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RORMallViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORMallViewController.h"/>
-        </class>
-        <class className="RORMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="RORMissionDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORMissionDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="discardAction:"/>
-            </relationships>
-        </class>
-        <class className="RORMissionSelectingViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORMissionSelectingViewController.h"/>
-        </class>
-        <class className="RORMoreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORMoreViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logoutAction:"/>
-                <relationship kind="outlet" name="moreTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RORPeriodicPickerViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORPeriodicPickerViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="okAction:"/>
-            </relationships>
-        </class>
-        <class className="RORPlanViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORPlanViewController.h"/>
-        </class>
-        <class className="RORRouteDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORRouteDetailViewController.h"/>
-        </class>
-        <class className="RORRunningViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORRunningViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="collapseAction:"/>
-                <relationship kind="action" name="endButtonAction:"/>
-                <relationship kind="action" name="expandAction:"/>
-                <relationship kind="action" name="setUserCentered:"/>
-                <relationship kind="action" name="startButtonAction:"/>
-                <relationship kind="outlet" name="collapseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="endButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="expandButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="startButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RORSayHiViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORSayHiViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundTap:"/>
-                <relationship kind="action" name="textfieldDoneEditing:"/>
-                <relationship kind="outlet" name="sayhiTextField" candidateClass="UIControl"/>
-            </relationships>
-        </class>
-        <class className="RORSecondViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORSecondViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addFriendButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="coverView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RORUserInfoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RORUserInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3wt-ZP-2pm"/>
         <segue reference="Rxd-eV-2oK"/>
-        <segue reference="hUa-nB-xek"/>
+        <segue reference="wyF-zp-Z04"/>
         <segue reference="bQK-KH-US1"/>
+        <segue reference="hUa-nB-xek"/>
     </inferredMetricsTieBreakers>
 </document>

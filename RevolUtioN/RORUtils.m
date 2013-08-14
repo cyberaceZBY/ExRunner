@@ -234,9 +234,18 @@ static NSDate *systemTime = nil;
     [context save:&error];
 }
 
-+ (NSData*) gzipCompressData: (NSData*)uncompressedData  {
++ (NSData*) gzipCompressData:(NSData*)pUncompressedData
+{
+	/*
+	 Special thanks to Robbie Hanson of Deusty Designs for sharing sample code
+	 showing how deflateInit2() can be used to make zlib generate a compressed
+	 file with gzip headers:
+     
+     http://deusty.blogspot.com/2007/07/gzip-compressiondecompression.html
+     
+	 */
     
-    if (!uncompressedData || [uncompressedData length] == 0)
+	if (!pUncompressedData || [pUncompressedData length] == 0)
 	{
 		NSLog(@"%s: Error: Can't compress an empty or null NSData object.", __func__);
 		return nil;
@@ -259,8 +268,8 @@ static NSDate *systemTime = nil;
 	zlibStreamStruct.zfree     = Z_NULL; // that when we call deflateInit2 they will be
 	zlibStreamStruct.opaque    = Z_NULL; // updated to use default allocation functions.
 	zlibStreamStruct.total_out = 0; // Total number of output bytes produced so far
-	zlibStreamStruct.next_in   = (Bytef*)[uncompressedData bytes]; // Pointer to input bytes
-	zlibStreamStruct.avail_in  = [uncompressedData length]; // Number of input bytes left to process
+	zlibStreamStruct.next_in   = (Bytef*)[pUncompressedData bytes]; // Pointer to input bytes
+	zlibStreamStruct.avail_in  = [pUncompressedData length]; // Number of input bytes left to process
     
 	/* Initialize the zlib deflation (i.e. compression) internals with deflateInit2().
 	 The parameters are as follows:
@@ -310,18 +319,21 @@ static NSDate *systemTime = nil;
     
 	// Create output memory buffer for compressed data. The zlib documentation states that
 	// destination buffer size must be at least 0.1% larger than avail_in plus 12 bytes.
-	NSMutableData *compressedData = [NSMutableData dataWithLength:[uncompressedData length] * 1.01 + 12];
+	NSMutableData *compressedData = [NSMutableData dataWithLength:[pUncompressedData length] * 1.01 + 12];
     
-	int deflateStatus;
+	int deflateStatus = 0;
 	do
 	{
+        if ((deflateStatus == Z_BUF_ERROR) || (zlibStreamStruct.total_out == [compressedData length])) {
+			[compressedData increaseLengthBy:1024];
+		}
 		// Store location where next byte should be put in next_out
 		zlibStreamStruct.next_out = [compressedData mutableBytes] + zlibStreamStruct.total_out;
         
 		// Calculate the amount of remaining free space in the output buffer
 		// by subtracting the number of bytes that have been written so far
 		// from the buffer's total capacity
-		zlibStreamStruct.avail_out = [compressedData length] - zlibStreamStruct.total_out;
+		zlibStreamStruct.avail_out = (unsigned int)[compressedData length] - zlibStreamStruct.total_out;
         
 		/* deflate() compresses as much data as possible, and stops/returns when
 		 the input buffer becomes empty or the output buffer becomes full. If
@@ -333,7 +345,7 @@ static NSDate *systemTime = nil;
 		 compressed) and the loop should stop. */
 		deflateStatus = deflate(&zlibStreamStruct, Z_FINISH);
         
-	} while ( deflateStatus == Z_OK );
+	} while ( deflateStatus == Z_OK || deflateStatus == Z_BUF_ERROR );
     
 	// Check for zlib error and convert code to usable error message if appropriate
 	if (deflateStatus != Z_STREAM_END)
@@ -373,9 +385,8 @@ static NSDate *systemTime = nil;
 	// Free data structures that were dynamically created for the stream.
 	deflateEnd(&zlibStreamStruct);
 	[compressedData setLength: zlibStreamStruct.total_out];
-	NSLog(@"%s: Compressed file from %d KB to %d KB", __func__, [uncompressedData length]/1024, [compressedData length]/1024);
+	NSLog(@"%s: Compressed file from %d KB to %d KB", __func__, [pUncompressedData length]/1024, [compressedData length]/1024);
     
 	return compressedData;
 }
-
 @end

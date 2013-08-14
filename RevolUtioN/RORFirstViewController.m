@@ -53,7 +53,7 @@ NSInteger centerLoc =-10000;
     [[RORSettings getInstance] addObserver:self forKeyPath:@"location" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
     //=============加载天气信息=============
-    [self loadWeatherInfo];
+    //todo: remove common after debug [self loadWeatherInfo];
 }
 
 - (void)initPageData{

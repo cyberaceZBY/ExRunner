@@ -24,10 +24,47 @@
     }
 }
 
+- (void)initializePlat
+{
+    /**
+     连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
+     http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectSinaWeiboWithAppKey:@"1650188941"
+                               appSecret:@"1062ef996950870fc7322fc1a4d6716e"
+                             redirectUri:@"http://www.cyberace.cc"];
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /**
+     注册SDK应用，此应用请到http://www.sharesdk.cn中进行注册申请。
+     此方法必须在启动时调用，否则会限制SDK的使用。
+     **/
+    [ShareSDK registerApp:@"738183f3e91"];
+    
+    [self initializePlat];
+    
+    //监听用户信息变更
+//    [ShareSDK addNotificationWithName:SSN_USER_INFO_UPDATE
+//                               target:self
+//                               action:@selector(userInfoUpdateHandler:)];
+    
     // Override point for customization after application launch.
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
