@@ -855,6 +855,10 @@
 			isa = PBXGroup;
 			children = (
 				30FC28FF175E2E3500DEC042 /* MainStoryboard_iPhone.storyboard */,
+				0F87D885179D7313007E0412 /* Common */,
+				3061F3C7174DC6CC006093FC /* CoreData */,
+				0F972BC81792557A00A27EF2 /* HttpClient */,
+				0F7F39841792DEB600B1C720 /* RORServices */,
 				30BB0AFA1761C5AF0009A847 /* RORHistoryPage */,
 				30BB0AF21761AE420009A847 /* RORMallPage */,
 				3001498D1750F428005DAF1D /* RORMorePage */,
@@ -876,10 +880,6 @@
 		302FD00B1727D870004DA005 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0F87D885179D7313007E0412 /* Common */,
-				0F7F39841792DEB600B1C720 /* RORServices */,
-				0F972BC81792557A00A27EF2 /* HttpClient */,
-				3061F3C7174DC6CC006093FC /* CoreData */,
 				3008CC53175756F60032F5C7 /* DefaultSettings.plist */,
 				3008CC551758997E0032F5C7 /* RORSettings.h */,
 				3008CC561758997E0032F5C7 /* RORSettings.m */,
