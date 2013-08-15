@@ -36,6 +36,11 @@
 		0F59A15917BA2171000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F59A13017BA2170000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.bundle */; };
 		0F59A15A17BA2171000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A13117BA2170000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.framework */; };
 		0F59A16817BB235C000DEFEF /* RORLoginCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F59A16717BB235C000DEFEF /* RORLoginCheckViewController.m */; };
+		0F59A16B17BC700A000DEFEF /* RORShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F59A16A17BC700A000DEFEF /* RORShareService.m */; };
+		0F59A16D17BC7FF3000DEFEF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A16C17BC7FF2000DEFEF /* libsqlite3.dylib */; };
+		0F59A17117BC80D5000DEFEF /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A17017BC80D4000DEFEF /* libstdc++.dylib */; };
+		0F59A17217BCA4BD000DEFEF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0B071769A2E70009A847 /* SystemConfiguration.framework */; };
+		0F59A17317BCABBB000DEFEF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A16E17BC805C000DEFEF /* CoreTelephony.framework */; };
 		0F7F398E1792DF1000B1C720 /* RORUserServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F398D1792DF1000B1C720 /* RORUserServices.m */; };
 		0F7F39911794360800B1C720 /* RORUserClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F39901794360800B1C720 /* RORUserClientHandler.m */; };
 		0F7F3994179BD08000B1C720 /* RORMissionServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F3993179BD08000B1C720 /* RORMissionServices.m */; };
@@ -44,7 +49,7 @@
 		0F87D877179D642A007E0412 /* RORMissionClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D876179D6429007E0412 /* RORMissionClientHandler.m */; };
 		0F87D881179D72C7007E0412 /* RORRunHistoryServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D880179D72C7007E0412 /* RORRunHistoryServices.m */; };
 		0F87D884179D72F8007E0412 /* RORRunHistoryClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D883179D72F8007E0412 /* RORRunHistoryClientHandler.m */; };
-		0F87D888179ED3C7007E0412 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D887179ED3C6007E0412 /* User.m */; };
+		0F87D888179ED3C7007E0412 /* User_Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D887179ED3C6007E0412 /* User_Base.m */; };
 		0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9A9D3817894A1B0025E49B /* libsbjson-ios.a */; };
 		0F972BD2179255F300A27EF2 /* RORHttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F972BD1179255F300A27EF2 /* RORHttpResponse.m */; };
 		3000E52417408E4F007D5910 /* cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000E52317408E4E007D5910 /* cell_bg.png */; };
@@ -119,7 +124,6 @@
 		30BB0B001761C5DB0009A847 /* RORHistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0AFF1761C5DB0009A847 /* RORHistoryDetailViewController.m */; };
 		30BB0B021761F3C30009A847 /* redroundrec@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30BB0B011761F3C30009A847 /* redroundrec@2x.png */; };
 		30BB0B041769A2300009A847 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0B031769A2300009A847 /* CFNetwork.framework */; };
-		30BB0BA6176A03A00009A847 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0B071769A2E70009A847 /* SystemConfiguration.framework */; };
 		30BB0BA8176A03AC0009A847 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0BA7176A03AC0009A847 /* QuartzCore.framework */; };
 		30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0BA9176A04910009A847 /* libicucore.dylib */; };
 		30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */; };
@@ -279,6 +283,11 @@
 		0F59A13117BA2170000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneSimpleShareViewUI.framework; sourceTree = "<group>"; };
 		0F59A16617BB235C000DEFEF /* RORLoginCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORLoginCheckViewController.h; sourceTree = "<group>"; };
 		0F59A16717BB235C000DEFEF /* RORLoginCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORLoginCheckViewController.m; sourceTree = "<group>"; };
+		0F59A16917BC700A000DEFEF /* RORShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORShareService.h; sourceTree = "<group>"; };
+		0F59A16A17BC700A000DEFEF /* RORShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORShareService.m; sourceTree = "<group>"; };
+		0F59A16C17BC7FF2000DEFEF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0F59A16E17BC805C000DEFEF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0F59A17017BC80D4000DEFEF /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		0F7F398C1792DF1000B1C720 /* RORUserServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserServices.h; sourceTree = "<group>"; };
 		0F7F398D1792DF1000B1C720 /* RORUserServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUserServices.m; sourceTree = "<group>"; };
 		0F7F398F1794360700B1C720 /* RORUserClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUserClientHandler.h; sourceTree = "<group>"; };
@@ -295,8 +304,8 @@
 		0F87D880179D72C7007E0412 /* RORRunHistoryServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORRunHistoryServices.m; sourceTree = "<group>"; };
 		0F87D882179D72F7007E0412 /* RORRunHistoryClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORRunHistoryClientHandler.h; sourceTree = "<group>"; };
 		0F87D883179D72F8007E0412 /* RORRunHistoryClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORRunHistoryClientHandler.m; sourceTree = "<group>"; };
-		0F87D886179ED3C4007E0412 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		0F87D887179ED3C6007E0412 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0F87D886179ED3C4007E0412 /* User_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User_Base.h; sourceTree = "<group>"; };
+		0F87D887179ED3C6007E0412 /* User_Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User_Base.m; sourceTree = "<group>"; };
 		0F972BD0179255F300A27EF2 /* RORHttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpResponse.h; sourceTree = "<group>"; };
 		0F972BD1179255F300A27EF2 /* RORHttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHttpResponse.m; sourceTree = "<group>"; };
 		0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = "json-framework-master/SBJson.xcodeproj"; sourceTree = "<group>"; };
@@ -492,11 +501,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F59A17317BCABBB000DEFEF /* CoreTelephony.framework in Frameworks */,
+				0F59A17217BCA4BD000DEFEF /* SystemConfiguration.framework in Frameworks */,
+				0F59A17117BC80D5000DEFEF /* libstdc++.dylib in Frameworks */,
+				0F59A16D17BC7FF3000DEFEF /* libsqlite3.dylib in Frameworks */,
 				0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */,
 				30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */,
 				30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */,
 				30BB0BA8176A03AC0009A847 /* QuartzCore.framework in Frameworks */,
-				30BB0BA6176A03A00009A847 /* SystemConfiguration.framework in Frameworks */,
 				30BB0B041769A2300009A847 /* CFNetwork.framework in Frameworks */,
 				30FC2903175EC34200DEC042 /* MapKit.framework in Frameworks */,
 				3061F3B6174CDB96006093FC /* CoreData.framework in Frameworks */,
@@ -638,6 +650,8 @@
 				0F0D589A17B249230046515C /* RORThirdPartyService.m */,
 				0F274A6917B6058B00F0E927 /* RORSystemService.h */,
 				0F274A6A17B6058B00F0E927 /* RORSystemService.m */,
+				0F59A16917BC700A000DEFEF /* RORShareService.h */,
+				0F59A16A17BC700A000DEFEF /* RORShareService.m */,
 			);
 			name = RORServices;
 			path = ..;
@@ -811,11 +825,14 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+				0F59A17017BC80D4000DEFEF /* libstdc++.dylib */,
+				0F59A16C17BC7FF2000DEFEF /* libsqlite3.dylib */,
 				0F59A0FD17BA2170000DEFEF /* ShareSDK_v2.3.1 */,
 				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
 				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
 				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
 				30BB0BA9176A04910009A847 /* libicucore.dylib */,
+				0F59A16E17BC805C000DEFEF /* CoreTelephony.framework */,
 				30BB0BA7176A03AC0009A847 /* QuartzCore.framework */,
 				30BB0B071769A2E70009A847 /* SystemConfiguration.framework */,
 				30BB0B051769A2DB0009A847 /* MobileCoreServices.framework */,
@@ -942,8 +959,8 @@
 			isa = PBXGroup;
 			children = (
 				3061F3B7174CDBEB006093FC /* RORCoreData.xcdatamodeld */,
-				0F87D886179ED3C4007E0412 /* User.h */,
-				0F87D887179ED3C6007E0412 /* User.m */,
+				0F87D886179ED3C4007E0412 /* User_Base.h */,
+				0F87D887179ED3C6007E0412 /* User_Base.m */,
 				30BB0BD41775A2520009A847 /* Place_Package.h */,
 				30BB0BD51775A2540009A847 /* Place_Package.m */,
 				30BB0BD11775A06C0009A847 /* Mission.h */,
@@ -1375,7 +1392,7 @@
 				0F87D877179D642A007E0412 /* RORMissionClientHandler.m in Sources */,
 				0F87D881179D72C7007E0412 /* RORRunHistoryServices.m in Sources */,
 				0F87D884179D72F8007E0412 /* RORRunHistoryClientHandler.m in Sources */,
-				0F87D888179ED3C7007E0412 /* User.m in Sources */,
+				0F87D888179ED3C7007E0412 /* User_Base.m in Sources */,
 				0F0D588F17AFE6B80046515C /* Mission_Challenge.m in Sources */,
 				0F0D589217B0E4680046515C /* RORLoadingViewController.m in Sources */,
 				0F0D589817B23F490046515C /* RORThirdPartyClientHandler.m in Sources */,
@@ -1383,6 +1400,7 @@
 				0F274A6B17B6058C00F0E927 /* RORSystemService.m in Sources */,
 				0F274A7517B6061F00F0E927 /* RORSystemClientHandler.m in Sources */,
 				0F59A16817BB235C000DEFEF /* RORLoginCheckViewController.m in Sources */,
+				0F59A16B17BC700A000DEFEF /* RORShareService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,11 +1497,6 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Connection\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Core\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/UI\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Connection\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Core\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/RenRenSDK\"",
@@ -1497,13 +1510,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend/SDKExport\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend/TencentWeiboSSO\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/SDKExport\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/TencentWeiboSSO\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = RevolUtioN;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1513,11 +1525,6 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Connection\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Core\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/UI\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Connection\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Core\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/RenRenSDK\"",
@@ -1531,13 +1538,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend/SDKExport\"",
-					"\"$(SRCROOT)/ShareSDK_v2.2.2/Extend/TencentWeiboSSO\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/SDKExport\"",
 					"\"$(SRCROOT)/ShareSDK_v2.3.1/Extend/TencentWeiboSSO\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = RevolUtioN;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

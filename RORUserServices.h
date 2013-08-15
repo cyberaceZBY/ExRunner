@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "User.h"
+#import "User_Base.h"
 #import "Friend.h"
 #import "User_Attributes.h"
 #import "RORAppDelegate.h"
@@ -16,13 +16,13 @@
 
 @interface RORUserServices : NSObject
 
-+ (User *)fetchUser:(NSNumber *) userId;
++ (User_Base *)fetchUser:(NSNumber *) userId;
 
-+(User *)registerUser:(NSDictionary *)registerDic;
++(User_Base *)registerUser:(NSDictionary *)registerDic;
 
-+(User *)syncUserInfoById:(NSNumber *)userId;
++(User_Base *)syncUserInfoById:(NSNumber *)userId;
 
-+(User *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password;
++(User_Base *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password;
 
 +(void)syncFriends:(NSNumber *) userId;
 

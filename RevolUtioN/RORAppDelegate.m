@@ -33,6 +33,43 @@
     [ShareSDK connectSinaWeiboWithAppKey:@"1650188941"
                                appSecret:@"1062ef996950870fc7322fc1a4d6716e"
                              redirectUri:@"http://www.cyberace.cc"];
+    
+    /**
+     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
+     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+     **/
+    [ShareSDK connectWeChatWithAppId:@"wxfff11cf8dc68b3a8" wechatCls:[WXApi class]];
+    
+    
+    /**
+     连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
+     http://dev.t.qq.com上注册腾讯微博开放平台应用，并将相关信息填写到以下字段
+     
+     如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
+     **/
+    [ShareSDK connectTencentWeiboWithAppKey:@"801401136"
+                                  appSecret:@"b90baa51d8e2bd0a5ab5a7c1a9115ab8"
+                                redirectUri:@"http://www.cyberace.cc"
+                                   wbApiCls:[WBApi class]];
+    /**
+     连接QQ空间应用以使用相关功能，此应用需要引用QZoneConnection.framework
+     http://connect.qq.com/intro/login/上申请加入QQ登录，并将相关信息填写到以下字段
+     
+     如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
+     **/
+    [ShareSDK connectQZoneWithAppKey:@"100504316"
+                           appSecret:@"41796cc32c1dec21061ab7a9d221cd34"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    /**
+     连接人人网应用以使用相关功能，此应用需要引用RenRenConnection.framework
+     http://dev.renren.com上注册人人网开放平台应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectRenRenWithAppId:@"239934"
+                              appKey:@"b2c37b4889c9434d8e19086c1b4d6074"
+                           appSecret:@"42530538fea74a9f9ccd169d3cacb88a"
+                   renrenClientClass:[RennClient class]];
 }
 
 
@@ -47,9 +84,9 @@
     [self initializePlat];
     
     //监听用户信息变更
-//    [ShareSDK addNotificationWithName:SSN_USER_INFO_UPDATE
-//                               target:self
-//                               action:@selector(userInfoUpdateHandler:)];
+    //    [ShareSDK addNotificationWithName:SSN_USER_INFO_UPDATE
+    //                               target:self
+    //                               action:@selector(userInfoUpdateHandler:)];
     
     // Override point for customization after application launch.
     return YES;

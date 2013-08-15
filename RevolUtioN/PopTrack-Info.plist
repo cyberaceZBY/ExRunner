@@ -56,6 +56,9 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sinaweibosso.1650188941</string>
+				<string>tencent100504316</string>
+				<string>wb801401136</string>
+				<string>rm239934com.5432.${PRODUCT_NAME:rfc1034identifier}</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string></string>
