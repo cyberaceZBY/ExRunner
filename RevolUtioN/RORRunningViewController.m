@@ -66,7 +66,8 @@
     collapseButton.alpha = 0;
     
     timeLabel.text = @"00:00:00";
-    speedLabel.text = @"0.0";
+    speedLabel.text = @"0.00 m/s";
+    distanceLabel.text = @"0 m";
     mapView.frame = SCALE_SMALL;
     
     doCollect = NO;
@@ -74,7 +75,7 @@
 
 -(void)navigationInit{
     //    [mapView setUserTrackingMode:MKUserTrackingModeFollow];
-    [mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
     [mapView removeOverlays:[mapView overlays]];
     wasFound = NO;
     count = 0;
@@ -99,8 +100,8 @@
     
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    locationManager.distanceFilter = 3;
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+    //    locationManager.distanceFilter = 3;
     [locationManager startUpdatingLocation];
 }
 
@@ -116,9 +117,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"ToLocation:%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:newLocation]);
+    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:newLocation]);
     self.latestUserLocation = [self transToRealLocation:newLocation];
-    
+    //    self.latestUserLocation = newLocation;
     //    if (wasFound) return;
     //
     //    wasFound = YES;
@@ -150,17 +151,17 @@
 }
 
 -(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-
 {
     //    if (self.latestUserLocation != nil && offset.latitude == 0.0) {
     //        offset.latitude = userLocation.coordinate.latitude - self.latestUserLocation.coordinate.latitude;
     //        offset.longitude = userLocation.coordinate.longitude - self.latestUserLocation.coordinate.longitude;
     //    }
-    NSLog(@"UserLocation:%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+    //    NSLog(@"UserLocation:%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
     //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:[userLocation location]]);
     //    self.latestUserLocation = [userLocation location];
     //    // 这里获得的userLocation，已经是偏移后的地位了
 }
+
 ////center the route line
 //- (void)center_map{
 //    MKCoordinateRegion region;
@@ -306,10 +307,14 @@
         isStarted = YES;
         if (self.startTime == nil){
             self.startTime = [NSDate date];
+            [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
+            
             [self initOffset];
             self.latestUserLocation = [self transToRealLocation:latestUserLocation];
             self.formerLocation = self.latestUserLocation;//[locationManager location];
             [routePoints addObject:self.latestUserLocation];
+            [self drawLineWithLocationArray:routePoints];
+            
             //            [self pushPoint];
         }
         
@@ -336,8 +341,8 @@
     NSInteger time = timerCount * TIMER_INTERVAL;
     if (time % 3 == 0){
         [self pushPoint];
-        distanceLabel.text = [NSString stringWithFormat:@"%.2lf m", distance];
-        speedLabel.text = [NSString stringWithFormat:@"%.1f m/s", (float)distance/time*3.6];
+        distanceLabel.text = [NSString stringWithFormat:@"%.0lf m", distance];
+        speedLabel.text = [NSString stringWithFormat:@"%.2f m/s", (float)distance/time*3.6];
     }
     timeLabel.text = [RORUtils transSecondToStandardFormat:time];
 }
@@ -345,7 +350,7 @@
 - (void)pushPoint{
     CLLocation *currentLocation = self.latestUserLocation;
     if (formerLocation != currentLocation){
-        distance += [self.formerLocation distanceFromLocation:currentLocation];
+        distance += [self.formerLocation getDistanceFrom:currentLocation];
         self.formerLocation = currentLocation;
         [routePoints addObject:currentLocation];
         [self drawLineWithLocationArray:routePoints];
@@ -355,6 +360,8 @@
 - (IBAction)endButtonAction:(id)sender {
     if (self.endTime == nil)
         self.endTime = [NSDate date];
+    [[UIApplication sharedApplication] setIdleTimerDisabled: NO];
+    
     [locationManager stopUpdatingLocation];
     [repeatingTimer invalidate];
     [startButton setEnabled:NO];
@@ -374,16 +381,21 @@
 }
 
 - (void)saveRunInfo{
-    User_Running_History *runHistory = [[User_Running_History alloc] init];
+    NSError *error = nil;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
     runHistory.distance = [[NSNumber alloc] initWithInteger:distance];
     runHistory.duration = [[NSNumber alloc] initWithInteger:timerCount];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutePoints:routePoints];
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;
-    runHistory.userId = [RORUtils getUserId];
-    runHistory.runUuid = [RORUtils uuidString];
+    runHistory.userId = nil;
     record = runHistory;
+    if (![context save:&error]) {
+        NSLog(@"%@",[error localizedDescription]);
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -421,7 +433,7 @@
 
 - (void) centerMap{
     [mapView setCenterCoordinate:self.latestUserLocation.coordinate animated:YES];
-    //CLLocation *cl = [mapView userLocation].location;
+    CLLocation *cl = [mapView userLocation].location;
     //    [self drawTestLine];
 }
 
