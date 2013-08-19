@@ -19,7 +19,6 @@
 		0F59A13E17BA2170000DEFEF /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A10B17BA2170000DEFEF /* SinaWeiboConnection.framework */; };
 		0F59A14317BA2171000DEFEF /* TencentWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A11017BA2170000DEFEF /* TencentWeiboConnection.framework */; };
 		0F59A14517BA2171000DEFEF /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A11217BA2170000DEFEF /* WeChatConnection.framework */; };
-		0F59A14717BA2171000DEFEF /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A11517BA2170000DEFEF /* AGCommon.framework */; };
 		0F59A14817BA2171000DEFEF /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F59A11617BA2170000DEFEF /* Resource.bundle */; };
 		0F59A14917BA2171000DEFEF /* ShareSDKCoreService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F59A11717BA2170000DEFEF /* ShareSDKCoreService.framework */; };
 		0F59A14A17BA2171000DEFEF /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F59A11817BA2170000DEFEF /* ShareSDKLocalizable.strings */; };
@@ -43,6 +42,8 @@
 		0F7F3994179BD08000B1C720 /* RORMissionServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F3993179BD08000B1C720 /* RORMissionServices.m */; };
 		0F8501DE17C1C63E0005993E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501DD17C1C63E0005993E /* libstdc++.dylib */; };
 		0F8501E017C1C68E0005993E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501DF17C1C68E0005993E /* libsqlite3.dylib */; };
+		0F8501E217C1C8DF0005993E /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501E117C1C8DF0005993E /* AGCommon.framework */; };
+		0F8501E317C1C9510005993E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501D517C1C6160005993E /* CoreTelephony.framework */; };
 		0F857708178959DC00173A92 /* RORUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857707178959DC00173A92 /* RORUtils.m */; };
 		0F857712178C4EF100173A92 /* RORHttpClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F857711178C4EF100173A92 /* RORHttpClientHandler.m */; };
 		0F87D877179D642A007E0412 /* RORMissionClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F87D876179D6429007E0412 /* RORMissionClientHandler.m */; };
@@ -271,7 +272,6 @@
 		0F59A10B17BA2170000DEFEF /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
 		0F59A11017BA2170000DEFEF /* TencentWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentWeiboConnection.framework; sourceTree = "<group>"; };
 		0F59A11217BA2170000DEFEF /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
-		0F59A11517BA2170000DEFEF /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
 		0F59A11617BA2170000DEFEF /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
 		0F59A11717BA2170000DEFEF /* ShareSDKCoreService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKCoreService.framework; sourceTree = "<group>"; };
 		0F59A11817BA2170000DEFEF /* ShareSDKLocalizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ShareSDKLocalizable.strings; sourceTree = "<group>"; };
@@ -304,6 +304,7 @@
 		0F8501D517C1C6160005993E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0F8501DD17C1C63E0005993E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		0F8501DF17C1C68E0005993E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0F8501E117C1C8DF0005993E /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
 		0F857706178959DC00173A92 /* RORUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORUtils.h; sourceTree = "<group>"; };
 		0F857707178959DC00173A92 /* RORUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORUtils.m; sourceTree = "<group>"; };
 		0F857710178C4EF100173A92 /* RORHttpClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHttpClientHandler.h; sourceTree = "<group>"; };
@@ -531,6 +532,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8501E317C1C9510005993E /* CoreTelephony.framework in Frameworks */,
 				0F8501E017C1C68E0005993E /* libsqlite3.dylib in Frameworks */,
 				0F8501DE17C1C63E0005993E /* libstdc++.dylib in Frameworks */,
 				30F4548317BD10C5006CB66C /* CoreMotion.framework in Frameworks */,
@@ -552,7 +554,6 @@
 				0F59A13E17BA2170000DEFEF /* SinaWeiboConnection.framework in Frameworks */,
 				0F59A14317BA2171000DEFEF /* TencentWeiboConnection.framework in Frameworks */,
 				0F59A14517BA2171000DEFEF /* WeChatConnection.framework in Frameworks */,
-				0F59A14717BA2171000DEFEF /* AGCommon.framework in Frameworks */,
 				0F59A14917BA2171000DEFEF /* ShareSDKCoreService.framework in Frameworks */,
 				0F59A14C17BA2171000DEFEF /* RennSDK.framework in Frameworks */,
 				0F59A14D17BA2171000DEFEF /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
@@ -562,6 +563,7 @@
 				0F59A15617BA2171000DEFEF /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
 				0F59A15817BA2171000DEFEF /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
 				0F59A15A17BA2171000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
+				0F8501E217C1C8DF0005993E /* AGCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +608,7 @@
 		0F59A11417BA2170000DEFEF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				0F59A11517BA2170000DEFEF /* AGCommon.framework */,
+				0F8501E117C1C8DF0005993E /* AGCommon.framework */,
 				0F59A11617BA2170000DEFEF /* Resource.bundle */,
 				0F59A11717BA2170000DEFEF /* ShareSDKCoreService.framework */,
 				0F59A11817BA2170000DEFEF /* ShareSDKLocalizable.strings */,
