@@ -153,6 +153,17 @@
 		30D21E91173CE617006B24A8 /* RORRelationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D21E90173CE617006B24A8 /* RORRelationsCell.m */; };
 		30D21E9A173D4D02006B24A8 /* RORRelationsOnlineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D21E99173D4D02006B24A8 /* RORRelationsOnlineCell.m */; };
 		30F44B501778267200876915 /* RORDBCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F44B4F1778267200876915 /* RORDBCommon.m */; };
+		30F4547017BCB519006CB66C /* INConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546217BCB519006CB66C /* INConstant.m */; };
+		30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546417BCB519006CB66C /* INDeviceStatus.m */; };
+		30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546617BCB519006CB66C /* INKalmanFilter.m */; };
+		30F4547317BCB519006CB66C /* INMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546817BCB519006CB66C /* INMatrix.m */; };
+		30F4547417BCB519006CB66C /* INNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546A17BCB519006CB66C /* INNavigationController.m */; };
+		30F4547517BCB519006CB66C /* INTimeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546C17BCB519006CB66C /* INTimeWindow.m */; };
+		30F4547617BCB519006CB66C /* INVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546E17BCB519006CB66C /* INVector.m */; };
+		30F4548117BCB564006CB66C /* INStepCounting.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4548017BCB564006CB66C /* INStepCounting.m */; };
+		30F4548317BD10C5006CB66C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F4548217BD10C5006CB66C /* CoreMotion.framework */; };
+		30F4548717C0C2DC006CB66C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F4548617C0C2DC006CB66C /* Default-568h@2x.png */; };
+		30F4549317C1296C006CB66C /* Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4549217C1296C006CB66C /* Animations.m */; };
 		30FC2901175E2E3500DEC042 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FC28FF175E2E3500DEC042 /* MainStoryboard_iPhone.storyboard */; };
 		30FC2903175EC34200DEC042 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC2902175EC34200DEC042 /* MapKit.framework */; };
 		30FC2906175EF6F300DEC042 /* RORMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC2905175EF6F300DEC042 /* RORMapViewController.m */; };
@@ -464,6 +475,26 @@
 		30D21E99173D4D02006B24A8 /* RORRelationsOnlineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORRelationsOnlineCell.m; path = Cells/RORRelationsOnlineCell.m; sourceTree = "<group>"; };
 		30F44B4E1778267200876915 /* RORDBCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORDBCommon.h; sourceTree = "<group>"; };
 		30F44B4F1778267200876915 /* RORDBCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORDBCommon.m; sourceTree = "<group>"; };
+		30F4546117BCB519006CB66C /* INConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INConstant.h; sourceTree = "<group>"; };
+		30F4546217BCB519006CB66C /* INConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INConstant.m; sourceTree = "<group>"; };
+		30F4546317BCB519006CB66C /* INDeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDeviceStatus.h; sourceTree = "<group>"; };
+		30F4546417BCB519006CB66C /* INDeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDeviceStatus.m; sourceTree = "<group>"; };
+		30F4546517BCB519006CB66C /* INKalmanFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INKalmanFilter.h; sourceTree = "<group>"; };
+		30F4546617BCB519006CB66C /* INKalmanFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INKalmanFilter.m; sourceTree = "<group>"; };
+		30F4546717BCB519006CB66C /* INMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INMatrix.h; sourceTree = "<group>"; };
+		30F4546817BCB519006CB66C /* INMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INMatrix.m; sourceTree = "<group>"; };
+		30F4546917BCB519006CB66C /* INNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INNavigationController.h; sourceTree = "<group>"; };
+		30F4546A17BCB519006CB66C /* INNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INNavigationController.m; sourceTree = "<group>"; };
+		30F4546B17BCB519006CB66C /* INTimeWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTimeWindow.h; sourceTree = "<group>"; };
+		30F4546C17BCB519006CB66C /* INTimeWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTimeWindow.m; sourceTree = "<group>"; };
+		30F4546D17BCB519006CB66C /* INVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INVector.h; sourceTree = "<group>"; };
+		30F4546E17BCB519006CB66C /* INVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INVector.m; sourceTree = "<group>"; };
+		30F4547F17BCB564006CB66C /* INStepCounting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INStepCounting.h; sourceTree = "<group>"; };
+		30F4548017BCB564006CB66C /* INStepCounting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INStepCounting.m; sourceTree = "<group>"; };
+		30F4548217BD10C5006CB66C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		30F4548617C0C2DC006CB66C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		30F4549117C1296C006CB66C /* Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
+		30F4549217C1296C006CB66C /* Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animations.m; sourceTree = "<group>"; };
 		30FC2900175E2E3500DEC042 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		30FC2902175EC34200DEC042 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		30FC2904175EF6F300DEC042 /* RORMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORMapViewController.h; sourceTree = "<group>"; };
@@ -501,10 +532,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
+				30F4548317BD10C5006CB66C /* CoreMotion.framework in Frameworks */,
+=======
 				0F59A17317BCABBB000DEFEF /* CoreTelephony.framework in Frameworks */,
 				0F59A17217BCA4BD000DEFEF /* SystemConfiguration.framework in Frameworks */,
 				0F59A17117BC80D5000DEFEF /* libstdc++.dylib in Frameworks */,
 				0F59A16D17BC7FF3000DEFEF /* libsqlite3.dylib in Frameworks */,
+>>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */,
 				30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */,
 				30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */,
@@ -825,13 +860,21 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				30F4549017C1296C006CB66C /* Animation */,
+				30F4548617C0C2DC006CB66C /* Default-568h@2x.png */,
+				30F4546017BCB519006CB66C /* InertiaNavigation */,
+=======
 				0F59A17017BC80D4000DEFEF /* libstdc++.dylib */,
 				0F59A16C17BC7FF2000DEFEF /* libsqlite3.dylib */,
+>>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				0F59A0FD17BA2170000DEFEF /* ShareSDK_v2.3.1 */,
 				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
 				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
 				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
 				30BB0BA9176A04910009A847 /* libicucore.dylib */,
+<<<<<<< HEAD
+=======
 				0F59A16E17BC805C000DEFEF /* CoreTelephony.framework */,
 				30BB0BA7176A03AC0009A847 /* QuartzCore.framework */,
 				30BB0B071769A2E70009A847 /* SystemConfiguration.framework */,
@@ -839,8 +882,8 @@
 				30BB0B031769A2300009A847 /* CFNetwork.framework */,
 				30FC2902175EC34200DEC042 /* MapKit.framework */,
 				3061F3B5174CDB96006093FC /* CoreData.framework */,
+>>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				301C1F6817378AF30068B43B /* Resources */,
-				302FD04D172903D7004DA005 /* CoreLocation.framework */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
 				302FD03C1727D870004DA005 /* RevolUtioNTests */,
 				302FD0031727D870004DA005 /* Frameworks */,
@@ -860,6 +903,14 @@
 		302FD0031727D870004DA005 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				30BB0BA7176A03AC0009A847 /* QuartzCore.framework */,
+				30BB0B071769A2E70009A847 /* SystemConfiguration.framework */,
+				30BB0B051769A2DB0009A847 /* MobileCoreServices.framework */,
+				30BB0B031769A2300009A847 /* CFNetwork.framework */,
+				30FC2902175EC34200DEC042 /* MapKit.framework */,
+				3061F3B5174CDB96006093FC /* CoreData.framework */,
+				302FD04D172903D7004DA005 /* CoreLocation.framework */,
+				30F4548217BD10C5006CB66C /* CoreMotion.framework */,
 				302FD0041727D870004DA005 /* UIKit.framework */,
 				302FD0061727D870004DA005 /* Foundation.framework */,
 				302FD0081727D870004DA005 /* CoreGraphics.framework */,
@@ -1058,6 +1109,40 @@
 				3008CC5E175DCA940032F5C7 /* RORInitationViewController.m */,
 			);
 			name = RelationsPage;
+			sourceTree = "<group>";
+		};
+		30F4546017BCB519006CB66C /* InertiaNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				30F4547F17BCB564006CB66C /* INStepCounting.h */,
+				30F4548017BCB564006CB66C /* INStepCounting.m */,
+				30F4546117BCB519006CB66C /* INConstant.h */,
+				30F4546217BCB519006CB66C /* INConstant.m */,
+				30F4546317BCB519006CB66C /* INDeviceStatus.h */,
+				30F4546417BCB519006CB66C /* INDeviceStatus.m */,
+				30F4546517BCB519006CB66C /* INKalmanFilter.h */,
+				30F4546617BCB519006CB66C /* INKalmanFilter.m */,
+				30F4546717BCB519006CB66C /* INMatrix.h */,
+				30F4546817BCB519006CB66C /* INMatrix.m */,
+				30F4546917BCB519006CB66C /* INNavigationController.h */,
+				30F4546A17BCB519006CB66C /* INNavigationController.m */,
+				30F4546B17BCB519006CB66C /* INTimeWindow.h */,
+				30F4546C17BCB519006CB66C /* INTimeWindow.m */,
+				30F4546D17BCB519006CB66C /* INVector.h */,
+				30F4546E17BCB519006CB66C /* INVector.m */,
+			);
+			name = InertiaNavigation;
+			path = RevolUtioN/InertiaNavigation;
+			sourceTree = "<group>";
+		};
+		30F4549017C1296C006CB66C /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				30F4549117C1296C006CB66C /* Animations.h */,
+				30F4549217C1296C006CB66C /* Animations.m */,
+			);
+			name = Animation;
+			path = RevolUtioN/Animation;
 			sourceTree = "<group>";
 		};
 		30FC291A17607F6D00DEC042 /* icons */ = {
@@ -1300,6 +1385,7 @@
 				0F59A14F17BA2171000DEFEF /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				0F59A15717BA2171000DEFEF /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				0F59A15917BA2171000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
+				30F4548717C0C2DC006CB66C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1400,7 +1486,19 @@
 				0F274A6B17B6058C00F0E927 /* RORSystemService.m in Sources */,
 				0F274A7517B6061F00F0E927 /* RORSystemClientHandler.m in Sources */,
 				0F59A16817BB235C000DEFEF /* RORLoginCheckViewController.m in Sources */,
+<<<<<<< HEAD
+				30F4547017BCB519006CB66C /* INConstant.m in Sources */,
+				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
+				30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */,
+				30F4547317BCB519006CB66C /* INMatrix.m in Sources */,
+				30F4547417BCB519006CB66C /* INNavigationController.m in Sources */,
+				30F4547517BCB519006CB66C /* INTimeWindow.m in Sources */,
+				30F4547617BCB519006CB66C /* INVector.m in Sources */,
+				30F4548117BCB564006CB66C /* INStepCounting.m in Sources */,
+				30F4549317C1296C006CB66C /* Animations.m in Sources */,
+=======
 				0F59A16B17BC700A000DEFEF /* RORShareService.m in Sources */,
+>>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,27 +9,40 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-//#import "SVPulsingAnnotationView.h"
 #import "User_Running_History.h"
+#import "INTimeWindow.h"
+#import "INKalmanFilter.h"
+#import "INStepCounting.h"
 
-#define TIMER_INTERVAL 1
+#define TIMER_INTERVAL delta_T
 
 @interface RORRunningViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate> {
     BOOL wasFound;
-    CLLocationManager* locationManager;
 }
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
-@property (retain, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *expandButton;
 @property (weak, nonatomic) IBOutlet UIButton *collapseButton;
+@property (weak, nonatomic) IBOutlet UILabel *stepLabel;
+@property (weak, nonatomic) IBOutlet UILabel *avgDisPerStep;
+@property (weak, nonatomic) IBOutlet UILabel *avgTimePerStep;
+
+
 @property (strong, nonatomic) CLLocation *initialLocation;
 @property (strong, nonatomic) CLLocation *formerLocation;
 @property (strong, nonatomic) CLLocation *latestUserLocation;
+@property (nonatomic) CLLocationCoordinate2D latestINLocation;
+@property (nonatomic) vec_3 OldVn;
+@property (strong, nonatomic) INKalmanFilter *kalmanFilter;
+@property (strong, nonatomic) INStepCounting *stepCounting;
+@property (nonatomic) vec_3 inDistance;
 @property (nonatomic) CLLocationCoordinate2D offset;
 @property (nonatomic) NSInteger count;
 @property (nonatomic) NSInteger timerCount;

@@ -221,7 +221,7 @@ NSInteger centerLoc =-10000;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.3];
 
-    weatherSubView.frame = CGRectMake(2, 0, 100, 120);
+    weatherSubView.frame = CGRectMake(2, 0, 100, 140);
     weatherInfoButtonView.tintColor = [UIColor colorWithRed:0.25 green:0.4 blue:0.72 alpha:0.0];
     expanded = 1;
 
@@ -229,10 +229,27 @@ NSInteger centerLoc =-10000;
     [UIView setAnimationDidStopSelector:@selector(animationFinished)];
     [UIView commitAnimations];
 }
+- (void)weatherInView1{
+    CGContextRef gccontext = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:gccontext];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:0.3];
+    
+    weatherSubView.frame = CGRectMake(2, 0, 100, 120);
+//    weatherInfoButtonView.tintColor = [UIColor colorWithRed:0.25 green:0.4 blue:0.72 alpha:0.0];
+    expanded = 1;
+    
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationFinished)];
+    [UIView commitAnimations];
+}
 
 - (IBAction)weatherInfoAction:(id)sender {
     if (weatherSubView.frame.origin.y < 0){
-        [self weatherInView];
+//        [self weatherInView];
+        [Animations moveDown:weatherSubView andAnimationDuration:0.2 andWait:YES andLength:130];
+        [Animations moveUp:weatherSubView andAnimationDuration:0.1 andWait:YES andLength:10];
+        
     } else {
         [self weatherPopView];
     }

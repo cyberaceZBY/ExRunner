@@ -10,6 +10,7 @@
 #import "RORUserInfoBasicViewController.h"
 #import "RORUserRunHistoryViewController.h"
 #import "RORUserDoneMissionsViewController.h"
+#import "RORHistoryViewController.h"
 
 @interface RORUserInfoViewController : UIViewController<UIScrollViewDelegate>
 
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) RORUserInfoBasicViewController *userInfoBasicView;
 @property (strong, nonatomic) RORUserRunHistoryViewController *userInfoRunHistoryView;
 @property (strong, nonatomic) RORUserDoneMissionsViewController *userInfoDoneMissionsView;
+@property (strong, nonatomic) RORHistoryViewController *historyInStoryboard;
 @property (copy, nonatomic) NSDictionary *selection;
 @property (copy, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSNumber *userId;

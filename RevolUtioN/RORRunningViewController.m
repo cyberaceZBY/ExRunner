@@ -23,11 +23,14 @@
 @end
 
 @implementation RORRunningViewController
-@synthesize mapView, expandButton, collapseButton, formerLocation, count, repeatingTimer, timerCount, isStarted, latestUserLocation, offset;
+@synthesize locationManager, motionManager;
+@synthesize mapView, expandButton, collapseButton, formerLocation, count, repeatingTimer, timerCount, isStarted, latestUserLocation, offset, latestINLocation;
 @synthesize timeLabel, speedLabel, distanceLabel, startButton, endButton;
 @synthesize distance, routePoints, routeLine, routeLineView;
 @synthesize record;
 @synthesize doCollect;
+@synthesize kalmanFilter, OldVn, stepCounting, inDistance;
+@synthesize avgDisPerStep, avgTimePerStep;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,7 +69,9 @@
     collapseButton.alpha = 0;
     
     timeLabel.text = @"00:00:00";
-    speedLabel.text = @"0.0";
+    speedLabel.text = @"0.00 m/s";
+    distanceLabel.text = @"0 m";
+    self.stepLabel.text = @"0";
     mapView.frame = SCALE_SMALL;
     
     doCollect = NO;
@@ -74,8 +79,9 @@
 
 -(void)navigationInit{
     //    [mapView setUserTrackingMode:MKUserTrackingModeFollow];
-    [mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
     [mapView removeOverlays:[mapView overlays]];
+    motionManager = [[CMMotionManager alloc] init];
     wasFound = NO;
     count = 0;
     timerCount = 0;
@@ -83,6 +89,52 @@
     offset.latitude = 0.0;
     offset.longitude = 0.0;
     isStarted = NO;
+    
+    //init inertia navigation distance
+    inDistance.v1 = 0;
+    inDistance.v2 = 0;
+    inDistance.v3 = 0;
+}
+
+-(void)LogDeviceStatus{
+    // 加速度器的检测
+    if ([motionManager isAccelerometerAvailable]){
+        NSLog(@"Accelerometer is available.");
+    } else{
+        NSLog(@"Accelerometer is not available.");
+    }
+    if ([motionManager isAccelerometerActive]){
+        NSLog(@"Accelerometer is active.");
+    } else {
+        NSLog(@"Accelerometer is not active.");
+    }
+    
+    // 陀螺仪的检测
+    if([motionManager isGyroAvailable]){
+        NSLog(@"Gryro is available.");
+    } else {
+        NSLog(@"Gyro is not available.");
+    }
+    if ([motionManager isGyroActive]){
+        NSLog(@"Gryo is active.");
+        
+    } else {
+        NSLog(@"Gryo is not active.");
+    }
+    
+    // deviceMotion的检测
+    if([motionManager isDeviceMotionAvailable]){
+        NSLog(@"DeviceMotion is available.");
+    } else {
+        NSLog(@"DeviceMotion is not available.");
+    }
+    if ([motionManager isDeviceMotionActive]){
+        NSLog(@"DeviceMotion is active.");
+        
+    } else {
+        NSLog(@"DeviceMotion is not active.");
+    }
+    
 }
 
 -(void)backToMain:(id)sender {
@@ -95,17 +147,57 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)update {
-    
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager setDelegate:self];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    locationManager.distanceFilter = 3;
+- (void)startDeviceLocation{
+    locationManager.delegate = self;
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+    locationManager.distanceFilter = 1;
+    // start the compass
     [locationManager startUpdatingLocation];
+    
+	if ([CLLocationManager headingAvailable] == NO) {
+		// No compass is available. This application cannot function without a compass,
+        // so a dialog will be displayed and no magnetic data will be measured.
+        NSLog(@"Magnet is not available.");
+	} else {
+        // heading service configuration
+        locationManager.headingFilter = kCLHeadingFilterNone;
+        
+        [locationManager startUpdatingHeading];
+    }
+}
+
+- (void)startDeviceMotion
+{
+    //	motionManager = [[CMMotionManager alloc] init];
+	// Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
+	motionManager.showsDeviceMovementDisplay = YES;
+    
+	motionManager.deviceMotionUpdateInterval = delta_T;
+    motionManager.accelerometerUpdateInterval = delta_T;
+	
+	// New in iOS 5.0: Attitude that is referenced to true north
+    if (motionManager.isMagnetometerAvailable){
+        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical];
+        //        [motionManager startAccelerometerUpdates];
+        NSLog(@"start updating device motion using X true north Z vertical reference frame.");
+    } else {
+        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical];
+        //        [motionManager startAccelerometerUpdates];
+        NSLog(@"start updating device motion using Z vertical reference frame.");
+    }
+}
+
+- (void)stopUpdates
+{
+    if ([motionManager isDeviceMotionActive] == YES) {
+        [motionManager stopDeviceMotionUpdates];
+    }
+    [locationManager stopUpdatingLocation];
+    [locationManager stopUpdatingHeading];
 }
 
 -(void)awakeFromNib {
-    [self update];
+    [self startDeviceLocation];
 }
 
 - (CLLocation *)transToRealLocation:(CLLocation *)orginalLocation{
@@ -116,51 +208,16 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"ToLocation:%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:newLocation]);
+    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:newLocation]);
     self.latestUserLocation = [self transToRealLocation:newLocation];
-    
-    //    if (wasFound) return;
-    //
-    //    wasFound = YES;
-    //    NSLog(@"didUpdateToLocation:%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    //    double dist_cocoa = [newLocation getDistanceFrom:oldLocation];
-    //    CLLocationCoordinate2D newLoc = [newLocation coordinate];
-    //    CLLocationCoordinate2D oldLoc = [oldLocation coordinate];
-    //    double dist = [self LatitudeLongitudeDist:oldLoc.longitude latitude_Y:oldLoc.latitude longtitude_X:newLoc.longitude longtitude_Y:newLoc.latitude];
-    //    formerLocation = newLocation;
-    //    if (isStarted && doCollect){
-    //        [mapView removeOverlays:[mapView overlays]];
-    //        [routePoints addObject:newLocation];
-    //        [self drawLineWithLocationArray:routePoints];
-    ////        preLocation = newLocation;
-    ////        count ++;
-    //        distance += dist;
-    //
-    //        doCollect = NO;
-    //    }
-    ////    [self center_map];
-    //    if (dist_cocoa >5){
-    //    float zoomLevel = 0.005;
-    //    MKCoordinateRegion region = MKCoordinateRegionMake(newLoc,MKCoordinateSpanMake(zoomLevel, zoomLevel));
-    //    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
-    //    }
-    //    latitude.text = [NSString stringWithFormat: @"%f", loc.latitude];
-    //    longitude.text = [NSString stringWithFormat: @"%f", loc.longitude];
     
 }
 
 -(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-
 {
-    //    if (self.latestUserLocation != nil && offset.latitude == 0.0) {
-    //        offset.latitude = userLocation.coordinate.latitude - self.latestUserLocation.coordinate.latitude;
-    //        offset.longitude = userLocation.coordinate.longitude - self.latestUserLocation.coordinate.longitude;
-    //    }
-    NSLog(@"UserLocation:%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-    //    NSLog(@"Device did %f meters move.", [self.latestUserLocation getDistanceFrom:[userLocation location]]);
-    //    self.latestUserLocation = [userLocation location];
-    //    // 这里获得的userLocation，已经是偏移后的地位了
+ 
 }
+
 ////center the route line
 //- (void)center_map{
 //    MKCoordinateRegion region;
@@ -187,39 +244,6 @@
 //
 //    [mapView setRegion:region animated:YES];
 //}
-
-#define PI M_PI
--(double) LatitudeLongitudeDist:(double) lon1 latitude_Y:(double) lat1 longtitude_X:
-(double) lon2 longtitude_Y: (double) lat2{
-    double er = 6378137; // 6378700.0f;
-    //ave. radius = 6371.315 (someone said more accurate is 6366.707)
-    //equatorial radius = 6378.388
-    //nautical mile = 1.15078
-    double radlat1 = PI*lat1/180.0f;
-    double radlat2 = PI*lat2/180.0f;
-    //now long.
-    double radlong1 = PI*lon1/180.0f;
-    double radlong2 = PI*lon2/180.0f;
-    if( radlat1 < 0 ) radlat1 = PI/2 + fabs(radlat1);// south
-    if( radlat1 > 0 ) radlat1 = PI/2 - fabs(radlat1);// north
-    if( radlong1 < 0 ) radlong1 = PI*2 - fabs(radlong1);//west
-    if( radlat2 < 0 ) radlat2 = PI/2 + fabs(radlat2);// south
-    if( radlat2 > 0 ) radlat2 = PI/2 - fabs(radlat2);// north
-    if( radlong2 < 0 ) radlong2 = PI*2 - fabs(radlong2);// west
-    //spherical coordinates x=r*cos(ag)sin(at), y=r*sin(ag)*sin(at), z=r*cos(at)
-    //zero ag is up so reverse lat
-    double x1 = er * cos(radlong1) * sin(radlat1);
-    double y1 = er * sin(radlong1) * sin(radlat1);
-    double z1 = er * cos(radlat1);
-    double x2 = er * cos(radlong2) * sin(radlat2);
-    double y2 = er * sin(radlong2) * sin(radlat2);
-    double z2 = er * cos(radlat2);
-    double d = sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-    //side, side, side, law of cosines and arccos
-    double theta = acos((er*er+er*er-d*d)/(2*er*er));
-    double dist = theta*er;
-    return dist;
-}
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -261,6 +285,9 @@
     [self setEndTime:nil];
     [self setRecord:nil];
     
+    [self setStepLabel:nil];
+    [self setAvgDisPerStep:nil];
+    [self setAvgTimePerStep:nil];
     [super viewDidUnload];
 }
 
@@ -306,10 +333,25 @@
         isStarted = YES;
         if (self.startTime == nil){
             self.startTime = [NSDate date];
+            [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
+            
+            //init inertia navigation
+            [self initNavi];
+            
+            [self startDeviceMotion];
+            
+            //the first point after started
             [self initOffset];
             self.latestUserLocation = [self transToRealLocation:latestUserLocation];
             self.formerLocation = self.latestUserLocation;//[locationManager location];
             [routePoints addObject:self.latestUserLocation];
+            [self drawLineWithLocationArray:routePoints];
+            
+            CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+            [geocoder reverseGeocodeLocation:self.latestUserLocation completionHandler:^(NSArray *placemarks, NSError *error){
+                CLPlacemark *placemark = (CLPlacemark *)[placemarks objectAtIndex:0];
+                NSLog(@"%@, %@, %@, %@, %@, %@", placemark.country, placemark.administrativeArea, placemark.subLocality, placemark.thoroughfare, placemark.subThoroughfare, placemark.name);
+            }];
             //            [self pushPoint];
         }
         
@@ -329,23 +371,105 @@
     //    [[NSRunLoop  currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
 }
 
+- (void)initNavi{
+    OldVn.v1 = 0;
+    OldVn.v2 = 0;
+    OldVn.v3 = 0;
+    
+    [mapView removeOverlays:[mapView overlays]];
+    //    [routePoints addObject:initialLocation];
+    //init kalman filter
+    kalmanFilter = [[INKalmanFilter alloc]initWithCoordinate:[locationManager location].coordinate];
+    stepCounting = [[INStepCounting alloc]init];
+    //    [self drawLineWithLocationArray:routePoints];
+    //    [self center_map];
+}
+
+- (void)inertiaNavi{
+    CMDeviceMotion *deviceMotion = motionManager.deviceMotion;
+    INDeviceStatus *newDeviceStatus = [[INDeviceStatus alloc]initWithDeviceMotion:deviceMotion];
+    //    newDeviceStatus.timeTag = timeCounter;
+    newDeviceStatus.timeTag = timerCount;
+//    [timeWindow setTimeCounter:timerCount * delta_T];
+    
+//    [newDeviceStatus checkIsStill];//:a_variance];
+//    [newDeviceStatus updateWithVn:OldVn];
+//
+//    latestINLocation = [newDeviceStatus getNewLocation:latestINLocation];
+//    
+//    OldVn = newDeviceStatus.Vn;
+    CLLocation *currentLocation = [locationManager location];
+    vec_3 gpsSpeed = [INDeviceStatus getSpeedVectorBetweenLocation1:formerLocation andLocation2:currentLocation];
+//    formerLocation = currentLocation;
+//    vec_3 deltaSpeed;
+//    deltaSpeed.v1 = OldVn.v1 - gpsSpeed.v1;
+//    deltaSpeed.v2 = OldVn.v2 - gpsSpeed.v2;
+//
+//    if (!newDeviceStatus.isStill) {
+//        [kalmanFilter calculateKwithF:newDeviceStatus.an deltaCoor:deltaSpeed andVe:OldVn.v1];
+//        
+//        //        NSLog(@"V:%f, %f, %f\nDist:%f, %f", [kalmanFilter.X_k getMatrixValueAtRow:0 andColumn:0],
+//        //              [kalmanFilter.X_k getMatrixValueAtRow:1 andColumn:0],
+//        //              [kalmanFilter.X_k getMatrixValueAtRow:2 andColumn:0],
+//        //              [kalmanFilter.X_k getMatrixValueAtRow:6 andColumn:0],
+//        //              [kalmanFilter.X_k getMatrixValueAtRow:7 andColumn:0]);
+//        OldVn.v1 -= [kalmanFilter.X_k getMatrixValueAtRow:0 andColumn:0];
+//        OldVn.v2 -= [kalmanFilter.X_k getMatrixValueAtRow:2 andColumn:0];
+//        //        oldLocation.latitude += [kalmanFilter.X_k getMatrixValueAtRow:6 andColumn:0];
+//        //        oldLocation.longitude += [kalmanFilter.X_k getMatrixValueAtRow:7 andColumn:0];
+//        
+////        //draw route onto the mapview
+////        if (((NSInteger)(timerCount * delta_T)) % 3 == 0){
+////            [self addNewLocationAndDraw];
+////            if (routePoints.count>1){
+////                CLLocation *loc1 = [routePoints objectAtIndex:routePoints.count-2];
+////                CLLocation *loc2 = [routePoints objectAtIndex:routePoints.count-1];
+////                self.move += [loc1 getDistanceFrom:loc2];
+////            }
+////        }
+//    }
+//    
+//    //update labels
+//    //        timeCounter ++;
+//    //        [timeWindow setTimeCounter:timeCounter * delta_T];
+//    //        xLabel.text = [NSString stringWithFormat:@"t: %.0f s", timeCounter*delta_T];
+//    
+//    inDistance.v1 += newDeviceStatus.Dist.v1;// + [kalmanFilter.X_k getMatrixValueAtRow:6 andColumn:0];
+//    inDistance.v2 += newDeviceStatus.Dist.v2;// + [kalmanFilter.X_k getMatrixValueAtRow:7 andColumn:0];
+//    inDistance.v3 += newDeviceStatus.Dist.v3;
+//    
+    //step counting
+    [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:[INMatrix modOfVec_3:gpsSpeed]];
+    self.stepLabel.text = [NSString stringWithFormat:@"%d", stepCounting.counter];
+    self.avgTimePerStep.text = [NSString stringWithFormat:@"%.2f", ((double)timerCount*TIMER_INTERVAL)/((double)stepCounting.counter)];
+    self.avgDisPerStep.text = [NSString stringWithFormat:@"%.2f", distance/((double)stepCounting.counter)];
+}
+
 - (void)timerDot{
     doCollect = YES;
     
     timerCount++;
-    NSInteger time = timerCount * TIMER_INTERVAL;
-    if (time % 3 == 0){
+    
+    // currently, only do running status judgement here.
+    [self inertiaNavi];
+    
+    double time = timerCount * TIMER_INTERVAL;
+    NSInteger intTime = (NSInteger)time;
+    if (time - intTime < 0.001){ //1 second
+        //    if (time % 3 == 0){
         [self pushPoint];
-        distanceLabel.text = [NSString stringWithFormat:@"%.2lf m", distance];
-        speedLabel.text = [NSString stringWithFormat:@"%.1f m/s", (float)distance/time*3.6];
+        distanceLabel.text = [NSString stringWithFormat:@"%.0lf m", distance];
+        speedLabel.text = [NSString stringWithFormat:@"%.2f m/s", (float)distance/time*3.6];
+        //    }
     }
+
     timeLabel.text = [RORUtils transSecondToStandardFormat:time];
 }
 
 - (void)pushPoint{
     CLLocation *currentLocation = self.latestUserLocation;
     if (formerLocation != currentLocation){
-        distance += [self.formerLocation distanceFromLocation:currentLocation];
+        distance += [self.formerLocation getDistanceFrom:currentLocation];
         self.formerLocation = currentLocation;
         [routePoints addObject:currentLocation];
         [self drawLineWithLocationArray:routePoints];
@@ -353,8 +477,12 @@
 }
 
 - (IBAction)endButtonAction:(id)sender {
+    [self stopUpdates];
+    
     if (self.endTime == nil)
         self.endTime = [NSDate date];
+    [[UIApplication sharedApplication] setIdleTimerDisabled: NO];
+    
     [locationManager stopUpdatingLocation];
     [repeatingTimer invalidate];
     [startButton setEnabled:NO];
@@ -374,16 +502,21 @@
 }
 
 - (void)saveRunInfo{
-    User_Running_History *runHistory = [[User_Running_History alloc] init];
+    NSError *error = nil;
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
     runHistory.distance = [[NSNumber alloc] initWithInteger:distance];
     runHistory.duration = [[NSNumber alloc] initWithInteger:timerCount];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutePoints:routePoints];
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;
-    runHistory.userId = [RORUtils getUserId];
-    runHistory.runUuid = [RORUtils uuidString];
+    runHistory.userId = nil;
     record = runHistory;
+    if (![context save:&error]) {
+        NSLog(@"%@",[error localizedDescription]);
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -421,7 +554,7 @@
 
 - (void) centerMap{
     [mapView setCenterCoordinate:self.latestUserLocation.coordinate animated:YES];
-    //CLLocation *cl = [mapView userLocation].location;
+    CLLocation *cl = [mapView userLocation].location;
     //    [self drawTestLine];
 }
 
