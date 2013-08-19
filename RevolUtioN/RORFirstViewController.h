@@ -14,6 +14,7 @@
 #import "RORPages.h"
 #import "RORUtils.h"
 #import "User.h"
+#import "Animations.h"
 
 @interface RORFirstViewController : UIViewController
 
