@@ -7,7 +7,7 @@
 //
 
 #import "RORMoreViewController.h"
-#import "User.h"
+#import "User_Base.h"
 #import "RORAppDelegate.h"
 #import "RORUtils.h"
 #import "RORSettings.h"

@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <ShareSDK/ShareSDK.h>
-#import "User.h"
-#import "RORUserServices.h"
+#import "RORShareService.h"
 
 @interface RORLoginCheckViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *btnSinaWeibo;
-
 - (IBAction)sinaWeiboLogin:(id)sender;
+- (IBAction)tencentWeiboLogin:(id)sender;
+- (IBAction)qqAccountLogin:(id)sender;
+- (IBAction)renrenAccountLogin:(id)sender;
 
 @end

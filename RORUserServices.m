@@ -10,16 +10,16 @@
 
 @implementation RORUserServices
 
-+ (User *)fetchUserById:(NSNumber *) userId{
++ (User_Base *)fetchUserById:(NSNumber *) userId{
     
-    NSString *table=@"User";
+    NSString *table=@"User_Base";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSArray *fetchObject = [RORUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    return  (User *) [fetchObject objectAtIndex:0];
+    return  (User_Base *) [fetchObject objectAtIndex:0];
 }
 
 +(User_Attributes *)fetchUserAttrsByUserId:(NSNumber *) userId{
@@ -44,31 +44,31 @@
     return (Friend *) [fetchObject objectAtIndex:0];
 }
 
-+ (User *)fetchUser:(NSNumber *) userId{
-    User *user = [self fetchUserById:userId];
++ (User_Base *)fetchUser:(NSNumber *) userId{
+    User_Base *user = [self fetchUserById:userId];
     if(user != nil){
         user.attributes = [self fetchUserAttrsByUserId:userId];
     }
     return user;
 }
 
-+(User *)registerUser:(NSDictionary *)registerDic{
++(User_Base *)registerUser:(NSDictionary *)registerDic{
     RORHttpResponse *httpResponse = [RORUserClientHandler createUserInfoByUserDic:registerDic];
     return [self syncUserFromResponse:httpResponse];
 }
 
-+(User *)syncUserInfoById:(NSNumber *)userId{
++(User_Base *)syncUserInfoById:(NSNumber *)userId{
     RORHttpResponse *httpResponse =[RORUserClientHandler getUserInfoById:userId];
     return [self syncUserFromResponse:httpResponse];
 }
 
-+(User *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password{
++(User_Base *)syncUserInfoByLogin:(NSString *)userName withUserPasswordL:(NSString *) password{
     RORHttpResponse *httpResponse = [RORUserClientHandler getUserInfoByUserNameAndPassword:userName withPassword:password];
     return [self syncUserFromResponse:httpResponse];
 }
 
 
-+ (void) saveUserInfoToList:(User *)user{
++ (void) saveUserInfoToList:(User_Base *)user{
     NSMutableDictionary *userDict = [RORUtils getUserInfoPList];
     [userDict setValue:user.userId forKey:@"userId"];
     [userDict setValue:user.nickName forKey:@"nickName"];
@@ -76,9 +76,9 @@
     [RORUtils writeToUserInfoPList:userDict];
 }
     
-+(User *)syncUserFromResponse:(RORHttpResponse *)httpResponse{
++(User_Base *)syncUserFromResponse:(RORHttpResponse *)httpResponse{
     NSError *error;
-    User *user = nil;
+    User_Base *user = nil;
     RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     
@@ -92,7 +92,7 @@
         
         
         if(user == nil)
-            user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+            user = [NSEntityDescription insertNewObjectForEntityForName:@"User_Base" inManagedObjectContext:context];
         [user initWithDictionary:userInfoDic];
         
         if(userAttr == nil)

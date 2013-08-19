@@ -6,10 +6,11 @@
 //  Copyright (c) 2013年 Beyond. All rights reserved.
 //
 
-#import "User.h"
+#import "User_Base.h"
 #import "RORDBCommon.h"
+#import "RORAppDelegate.h"
 
-@implementation User
+@implementation User_Base
 
 @synthesize nickName;
 @synthesize password;
@@ -18,6 +19,13 @@
 @synthesize sex;
 @synthesize uuid;
 @synthesize attributes;
+
++ (User_Base *)init{
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    User_Base *user = [NSEntityDescription insertNewObjectForEntityForName:@"User_Base" inManagedObjectContext:context];
+    return user;
+}
 
 -(NSMutableDictionary *)transToDictionary{
     NSMutableDictionary *tempoDict = [[NSMutableDictionary alloc] init];

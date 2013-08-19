@@ -56,7 +56,7 @@
         NSLog(@"userName: %@ password:%@",usernameTextField.text,passwordTextField.text);
         NSString *userName = usernameTextField.text;
         NSString *password = [RORUtils md5:passwordTextField.text];
-        User *user = [RORUserServices syncUserInfoByLogin:userName withUserPasswordL:password];
+        User_Base *user = [RORUserServices syncUserInfoByLogin:userName withUserPasswordL:password];
         
         if (user == nil){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:@"用户名或密码错误" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -65,7 +65,7 @@
         }
     } else { //注册
         NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [sexButton selectedSegmentIndex]==0?@"男":@"女", @"sex", nil];
-        User *user = [RORUserServices registerUser:regDict];
+        User_Base *user = [RORUserServices registerUser:regDict];
         
         if (user != nil){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"恭喜你，注册成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

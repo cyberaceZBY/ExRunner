@@ -13,7 +13,6 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <RennSDK/RennSDK.h>
-
 #import <ShareSDK/ShareSDK.h>
 
 @interface RORAppDelegate : UIResponder <UIApplicationDelegate>
