@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RORAccountViewController : UIViewController
-- (IBAction)backAction:(id)sender;
+@interface RORAccountViewController : UIViewController{
 
+    NSMutableArray *shareTypeArray;
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *tblAutoView;
+
+- (IBAction)backAction:(id)sender;
 - (IBAction)logoutAction:(id)sender ;
+
 @end

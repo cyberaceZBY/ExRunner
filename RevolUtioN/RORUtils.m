@@ -142,6 +142,15 @@ static NSDate *systemTime = nil;
     [pInfo writeToFile:path atomically:YES];
 }
 
++ (void)logout{
+    NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [ doc objectAtIndex:0 ];
+    NSString *path = [docPath stringByAppendingPathComponent:@"userInfo.plist"];
+    NSMutableDictionary *logoutDict = [[NSMutableDictionary alloc] init];
+    [logoutDict setValue:[self getLastUpdateTime:@"MissionUpdateTime"] forKey:@"MissionUpdateTime"];
+    [logoutDict writeToFile:path atomically:YES];
+}
+
 + (void)saveLastUpdateTime: (NSString *) key{
     NSMutableDictionary *userDict = [self getUserInfoPList];
     NSString *systemTime = (NSString *)[userDict objectForKey:@"systemTime"];

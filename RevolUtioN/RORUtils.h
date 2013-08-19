@@ -17,6 +17,8 @@
 
 + (NSString *)getUserUuid;
 
++ (void)logout;
+
 + (NSString *)transSecondToStandardFormat:(NSInteger) seconds;
 
 + (NSDate *)getSystemTime;

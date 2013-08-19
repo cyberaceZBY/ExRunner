@@ -29,6 +29,7 @@
 @property (strong, nonatomic) User_Running_History *record;
 
 - (IBAction)backAction:(id)sender;
+- (IBAction)shareHistory:(id)sender;
 
 //@property (strong, nonatomic) NSNumber *distance;
 //@property (strong, nonatomic) NSNumber *speed;

@@ -13,24 +13,17 @@
 + (void)authLoginFromSNS:(ShareType) type{
     id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
                                                          allowCallback:YES
-                                                         authViewStyle:SSAuthViewStyleModal
+                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
                                                           viewDelegate:nil
                                                authManagerViewDelegate:nil];
     
     [authOptions setPowerByHidden:true];
     
     //在授权页面中添加关注官方微博
-    switch (type) {
-        case ShareTypeSinaWeibo:
-            [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
-                                            [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"Cyberace_赛跑乐"],
-                                            SHARE_TYPE_NUMBER(type),
-                                            nil]];
-            break;
-        default:
-            break;
-    }
-    
+    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
+                [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"Cyberace_赛跑乐"],
+                                    SHARE_TYPE_NUMBER(type),nil]];
+
     [ShareSDK getUserInfoWithType:type
                       authOptions:authOptions
                            result:^(BOOL result, id<ISSUserInfo> userInfo, id<ICMErrorInfo> error) {
@@ -64,6 +57,7 @@
         user.sex = @"未知";
     }
     user.password = @"thirdpartypassword";
+
     
     User_Base *loginUser = [RORUserServices syncUserInfoByLogin:user.userEmail withUserPasswordL:[RORUtils md5:user.password]];
     

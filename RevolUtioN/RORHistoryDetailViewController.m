@@ -85,4 +85,7 @@
     else
         [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)shareHistory:(id)sender {
+}
 @end
