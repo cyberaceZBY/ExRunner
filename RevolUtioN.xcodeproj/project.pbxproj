@@ -532,14 +532,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				30F4548317BD10C5006CB66C /* CoreMotion.framework in Frameworks */,
-=======
 				0F59A17317BCABBB000DEFEF /* CoreTelephony.framework in Frameworks */,
 				0F59A17217BCA4BD000DEFEF /* SystemConfiguration.framework in Frameworks */,
 				0F59A17117BC80D5000DEFEF /* libstdc++.dylib in Frameworks */,
 				0F59A16D17BC7FF3000DEFEF /* libsqlite3.dylib in Frameworks */,
->>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				0F8F262F17894E120037C130 /* libsbjson-ios.a in Frameworks */,
 				30BB0BAC176A04A10009A847 /* libz.1.2.5.dylib in Frameworks */,
 				30BB0BAA176A04910009A847 /* libicucore.dylib in Frameworks */,
@@ -860,29 +857,14 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				30F4549017C1296C006CB66C /* Animation */,
 				30F4548617C0C2DC006CB66C /* Default-568h@2x.png */,
 				30F4546017BCB519006CB66C /* InertiaNavigation */,
-=======
-				0F59A17017BC80D4000DEFEF /* libstdc++.dylib */,
-				0F59A16C17BC7FF2000DEFEF /* libsqlite3.dylib */,
->>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				0F59A0FD17BA2170000DEFEF /* ShareSDK_v2.3.1 */,
 				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
 				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
 				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
 				30BB0BA9176A04910009A847 /* libicucore.dylib */,
-<<<<<<< HEAD
-=======
-				0F59A16E17BC805C000DEFEF /* CoreTelephony.framework */,
-				30BB0BA7176A03AC0009A847 /* QuartzCore.framework */,
-				30BB0B071769A2E70009A847 /* SystemConfiguration.framework */,
-				30BB0B051769A2DB0009A847 /* MobileCoreServices.framework */,
-				30BB0B031769A2300009A847 /* CFNetwork.framework */,
-				30FC2902175EC34200DEC042 /* MapKit.framework */,
-				3061F3B5174CDB96006093FC /* CoreData.framework */,
->>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 				301C1F6817378AF30068B43B /* Resources */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
 				302FD03C1727D870004DA005 /* RevolUtioNTests */,
@@ -1486,7 +1468,6 @@
 				0F274A6B17B6058C00F0E927 /* RORSystemService.m in Sources */,
 				0F274A7517B6061F00F0E927 /* RORSystemClientHandler.m in Sources */,
 				0F59A16817BB235C000DEFEF /* RORLoginCheckViewController.m in Sources */,
-<<<<<<< HEAD
 				30F4547017BCB519006CB66C /* INConstant.m in Sources */,
 				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
 				30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */,
@@ -1496,9 +1477,7 @@
 				30F4547617BCB519006CB66C /* INVector.m in Sources */,
 				30F4548117BCB564006CB66C /* INStepCounting.m in Sources */,
 				30F4549317C1296C006CB66C /* Animations.m in Sources */,
-=======
 				0F59A16B17BC700A000DEFEF /* RORShareService.m in Sources */,
->>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

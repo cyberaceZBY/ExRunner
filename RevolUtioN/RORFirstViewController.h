@@ -13,12 +13,8 @@
 #import "RORAppDelegate.h"
 #import "RORPages.h"
 #import "RORUtils.h"
-<<<<<<< HEAD
-#import "User.h"
 #import "Animations.h"
-=======
 #import "User_Base.h"
->>>>>>> 1dfad6c7970b4cc6854cb908b3a54a9bc2888c6b
 
 @interface RORFirstViewController : UIViewController
 
