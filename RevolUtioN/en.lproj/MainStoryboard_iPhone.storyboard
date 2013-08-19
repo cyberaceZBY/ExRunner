@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VcK-Gx-lSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E3067" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VcK-Gx-lSI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -2490,7 +2490,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="challengeRunAction:"/>
                 <relationship kind="action" name="normalRunAction:"/>
-                <relationship kind="action" name="userInfoMenu:"/>
                 <relationship kind="action" name="weatherInfoAction:"/>
                 <relationship kind="outlet" name="lbTemperature" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lbWind" candidateClass="UILabel"/>
@@ -2505,6 +2504,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RORHistoryDetailViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backAction:"/>
+                <relationship kind="action" name="shareHistory:"/>
                 <relationship kind="outlet" name="backButtonItem" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="bonusLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
@@ -2612,6 +2612,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="expandAction:"/>
                 <relationship kind="action" name="setUserCentered:"/>
                 <relationship kind="action" name="startButtonAction:"/>
+                <relationship kind="outlet" name="avgDisPerStep" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="avgTimePerStep" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="collapseButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="endButton" candidateClass="UIButton"/>
@@ -2619,6 +2621,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="startButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="stepLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
