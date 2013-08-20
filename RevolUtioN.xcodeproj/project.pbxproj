@@ -117,6 +117,9 @@
 		3061F3B4174CB7B7006093FC /* UserDoneMissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3061F3B3174CB7B7006093FC /* UserDoneMissionsView.xib */; };
 		3061F3B6174CDB96006093FC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3061F3B5174CDB96006093FC /* CoreData.framework */; };
 		3061F3B9174CDBEB006093FC /* RORCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3061F3B7174CDBEB006093FC /* RORCoreData.xcdatamodeld */; };
+		30AEF5D317C20CA40047CB40 /* RORHistoryPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AEF5D217C20CA40047CB40 /* RORHistoryPageViewController.m */; };
+		30AEF5DD17C20ED60047CB40 /* RORStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30AEF5DC17C20ED60047CB40 /* RORStatisticsViewController.m */; };
+		30AEF5DF17C23DDA0047CB40 /* main_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30AEF5DE17C23DDA0047CB40 /* main_bg.png */; };
 		30BB0AF51761AE610009A847 /* RORMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BB0AF41761AE610009A847 /* RORMallViewController.m */; };
 		30BB0AF81761BEA10009A847 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 30BB0AF61761BEA10009A847 /* history.png */; };
 		30BB0AF91761BEA10009A847 /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30BB0AF71761BEA10009A847 /* history@2x.png */; };
@@ -424,6 +427,11 @@
 		3061F3B3174CB7B7006093FC /* UserDoneMissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDoneMissionsView.xib; sourceTree = "<group>"; };
 		3061F3B5174CDB96006093FC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3061F3B8174CDBEB006093FC /* RORCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RORCoreData.xcdatamodel; sourceTree = "<group>"; };
+		30AEF5D117C20CA40047CB40 /* RORHistoryPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORHistoryPageViewController.h; sourceTree = "<group>"; };
+		30AEF5D217C20CA40047CB40 /* RORHistoryPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORHistoryPageViewController.m; sourceTree = "<group>"; };
+		30AEF5DB17C20ED60047CB40 /* RORStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORStatisticsViewController.h; sourceTree = "<group>"; };
+		30AEF5DC17C20ED60047CB40 /* RORStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORStatisticsViewController.m; sourceTree = "<group>"; };
+		30AEF5DE17C23DDA0047CB40 /* main_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_bg.png; sourceTree = "<group>"; };
 		30BB0AF31761AE610009A847 /* RORMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORMallViewController.h; sourceTree = "<group>"; };
 		30BB0AF41761AE610009A847 /* RORMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORMallViewController.m; sourceTree = "<group>"; };
 		30BB0AF61761BEA10009A847 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
@@ -819,6 +827,7 @@
 		301C1F6D1737B5B80068B43B /* bg */ = {
 			isa = PBXGroup;
 			children = (
+				30AEF5DE17C23DDA0047CB40 /* main_bg.png */,
 				30FC2914176072F700DEC042 /* redbutton_bg.png */,
 				30FC291217603C1500DEC042 /* graybutton_bg.png */,
 				30FC29101760240500DEC042 /* redroundrec.png */,
@@ -859,14 +868,14 @@
 			children = (
 				0F8501DF17C1C68E0005993E /* libsqlite3.dylib */,
 				0F8501DD17C1C63E0005993E /* libstdc++.dylib */,
+				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
+				30BB0BA9176A04910009A847 /* libicucore.dylib */,
+				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
+				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
 				30F4549017C1296C006CB66C /* Animation */,
 				30F4548617C0C2DC006CB66C /* Default-568h@2x.png */,
 				30F4546017BCB519006CB66C /* InertiaNavigation */,
 				0F59A0FD17BA2170000DEFEF /* ShareSDK_v2.3.1 */,
-				0F9A9D3B17894A320025E49B /* iPhone.xcodeproj */,
-				0F9A9D2C17894A1B0025E49B /* SBJson.xcodeproj */,
-				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
-				30BB0BA9176A04910009A847 /* libicucore.dylib */,
 				301C1F6817378AF30068B43B /* Resources */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
 				302FD03C1727D870004DA005 /* RevolUtioNTests */,
@@ -1049,6 +1058,10 @@
 				30BB0AFF1761C5DB0009A847 /* RORHistoryDetailViewController.m */,
 				30FC2904175EF6F300DEC042 /* RORMapViewController.h */,
 				30FC2905175EF6F300DEC042 /* RORMapViewController.m */,
+				30AEF5D117C20CA40047CB40 /* RORHistoryPageViewController.h */,
+				30AEF5D217C20CA40047CB40 /* RORHistoryPageViewController.m */,
+				30AEF5DB17C20ED60047CB40 /* RORStatisticsViewController.h */,
+				30AEF5DC17C20ED60047CB40 /* RORStatisticsViewController.m */,
 			);
 			name = RORHistoryPage;
 			sourceTree = "<group>";
@@ -1371,6 +1384,7 @@
 				0F59A15717BA2171000DEFEF /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				0F59A15917BA2171000DEFEF /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				30F4548717C0C2DC006CB66C /* Default-568h@2x.png in Resources */,
+				30AEF5DF17C23DDA0047CB40 /* main_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1481,6 +1495,8 @@
 				30F4548117BCB564006CB66C /* INStepCounting.m in Sources */,
 				30F4549317C1296C006CB66C /* Animations.m in Sources */,
 				0F59A16B17BC700A000DEFEF /* RORShareService.m in Sources */,
+				30AEF5D317C20CA40047CB40 /* RORHistoryPageViewController.m in Sources */,
+				30AEF5DD17C20ED60047CB40 /* RORStatisticsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

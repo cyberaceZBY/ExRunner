@@ -23,12 +23,13 @@
     [self setRunHistoryList:nil];
     [self setDateList:nil];
     [self setSortedDateList:nil];
+    [self setTableView:nil];
     [super viewDidUnload];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -116,6 +117,10 @@
 
 - (IBAction)syncAction:(id)sender {
     //[RORPublicMethods syncRunningHistoryToServer];
+}
+
+- (IBAction)popBackAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source

@@ -33,17 +33,13 @@
 		[controllers addObject:[NSNull null]];
     }
     self.contentViews = controllers;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];    // 通过storyboard id拿到目标控制器的对象
-    self.historyInStoryboard =  [storyboard instantiateViewControllerWithIdentifier:@"RORRunningHistoryViewController"];
 
     userInfoBasicView = [[RORUserInfoBasicViewController alloc]initWithPageNumber:0];
     userInfoBasicView.userName = self.userName;
     userInfoBasicView.userId = self.userId;
     [contentViews replaceObjectAtIndex:0 withObject:userInfoBasicView];
-//    userInfoRunHistoryView = [[RORUserRunHistoryViewController alloc]initWithPageNumber:1];
-//    [contentViews replaceObjectAtIndex:1 withObject:userInfoRunHistoryView];
-//    self.historyInStoryboard = [[RORUserRunHistoryViewController alloc]initWithPageNumber:1];
-    [contentViews replaceObjectAtIndex:1 withObject:self.historyInStoryboard];
+    userInfoRunHistoryView = [[RORUserRunHistoryViewController alloc]initWithPageNumber:1];
+    [contentViews replaceObjectAtIndex:1 withObject:userInfoRunHistoryView];
     userInfoDoneMissionsView = [[RORUserDoneMissionsViewController alloc]initWithPageNumber:2];
     [contentViews replaceObjectAtIndex:2 withObject:userInfoDoneMissionsView];
     
@@ -101,20 +97,11 @@
     frame.origin.x = CGRectGetWidth(frame) * page;
     frame.origin.y = 0;
     
-//    userInfoRunHistoryView.view.frame = frame;
-//    [self addChildViewController:userInfoRunHistoryView];
-//    [self.scrollView addSubview:userInfoRunHistoryView.view];
-//    [userInfoRunHistoryView didMoveToParentViewController:self];
-    self.historyInStoryboard.view.frame = frame;
-    if ([self.historyInStoryboard.view isKindOfClass:[UITableView class]]){
-        UITableView *tableView = (UITableView *)self.historyInStoryboard.view;
-        tableView.dataSource = self.historyInStoryboard;
-        tableView.delegate = self.historyInStoryboard;
-    }
-    [self addChildViewController:self.historyInStoryboard];
-    [self.scrollView addSubview:self.historyInStoryboard.view];
-    [self.historyInStoryboard didMoveToParentViewController:self];
-    
+    userInfoRunHistoryView.view.frame = frame;
+    [self addChildViewController:userInfoRunHistoryView];
+    [self.scrollView addSubview:userInfoRunHistoryView.view];
+    [userInfoRunHistoryView didMoveToParentViewController:self];
+
     //    }
 }
 
@@ -179,6 +166,7 @@
     bounds.origin.y = 0;
     [self.scrollView scrollRectToVisible:bounds animated:animated];
 }
+
 - (IBAction)changePage:(id)sender {
     [self gotoPage:YES];    // YES = animate
 }
